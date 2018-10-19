@@ -120,10 +120,17 @@ Somit gilt das Gegenteil von \eqref{gegenbeh}, sodass $f$ injektiv ist.
 \end{align*}
 \newpage
 \textbf{Aufgabe 3}\\
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
 (a)\\
 Sei $y \in f(A \cap B)$\\
-$\stackrel{\text{Def.}\;f,\;y\;=\;f(x)}{\Longrightarrow}$ Es gibt ein $x \in A \cap B$ mit $y = f(x)$ \\	
-$ \stackrel{\text{Def.}\ \cap}{\Longrightarrow} x \in A$ und $x \in B$\\
+$\defimpl{f,\;y\;=\;f(x)}$ Es gibt ein $x \in A \cap B$ mit $y = f(x)$ \\	
+$ \defimpl{\cap} x \in A$ und $x \in B$\\
 $\stackrel{\text{Def.}\;f}{\Longrightarrow} y \in f(A)\ \text{und}\ y \in f(B)$\\
-$ \stackrel{\text{Def.}\ \cap}{\Longrightarrow} y \in f(A) \cap f(B)$ \\
+$ \defimpl{\cap} y \in f(A) \cap f(B)$ \\
+(b)\\
+Sei $x \in f^{-1}(C) \cup f^{-1}(D)$ \\
+$\defimpl{\cup} x \in f^{-1}(C)$ oder $x \in f^{-1}(D)$ \\
+Fall 1: $x \in f^{-1}(C) \defimpl{f^{-1}}$ Es gibt $y \in C$ mit $f(x) = y \Rightarrow y \in C \cup D \defimpl{f(x) = y} x \in f^{-1}(C \cup D)$ \\
+Fall 2: $x \in f^{-1}(D) \defimpl{f^{-1}}$ Es gibt $y \in D$ mit $f(x) = y \Rightarrow y \in C \cup D \defimpl{f(x) = y} x \in f^{-1}(C \cup D)$
 \end{document}
