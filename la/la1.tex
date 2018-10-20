@@ -11,16 +11,29 @@
 \usepackage{mathtools}
 
 \usepackage{tikz}
-\usepackage{amsthm}
 \usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
 
 \allowdisplaybreaks
 
 \setlength{\parindent}{0pt}
 
 \theoremstyle{plain}
-\newtheorem{theorem}[part]{Theorem}
+\newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
+
+\declaretheoremstyle[%
+  spaceabove=-6pt,%
+  spacebelow=6pt,%
+  headfont=\normalfont\bfseries,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\let\theorem\oldtheorem
+\declaretheorem[name={Theorem}, style=mystyle, unnumbered]{theorem}
 
 \begin{document}
 \textbf{Aufgabe 1}\\
