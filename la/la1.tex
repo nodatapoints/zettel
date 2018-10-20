@@ -16,29 +16,38 @@
 \usepackage{amsthm}
 \usepackage{thmtools}
 
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
 \allowdisplaybreaks
 
 \setlength{\parindent}{0pt}
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-
 \declaretheoremstyle[%
-  spaceabove=-6pt,%
+  spaceabove=0,%
   spacebelow=6pt,%
-  headfont=\normalfont\bfseries,%
+  headfont=\normalfont\itshape,%
   postheadspace=1em,%
   headpunct={}
 ]{mystyle}
 
-\let\theorem\oldtheorem
-\declaretheorem[name={Theorem}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
 
 \begin{document}
-\textbf{Aufgabe 1}\\
-(a)\\
-(i)
+\task
+\ttask
+\tttask
 \[ \mathcal{P}(X) = \left\{ \emptyset,
 \ \left\{  8 \right\},
 \ \left\{  6 \right\},
@@ -47,45 +56,41 @@
 \ \left\{ 4,\ 8 \right\},
 \ \left\{ 4,\ 6 \right\},
 \ \left\{ 4,\ 6,\ 8 \right\}
- \right\} \]\\
-(ii)
+ \right\} \]
+\tttask
 \begin{align*}
-	X \cup Y &= \left\{ 4,\ 6,\ 7, \ 8,\ 9 \right\} & Y \cap Z &= \left\{ 7,\ 8,\ 9 \right\} \\ Y \backslash X &= \left\{ 7,\ 9 \right\} & Z \backslash Y &= \left\{ n \:\vert\: n \in \mathbb{N} \wedge n > 9 \right\} \\
+	X \cup Y &= \left\{ 4,\ 6,\ 7, \ 8,\ 9 \right\} & Y \cap Z &= \left\{ 7,\ 8,\ 9 \right\} \\ Y \backslash X &= \left\{ 7,\ 9 \right\} & Z \backslash Y &= \left\{ n \:\vert\: n \in \mathbb{N} \wedge n > 9 \right\}
 \end{align*}
-(iii) \[ (Y \cap Z) \times (X \cap Y) =  \left\{ (7, \ 6),\ (8, \ 6),\ (9, \ 6),\ (7, \ 8),\ (8, \ 8),\ (9, \ 8) \right\} \]
-(b)\\
+\tttask \[ (Y \cap Z) \times (X \cap Y) =  \left\{ (7, \ 6),\ (8, \ 6),\ (9, \ 6),\ (7, \ 8),\ (8, \ 8),\ (9, \ 8) \right\} \]
+\ttask
 \begin{theorem}
-	\[ C \backslash (A \cap B) = (C \backslash A) \cup (C \backslash B) \]
+Für alle Mengen $A,\ B,\ C$ gilt
+\[ C \backslash (A \cap B) = (C \backslash A) \cup (C \backslash B) \]
 \end{theorem}
-\begin{lemma}
-Sei $ m \coloneqq (x \in M)$ und  $n \coloneqq (x \in N)$, dann
-\[ x \in (M \cup N) \Leftrightarrow m \vee n \qquad x \in (M \cap N) \Leftrightarrow m \wedge n \qquad x  \in (M \backslash N) \Leftrightarrow m \wedge \neg n \]
-\end{lemma}
-\begin{lemma}
-\[ \forall x ((x \in A) \Leftrightarrow (x \in B)) \:\Leftrightarrow\; A = B \]
-\end{lemma}
-
+\begin{precondition}
+Seien $M,\ N$ Mengen und sei $ m \coloneqq (x \in M)\ ,\ n \coloneqq (x \in N)$\\ für ein beliebiges $x$, dann
+\begin{gather*}
+x \in (M \cup N) \Leftrightarrow m \vee n \qquad x \in (M \cap N) \Leftrightarrow m \wedge n \qquad x  \in (M \backslash N) \Leftrightarrow m \wedge \neg n \\
+\forall x (m \Leftrightarrow n) \:\Leftrightarrow\; A = B	
+\end{gather*}
+\end{precondition}
 \begin{proof}
-	
 Nun sei $a \coloneqq (x \in A), \ b \coloneqq (x \in B), \ c \coloneqq (x \in C)$
-
 \begin{align*}
-	&x \in (C \backslash (A \cap B)) \Leftrightarrow c \wedge \neg(x \in (A \cap B)) \Leftrightarrow c \wedge \neg(a \wedge b) \\
-	&\Leftrightarrow c \wedge (\neg a \vee \neg b) \Leftrightarrow (c \wedge \neg a) \vee (c \wedge \neg b) \Leftrightarrow (x \in (C \backslash A)) \vee (x \in (C \backslash B)) \\
+	&x \in (C \backslash (A \cap B)) \Leftrightarrow c \wedge \neg(a \wedge b) \Leftrightarrow c \wedge (\neg a \vee \neg b) \\
+	&\Leftrightarrow (c \wedge \neg a) \vee (c \wedge \neg b) \Leftrightarrow (x \in (C \backslash A)) \vee (x \in (C \backslash B)) \\
 	&\Leftrightarrow x \in ((C \backslash A) \cup (C \backslash B))
 \end{align*}
 \end{proof}
-
-\textbf{Aufgabe 2}\\
-(a)\\
+\task
+\ttask
 \[ f(X) = \{ 5,\ 6,\ 7,\ 8,\ 9 \} \qquad h^{-1}\left( \{11,\ 12\} \right) = \{11,\ 12\} \qquad h^{-1}(\{1\}) = \{2\} \]
-(b)\\
+\ttask
 $f$ injektiv, da nach \textsc{Peano} gilt $n+1 = m+1 \Rightarrow n = m\ (n,\ m \in \mathbb{N})$. \\
 $f$ nicht surjektiv, da
 \[ f(x) > x \ \wedge\ \nexists n \in \mathbb{N}\ (1 > n) \quad \Rightarrow \quad \nexists x \in \mathbb{N}\ (f(x) = 1) \]
 $g$ nicht injektiv, da $g(1) = g(2)$ \\
-$g$ surjektiv, da mit $m(n) = n+1$ gilt dass $\forall n \in \mathbb{N}\ \exists m \in \mathbb{N}\ (g(m) = n)$
-\newpage
+$g$ surjektiv, da mit $m = n+1$ gilt dass $\forall n \in \mathbb{N}\ \exists m \in \mathbb{N}\ (g(m) = n)$
 (c)
 \begin{theorem}
 Die Funktion $g : \mathbb{N} \rightarrow \mathbb{N}$ mit
@@ -94,10 +99,10 @@ ist bijektiv.
 \end{theorem}
 \begin{proof}
 Da $2 \mid (n \pm 1) \:\Leftrightarrow\: 2 \nmid n$ gilt
-\[ (g(n) \mid 2) \Leftrightarrow (n \nmid 2) \]
+\[ (2 \mid g(n)) \Leftrightarrow (2 \nmid n) \]
 womit
 \[ g(g(n)) = n \pm 1 \mp 1 = n \]
-sodass $g \circ g = \mathrm{id}_M$ erfüllt ist. Nach Lemma \ref{klemma} muss $g$ bijektiv, und somit sowohl injektiv als auch surjektiv sein.
+sodass $g \circ g = \mathrm{id}_\mathbb{N}$ erfüllt ist. Nach Lemma \ref{klemma} muss $g$ bijektiv, und somit sowohl injektiv als auch surjektiv sein.
 \end{proof}
 \begin{lemma}\label{klemma}
 Gilt für ein $f:M \rightarrow M$
@@ -107,36 +112,80 @@ Gilt für ein $f:M \rightarrow M$
 so ist $f$ bijektiv.
 \end{lemma}
 \begin{proof}
-% \subparagraph*{Surjektivität}
-Mit $x \coloneqq f(y)$ gilt
-\[ \forall y \in M\ \exists x \in M\ (f(x) = y) \]
-da nach \eqref{def}
-\[ f(x) = f(f(y)) = y \]
-gilt, ist $f$ surjektiv.
-% \subparagraph*{Injektivität}
-Wenn
-\begin{equation}\label{gegenbeh}
-	\exists m,\ n \in M\ (m \neq n \wedge f(m) = f(n))
-\end{equation}
-, dann muss nach \eqref{def}
-\begin{align*}
-	f(m) &= f(n) \\
-	f(f(m)) &= f(f(n)) \\
-	m &= n \\ % TODO Widerspruch \\
-\end{align*}
-Somit gilt das Gegenteil von \eqref{gegenbeh}, sodass $f$ injektiv ist.
+Nach Definition existiert ein $f^{-1} = f$, sodass $f$ bijektiv ist.
+% Mit $x \coloneqq f(y)$ gilt
+% \[ \forall y \in M\ \exists x \in M\ (f(x) = y) \]
+% da nach \eqref{def}
+% \[ f(x) = f(f(y)) = y \]
+% gilt, ist $f$ surjektiv.
+% Wenn
+% \begin{equation}\label{gegenbeh}
+% 	\exists m,\ n \in M\ (m \neq n \wedge f(m) = f(n))
+% \end{equation}
+% , dann muss nach \eqref{def}
+% \begin{align*}
+% 	f(m) &= f(n) \\
+% 	f(f(m)) &= f(f(n)) \\
+% 	m &= n \\ % TODO Widerspruch \\
+% \end{align*}
+% Somit gilt das Gegenteil von \eqref{gegenbeh}, sodass $f$ injektiv ist.
 \end{proof}
-(c)
+\ttask
 \begin{align*}
-(f \circ h)(n) &= \begin{cases}(n+1)+1 &\quad 2  \nmid (n+1) \\ n+1-1 &\quad 2 \mid (n+1) \end{cases} & (f \circ g)(n) &= \begin{cases} f(g(1)) = 2 &\quad n = 1\\ n-1+1 &\quad n > 1\end{cases}\\
+(h \circ f)(n) &= \begin{cases}(n+1)+1 &\quad 2  \nmid (n+1) \\ n+1-1 &\quad 2 \mid (n+1) \end{cases} & (f \circ g)(n) &= \begin{cases} f(g(1)) = 2 &\quad n = 1\\ n-1+1 &\quad n > 1\end{cases}\\
 &= \begin{cases} n + 2 &\quad 2 \mid n\\n &\quad 2 \nmid n  \end{cases} & &= \begin{cases}2 &\quad n=1\\n &\quad n > 1\end{cases}
 \end{align*}
-\newpage
-\textbf{Aufgabe 3}
-(a)
+\task
+Es seien $X,\ Y,\ A,\ B,\ C,\ D$ Mengen mit $A,\ B \subseteq X\ ,\ C,\ D \subseteq Y$ und $f:X \rightarrow Y$ eine Abbildung.
+
+\ttask
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
 Sei $y \in f(A \cap B)$\\
-Es gibt $x \in A \cap B$ mit $y = f(x)$\\
+$\defimpl{f,\;y\;=\;f(x)}$ Es gibt ein $x \in A \cap B$ mit $y = f(x)$ \\	
+$ \defimpl{\cap} x \in A$ und $x \in B$\\
+$\stackrel{\text{Def.}\;f}{\Longrightarrow} y \in f(A)\ \text{und}\ y \in f(B)$\\
+$ \defimpl{\cap} y \in f(A) \cap f(B)$\\
+
+\ttask
+Sei $x \in f^{-1}(C) \cup f^{-1}(D)$ \\
+$\defimpl{\cup} x \in f^{-1}(C)$ oder $x \in f^{-1}(D)$ \\
+Fall 1: $x \in f^{-1}(C) \defimpl{f^{-1}}$ Es gibt $y \in C$ mit $f(x) = y \Rightarrow y \in C \cup D \defimpl{f(x) = y} x \in f^{-1}(C \cup D)$ \\
+Fall 2: $x \in f^{-1}(D) \defimpl{f^{-1}}$ Es gibt $y \in D$ mit $f(x) = y \Rightarrow y \in C \cup D \defimpl{f(x) = y} x \in f^{-1}(C \cup D)$ \\
+
+\ttask
+\begin{theorem}
+	\[ f^{-1}(C \cap D) = f^{-1}(C) \cap f^{-1}(D) \]
+\end{theorem}
+\begin{precondition}
+	\[ x \in f^{-1}(M) \Leftrightarrow f(x) \in M \tag*{$M \subseteq Y$}  \]
+\end{precondition}
+\begin{proof}
 \begin{align*}
-	y \in f(a) \cup f(b) &\stackrel{\text{Def.}\ \cap}{\Longrightarrow} y \in f(A)\ \text{und}\ y \in f(b) \\
+	x \in f^{-1}(C \cap D) &\Leftrightarrow f(x) \in C \cap D \Leftrightarrow f(x) \in C \wedge f(x) \in D \\
+	&\Leftrightarrow f^{-1}(C) \cap f^{-1}(D)
 \end{align*}
+\end{proof}
+Es gilt keine Gleichheit für (a), da mit $A = \{1,\ 2\}\ ,\ B = \{ -1,\ 2\}$ und $f:\mathbb{R} \rightarrow \mathbb{R}\ ,\ x \mapsto x^2$
+\[ f(A \cap B) = f(\{2\}) = \{4\} \qquad f(A) \cap f(B) = \{ 1,\ 4 \} \cap \{1,\ 4\} = \{1,\ 4\} \]
+\task
+Seien $A,\ B,\ C$ Mengen und $f:A \rightarrow B\ ,\ g:B \rightarrow C$ Abbildungen.
+
+\ttask
+Ist $g \circ f$ surjektiv, so muss $f$ nicht notwendigerweise surjektiv sein. Sei $A = B = C = \mathbb{R}$ und $f(x) = \arctan x\ ,\ g(x) = \tan x $
+\[ \arctan(\mathbb{R}) = \left( -\tfrac{\tau}{4};\tfrac{\tau}{4} \right) \qquad f \circ g = \mathrm{id}_\mathbb{R}  \]
+So ist $f$ nicht surjektiv, obwohl $g \circ f$ bijektiv und somit auch surjektiv ist.
+
+\ttask
+\begin{theorem}
+\[ g \circ f\ \text{surjektiv} \Rightarrow g\ \text{surjektiv} \]
+\end{theorem}
+\begin{proof}
+Ist $g \circ f$ surjektiv, dann muss
+\begin{align*}
+	&\forall y \in C\ \exists x \in A\ (g(f(x)) = y)
+\intertext{Mit $b = f(x)$ , $b \in B$ gilt}
+	&\forall y \in C\ \exists b \in B\ (g(b) = y)
+\end{align*}
+Sodass $g$ surjektiv ist.
+\end{proof}
 \end{document}
