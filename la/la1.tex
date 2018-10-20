@@ -19,8 +19,9 @@
 \setlength{\parindent}{0pt}
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Behauptung}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{precondition}[theorem]{Voraussetzung}
 
 \begin{document}
 \textbf{Aufgabe 1}\\
@@ -44,13 +45,13 @@
 \begin{theorem}
 	\[ C \backslash (A \cap B) = (C \backslash A) \cup (C \backslash B) \]
 \end{theorem}
-\begin{lemma}
+\begin{precondition}
 Sei $ m \coloneqq (x \in M)$ und  $n \coloneqq (x \in N)$, dann
 \[ x \in (M \cup N) \Leftrightarrow m \vee n \qquad x \in (M \cap N) \Leftrightarrow m \wedge n \qquad x  \in (M \backslash N) \Leftrightarrow m \wedge \neg n \]
-\end{lemma}
-\begin{lemma}
+\end{precondition}
+\begin{precondition}
 \[ \forall x ((x \in A) \Leftrightarrow (x \in B)) \:\Leftrightarrow\; A = B \]
-\end{lemma}
+\end{precondition}
 
 \begin{proof}
 	
@@ -71,7 +72,7 @@ $f$ injektiv, da nach \textsc{Peano} gilt $n+1 = m+1 \Rightarrow n = m\ (n,\ m \
 $f$ nicht surjektiv, da
 \[ f(x) > x \ \wedge\ \nexists n \in \mathbb{N}\ (1 > n) \quad \Rightarrow \quad \nexists x \in \mathbb{N}\ (f(x) = 1) \]
 $g$ nicht injektiv, da $g(1) = g(2)$ \\
-$g$ surjektiv, da mit $m(n) = n+1$ gilt dass $\forall n \in \mathbb{N}\ \exists m \in \mathbb{N}\ (g(m) = n)$
+$g$ surjektiv, da mit $m = n+1$ gilt dass $\forall n \in \mathbb{N}\ \exists m \in \mathbb{N}\ (g(m) = n)$
 \newpage
 (c)
 \begin{theorem}
@@ -81,10 +82,10 @@ ist bijektiv.
 \end{theorem}
 \begin{proof}
 Da $2 \mid (n \pm 1) \:\Leftrightarrow\: 2 \nmid n$ gilt
-\[ (g(n) \mid 2) \Leftrightarrow (n \nmid 2) \]
+\[ (2 \mid g(n)) \Leftrightarrow (2 \nmid n) \]
 womit
 \[ g(g(n)) = n \pm 1 \mp 1 = n \]
-sodass $g \circ g = \mathrm{id}_M$ erfüllt ist. Nach Lemma \ref{klemma} muss $g$ bijektiv, und somit sowohl injektiv als auch surjektiv sein.
+sodass $g \circ g = \mathrm{id}_\mathbb{N}$ erfüllt ist. Nach Lemma \ref{klemma} muss $g$ bijektiv, und somit sowohl injektiv als auch surjektiv sein.
 \end{proof}
 \begin{lemma}\label{klemma}
 Gilt für ein $f:M \rightarrow M$
@@ -115,7 +116,7 @@ Somit gilt das Gegenteil von \eqref{gegenbeh}, sodass $f$ injektiv ist.
 \end{proof}
 (c)
 \begin{align*}
-(f \circ h)(n) &= \begin{cases}(n+1)+1 &\quad 2  \nmid (n+1) \\ n+1-1 &\quad 2 \mid (n+1) \end{cases} & (f \circ g)(n) &= \begin{cases} f(g(1)) = 2 &\quad n = 1\\ n-1+1 &\quad n > 1\end{cases}\\
+(h \circ f)(n) &= \begin{cases}(n+1)+1 &\quad 2  \nmid (n+1) \\ n+1-1 &\quad 2 \mid (n+1) \end{cases} & (f \circ g)(n) &= \begin{cases} f(g(1)) = 2 &\quad n = 1\\ n-1+1 &\quad n > 1\end{cases}\\
 &= \begin{cases} n + 2 &\quad 2 \mid n\\n &\quad 2 \nmid n  \end{cases} & &= \begin{cases}2 &\quad n=1\\n &\quad n > 1\end{cases}
 \end{align*}
 \newpage
