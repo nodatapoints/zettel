@@ -71,7 +71,7 @@ Für alle Mengen $A,\ B,\ C$ gilt
 Seien $M,\ N$ Mengen und sei $ m \coloneqq (x \in M)\ ,\ n \coloneqq (x \in N)$\\ für ein beliebiges $x$, dann
 \begin{gather*}
 x \in (M \cup N) \Leftrightarrow m \vee n \qquad x \in (M \cap N) \Leftrightarrow m \wedge n \qquad x  \in (M \backslash N) \Leftrightarrow m \wedge \neg n \\
-\forall x (m \Leftrightarrow n) \:\Leftrightarrow\; A = B	
+\forall x (m \Leftrightarrow n) \:\Leftrightarrow\; M = N
 \end{gather*}
 \end{precondition}
 \begin{proof}
@@ -91,7 +91,7 @@ $f$ nicht surjektiv, da
 \[ f(x) > x \ \wedge\ \nexists n \in \mathbb{N}\ (1 > n) \quad \Rightarrow \quad \nexists x \in \mathbb{N}\ (f(x) = 1) \]
 $g$ nicht injektiv, da $g(1) = g(2)$ \\
 $g$ surjektiv, da mit $m = n+1$ gilt dass $\forall n \in \mathbb{N}\ \exists m \in \mathbb{N}\ (g(m) = n)$
-(c)
+\newpage
 \begin{theorem}
 Die Funktion $g : \mathbb{N} \rightarrow \mathbb{N}$ mit
 \[ g(n) = \begin{cases} n+1 &\quad 2 \nmid n \\ n-1 &\quad 2 \mid n \\ \end{cases} \]
@@ -102,17 +102,7 @@ Da $2 \mid (n \pm 1) \:\Leftrightarrow\: 2 \nmid n$ gilt
 \[ (2 \mid g(n)) \Leftrightarrow (2 \nmid n) \]
 womit
 \[ g(g(n)) = n \pm 1 \mp 1 = n \]
-sodass $g \circ g = \mathrm{id}_\mathbb{N}$ erfüllt ist. Nach Lemma \ref{klemma} muss $g$ bijektiv, und somit sowohl injektiv als auch surjektiv sein.
-\end{proof}
-\begin{lemma}\label{klemma}
-Gilt für ein $f:M \rightarrow M$
-\begin{equation}\label{def}
-	f \circ f = \mathrm{id}_M
-\end{equation}
-so ist $f$ bijektiv.
-\end{lemma}
-\begin{proof}
-Nach Definition existiert ein $f^{-1} = f$, sodass $f$ bijektiv ist.
+sodass $g \circ g = \mathrm{id}_\mathbb{N}$ erfüllt ist. Damit existiert ein $g^{-1} = g$. Demnach ist $g$ bijektiv.
 % Mit $x \coloneqq f(y)$ gilt
 % \[ \forall y \in M\ \exists x \in M\ (f(x) = y) \]
 % da nach \eqref{def}
@@ -152,6 +142,7 @@ $\defimpl{\cup} x \in f^{-1}(C)$ oder $x \in f^{-1}(D)$ \\
 Fall 1: $x \in f^{-1}(C) \defimpl{f^{-1}}$ Es gibt $y \in C$ mit $f(x) = y \Rightarrow y \in C \cup D \defimpl{f(x) = y} x \in f^{-1}(C \cup D)$ \\
 Fall 2: $x \in f^{-1}(D) \defimpl{f^{-1}}$ Es gibt $y \in D$ mit $f(x) = y \Rightarrow y \in C \cup D \defimpl{f(x) = y} x \in f^{-1}(C \cup D)$ \\
 
+\newpage
 \ttask
 \begin{theorem}
 	\[ f^{-1}(C \cap D) = f^{-1}(C) \cap f^{-1}(D) \]
@@ -186,6 +177,6 @@ Ist $g \circ f$ surjektiv, dann muss
 \intertext{Mit $b = f(x)$ , $b \in B$ gilt}
 	&\forall y \in C\ \exists b \in B\ (g(b) = y)
 \end{align*}
-Sodass $g$ surjektiv ist.
+sodass $g$ surjektiv ist.
 \end{proof}
 \end{document}
