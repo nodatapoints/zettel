@@ -12,6 +12,7 @@
 
 \usepackage{tikz}
 
+\usepackage{marvosym}
 \usepackage{amsthm}
 \usepackage{thmtools}
 
@@ -45,10 +46,18 @@
 
 \begin{document}
 \begin{lemma}
-\begin{equation}
-	m = n \Rightarrow m+r = n+r \qquad (m,\ n,\ r \in \mathbb{N})
+\begin{equation}\label{lemma1}
+	m+p = n+p \Rightarrow m = n \qquad (m,\ n,\ p \in \mathbb{N})
 \end{equation}
 \end{lemma}
+\begin{proof}
+Wenn $m < n$, dann gibt es ein $r \in \mathbb{N}$ mit $n = m + r$
+\begin{align*}
+	m + p &= n+p  = (m + r) + p = m + (r + p) = m + (p + r) = (m + p) + r \\
+	m + p &> (m + p) \quad\text{\Lightning}
+\end{align*}
+$m > n$ führt analog ebenfalls auf einen Widerspruch, sodass nach Ausschlussverfahren nur gelten kann dass $m = n$.
+\end{proof}
 \begin{theorem}
 Für alle $m,\ n,\ p \in \mathbb{N}$ gelte
 \begin{equation}\label{beh}
