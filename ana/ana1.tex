@@ -14,6 +14,7 @@
 
 \usepackage{amsthm}
 \usepackage{thmtools}
+\usepackage{marvosym}
 
 \usepackage[left=2cm, right=2cm, top=2cm]{geometry}
 
@@ -44,34 +45,63 @@
 \newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
 
 \begin{document}
-\begin{lemma}
-\begin{equation}
-	m = n \Rightarrow m+r = n+r \qquad (m,\ n,\ r \in \mathbb{N})
-\end{equation}
-\end{lemma}
+\task
+\ttask
 \begin{theorem}
-Für alle $m,\ n,\ p \in \mathbb{N}$ gelte
-\begin{equation}\label{beh}
-	m < n \:\Rightarrow\: p \cdot m < p \cdot n \quad .
-\end{equation}
+	\[ n > m \Rightarrow pn > pm \tag*{$m,\ n,\ p \in \mathbb{N}$} \]
 \end{theorem}
 \begin{proof}
-Sei für alle $m,\ n \in \mathbb{N}$ die Menge $\mathcal{M}$
-\[ \mathcal{M} = \left\{ p \:\vert\: p \cdot m < p \cdot n\ ,\ p \in \mathbb{N} \right\} \quad. \]
-Aus $m < n$ folgt als für $p = 1$ die Behauptung \eqref{beh}
-\begin{equation}\label{IA}
-	m \cdot 1 < n \cdot 1 \:\Rightarrow\: 1 \in \mathcal{M} \quad.	
+\begin{align*}
+	n &= m + r \tag*{$r \in \mathbb{N}$} \\
+	pn &= p(m + r) = pm + pr \tag*{$pr \in \mathbb{N}$} \\
+	pn &> pm
+\end{align*}
+\end{proof}
+Obiger Beweis gilt analog für $m < n$. Für den Fall $m = n$ folgt sofort $pm = pn$.
+
+\ttask
+\begin{theorem}
+	\[ m > n \:\wedge\: p > q \ \Rightarrow\ mp > nq \tag*{$m,\ n,\ p,\ q \in \mathbb{N}$} \]
+\end{theorem}
+\begin{proof}
+\[ m = n + r \qquad p = q + s \tag*{$r,\ s \in \mathbb{N}$} \]
+\begin{align*}
+	mp &= (n+r)(q+s) = n(q+s) + r(q+s) = nq + \underbrace{(ns + rq + rs)}_{\in\:\mathbb{N}} \\
+	mp &> nq
+\end{align*}
+\end{proof}
+
+\task
+\begin{theorem}
+	\[ \nexists m,\ n \in \mathbb{N}\ (n < m < n+1) \]
+\end{theorem}
+\begin{proof}
+Es wird das Gegenteil der Behauptung angenommen.
+\[ n + r = m \qquad m + s = n+1 \tag*{$r,\ s \in \mathbb{N}$} \]
+\begin{align*}
+	m + s = (n + r) + s &= n + 1 \\
+	r + s &= 1 \\
+	r &< 1 \qquad \text{\Lightning}
+\end{align*}
+\end{proof}
+\newpage
+\task
+\begin{theorem}
+	\[ 6(1^2 + 2^2 + \hdots + n^2) = n(n+1)(2n+1) \tag*{$n \in \mathbb{N}$} \]
+\end{theorem}
+\begin{proof}
+Für $n = 1$
+\begin{equation}\label{IS}
+	6(1^2) = 1(1+1)(2 \cdot 1 + 1) = 6 \qquad \text{w. A.}
 \end{equation}
-Gilt \eqref{beh} für ein beliebiges $p$, so existiert ein $r \in \mathbb{N}$ mit
+Gilt es als Induktionsannahme für ein beliebiges $n$, so ist
 \begin{align}
-	m \cdot p &< n \cdot p \nonumber\\
-	m \cdot p + r &= n \cdot p \nonumber\\
-	m \cdot p + r + n &= n \cdot p + n \qquad. \nonumber
-\intertext{Da $m < n$ , existiert ein $r' \in \mathbb{N}$ mit $m + r' = n$ .}
-	m \cdot p + m + r + r' &= n \cdot p + n \nonumber\\
-	m \cdot (p + 1) + r + r' &= n \cdot (p+1) \tag*{$r + r' \in \mathbb{N}$} \nonumber\\
-	m \cdot (p + 1) &< n \cdot (p+1) \label{IS}
+	6(1^2 + 2^2 + \hdots + n^2) &= n(n+1)(2n+1) \nonumber\\
+	6(1^2 + 2^2 + \hdots + n^2) + 6(n+1)^2 &= n(n+1)(2n+1)+ 6(n+1)^2 \nonumber\\
+	6(1^2 + 2^2 + \hdots + (n+1)^2) &= (n+1)\left( n(2n+1) + 6(n+1) \right) \nonumber\\
+	&= (n+1)\left( 2n^2 + 7n + 6 \right) = (n+1)(n+2)(2n+3) \nonumber\\ 
+	6(1^2 + 2^2 + \hdots + (n+1)^2) &= (n+1)\left( (n+1)+1 \right)\left( 2(n+1)+1 \right)  \qquad, \label{IA}
 \end{align}
-Aus \eqref{IA} als Induktionsanfang und \eqref{IS} als Induktionsschritt folgt dass $\mathcal{M} = \mathbb{N}$ .
+sodass es für $n+1$ gilt. Aus Richtigkeit von Induktionsstart \eqref{IS} und Induktionsschritt \eqref{IA} folgt die Richtigkeit der Behauptung.
 \end{proof}
 \end{document}
