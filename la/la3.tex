@@ -1,0 +1,180 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})}
+
+\setcounter{taski}{8}
+
+\begin{document}
+\hfill Kamal
+\begin{center}
+	\bfseries Lineare Algebra Blatt 3
+\end{center}
+\task
+\ttask
+
+$\mathbb{Z}$ ist geschlossen über $\oplus$ und $\odot$, da sie jeweils auch nur aus geschlossenen Operationen über $\mathbb{Z}$ aufgebaut sind.
+\begin{align*}
+	a \oplus b = (a+b) -1 = (b+a) - 1 = b \oplus a & \Rightarrow\text{kommutativ unter $\oplus$} \\
+	(a \oplus b) \oplus c = \left( a+b -1 \right)+c  -1  = a+(b+c-1) -1 = a \oplus (b \oplus c) &\Rightarrow\text{Assoziativ unter $\oplus$} \\
+	a \oplus 1 = (a+1) - 1 = a  &\Rightarrow\text{Nullelement $0_z =1$} \\
+	a \oplus (2-a) = (a+(2-a)) -1 = 1 = 0_z  &\Rightarrow\text{Inverselement $a' = 2 - a$} \\
+\end{align*}
+$\Rightarrow (\mathbb{Z},\ \oplus)$ ist eine abelsche Gruppe.
+\begin{align*}
+	a \odot (b \oplus c) = a + (b + c -1) - a \cdot (b + c -1) = \qquad& \\
+	(a + b - a \cdot b) + (a + c - a \cdot c) - 1 = a \odot b \ \oplus\  a \odot c  & \Rightarrow\text{distributiv} \\
+	a \odot b = a + b - a \cdot b = b + a - b \cdot a = b \odot a &\Rightarrow\text{kommutativ unter $\odot$} \\
+	a \odot 0 = a + 0 - a \cdot 0 = a &\Rightarrow\text{Einselement $1_z = 0$} \\
+	a \odot (b \odot c) = a + (b + c - b \cdot c) - a \cdot (b + c - b \cdot c) &=\\
+	 a + b - a \cdot b + c - c \cdot (a+b - a \cdot b) = (a \odot b) \odot c &\Rightarrow \text{Assoziativ unter $\odot$}
+\end{align*}
+$\Rightarrow (\mathbb{Z},\ \oplus,\ \odot)$ ist ein kommutativer Ring mit Einselement.
+
+\ttask
+\begin{align*}
+	0_z &= a \odot b \\
+	1 &= a + b - a \cdot b = (a-1) \cdot (1 - b) \\
+	0 &= (a-1)(b-1)\\
+	&\Rightarrow (a = 1 = 0_z) \vee (b = 1 = 0_z)
+\end{align*}
+Angenommen es gäbe ein inverses Element $a' \in \mathbb{Z}$ zu $a$, sodass
+\begin{align}\label{inv}
+	1_z &= a \odot a' \\\nonumber
+	0 &= a + a' - a \cdot a' \\\nonumber
+	a \cdot a' - a' &= a \\\nonumber
+	a' &= \frac{a}{a-1}
+\end{align}
+Für $a = 3 \in \mathbb{Z}$ wäre $a' = \frac{3}{2} \notin \mathbb{Z}$. So ist das Inverse nicht abgeschlossen, womit es sich nicht um einen Körper handeln kann.
+
+\ttask
+Alle Umformungen in (a) und (b) sind auch für $\mathbb{Q}$ möglich. Das Inverse von einem bel. $\frac{p}{q} \in \mathbb{Q}$ ist nach \eqref{inv}
+\begin{align*}
+	\left( \frac{p}{q} \right)' &= \frac{\frac{p}{q}}{\frac{p}{q}-1} = \frac{p}{p - q}
+\end{align*}
+Was sich wieder in $\mathbb{Q}$ befindet, solange $p \neq q$. Ist $p = q$, so ist $\frac{p}{q} = 1 = 0_z$, sodass kein Inverses notwendig ist. Demnach ist $(\mathbb{Q}\backslash\{0_z\},\ \oplus)$ eine abelsche Gruppe, sodass $(\mathbb{Q},\ \oplus,\ \odot)$ ein Körper ist.
+\newpage
+\task
+\ttask
+
+\tttask\ Ja, mit $0,\ z' = -z$
+
+\tttask\ Nein, da Distributivgesetz verletzt. Bei $f,\ g,\ h: \mathbb{R} \rightarrow R,\ x \mapsto 1$
+\begin{align*}
+	f \left( g(x) + h(x) \right) &= f(g(x)) + f(h(x)) \\
+	1 &= 1+1 \quad \text{\Large \Lightning}
+\end{align*}
+
+\tttask\ Ja. mit $(0,\ 0),\ (a,\ b)' = (-a,\ -b)$
+
+\ttask
+
+\tttask\ Nein, da das einzig mögliche Einselement $1 \notin 2 \mathbb{Z}$
+
+\tttask\ Nein, siehe (i)
+
+\tttask\ Ja, $(1,\ 1)$
+
+\ttask
+
+\tttask\ Ja.
+
+\tttask\ Nein, siehe (i)
+
+\tttask\ Nein, da $(0,\ 1) \odot (1,\ 0) = (0,\ 0) = 0_{\mathbb{Z}^2}$
+
+\task
+
+\ttask
+
+Im folgenden gilt als Notation dass $*$ ein beliebiges Vielfaches von $m$ darstellt \\$\forall *\ \exists z \in \mathbb{Z} : * = mz $, sodass
+\[ r_m(*) = 0 \qquad * \cdot\, a = * \]
+\begin{align*}
+	r_m(a \cdot r_m(b)) &= r_m\!\big( (* + r_m(a)) \cdot r_m(b) \big)  = r_m(* + r_m(a) \cdot r_m(b)) = r_m(r_m(a) \cdot r_m(b)) \\
+	r_m(r_m(a) \cdot b) &= r_m\!\big(r_m(a) \cdot (* + r_m(b)) \big)  = r_m(* + r_m(a) \cdot r_m(b)) = r_m(r_m(a) \cdot r_m(b)) \\
+	r_m(a \cdot b) &= r_m\!\big( a \cdot (* + r_m(b)) \big) = r_m(a \cdot r_m(b))
+\end{align*}
+\ttask
+
+Unter Verwendung von den Ergebnissen der vorherigen Aufgabe
+\[ a \;\cdot_m (b \;\cdot_m c) = r_m(a \cdot r_m(b \cdot c)) = r_m(a \cdot b \cdot c) = r_m(r_m(a \cdot b) \cdot c) = (a \;\cdot_m b)\;\cdot_m c \]
+\ttask
+\begin{align*}
+	a \;\cdot_m (b \;+_m c) &= r_m(a \cdot r_m(b+c)) = r_m(a \cdot (b+c)) = r_m(a \cdot b + a \cdot c) = r_m(a \cdot b) + r_m(a \cdot c) \\
+	&= (a \;\cdot_m b) \;+_m (a \;\cdot_m c)
+\end{align*}
+
+\ttask
+
+Nach \textbf{P11} ist $(F_m,\ +_m)$ eine Gruppe. $F_m$ ist geschlossen über $\cdot_m,\ +_m$, da beide Operatoren Funktionswerte von $r_m$ sind und somit immer in $F_m$ liegen. $\cdot_m$ ist nach (b) assoziativ. Nach (c) hält das Distributivgesetz. Weiterhin ist $\cdot_m$ kommutativ, da
+\[ a \;\cdot_m b = r_m(a \cdot b) = r_m(b \cdot a) = b \;\cdot_m a \]
+Das Einselement ist 1, da
+\[ a \;\cdot_m 1 = r_m(a \cdot 1) = r_m(a) = a \tag{$a \in F_m$} \]
+So sind alle Kriterien für einen kommutativen Ring mit Einselement erfüllt.
+
+\task
+
+\ttask
+\begin{gather*}
+	3 \cdot (4 + 2^{-1}) = 3 \cdot (4 + 3) = 3 \cdot 2 = 1 \\
+	\\
+	3^0 = 1 \qquad 3^1 = 3 \qquad 3^2 = 4 \qquad 3^3 = 2 \qquad 3^4 = 1 = 3^0 \\
+	\curvearrowright 3^a = 3^{r_4(a)} \\
+	3^{12345} = 3^1 = 3\\
+	\\
+	2^0 = 1 \qquad 2^1 = 2 \qquad 2^2 = 4 \qquad 2^3 = 3 \qquad 2^4  = 1 = 2^0 \\
+	\curvearrowright 2^a = 2^{r_4(a)} \\
+	r_4(7^0)= 1 \qquad r_4(7^1)= 3 \qquad r_4(7^2)= 1 = r_4(7^0)\\
+	\curvearrowright r_4(7^a) = r_4(7^{r_2(a)})\\
+	2^{7^{73}} = 2^{r_4(7^{73})} = 2^{r_4(7^{r_2(73)})} = 2^{r_4(7^1)} = 2^{3} = 3
+\end{gather*}
+\ttask
+
+für $m=5 \qquad \left\{ 1 \right\}$ \\
+für $m=7 \qquad \left\{ 1,\ 2,\ 4 \right\}$
+
+\ttask
+\[\left\{ (3,\ 3),\ (3,\ 6),\ (6,\ 6) \right\}\]
+\end{document}
