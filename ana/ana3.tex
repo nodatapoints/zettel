@@ -52,6 +52,7 @@
 \newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
 \newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
 
+\DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \begin{flushright}
 	Kamal\\
@@ -68,7 +69,100 @@
 Es sei $\pi_n \coloneqq \left\{ f:A_n \rightarrow A_n \mid f\ \text{bijektiv} \right\}$
 \paragraph*{Induktionsanfang} $n = 1$ , $\pi_1 = \{ \mathrm{id}_{A_1}\}$
 \paragraph*{Induktionsbehauptung} $|\pi_n| = n!$
-\paragraph*{Induktionsschritt}
+\paragraph*{Induktionsschritt} z. z. $|\pi_{n+1}| = (n+1)!$
+
+Es sei $\mathrm{Ins}: \pi_n \times A_{n+1} \rightarrow \pi_{n+1}$ definiert als
+\[ \mathrm{Ins}(\varphi,\ k)(i) \coloneqq \begin{cases}
+	n+1 &\qquad i = k \\
+	\varphi(k) &\qquad i = n+1 \\
+	\varphi(i) &\qquad \text{sonst}
+\end{cases} \]
+Jeder Wert von $\mathrm{Ins}(\varphi,\ k)$ ist nach Definition bijektiv und bildet $A_{n+1}$ auf $A_{n+1}$ ab, und ist somit in $\pi_{n+1}$ enthalten.
+
+Nach Lemma \ref{lemma1} und Lemma \ref{lemma2} ist $\mathrm{Ins}$ bijektiv, womit
+\[ |\pi_{n+1}| = |\pi_n \times A_{n+1}| = |\pi_n| \cdot |A_{n+1}| = n! \cdot (n+1) = (n+1)! \]
+\end{proof}
+\begin{lemma}\label{lemma1}
+$\mathrm{Ins}$ ist injektiv.
+\end{lemma}
+\begin{proof}
+\[ \mathrm{Ins}\ \text{injektiv} \txtImpl{Def. Inj.} \left( \forall\varphi,\ \varphi' \in \pi_n\ \forall k,\ k' \in A_{n+1} : \varphi \neq \varphi' \vee k \neq k' \Rightarrow \mathrm{Ins}(\varphi,\ k) \neq \mathrm{Ins}(\varphi',\ k') \right) \]
+Fall 1: $\varphi \neq \varphi' \Leftrightarrow \exists i \in A_n : \varphi(i) \neq \varphi'(i)$
+
+Wenn $k = k'$, so trifft Fall 2 zu, und es ist nichts zu zeigen $
+\curvearrowright$ Es sei $k \stackrel{!}{\neq} k'$
+\begin{gather*}
+	i = k \defimpl{\mathrm{Ins}} \mathrm{Ins}(\varphi,\ k)(i) = n+1 \\
+	i = k \stackrel{k \neq k'}{\Longrightarrow} i \neq k' \defimpl{\mathrm{Ins}} \mathrm{Ins}(\varphi',\ k')(i) = \varphi'(i)\\\\
+	\defimpl{\varphi'} \varphi'(i) \neq n+1 \Rightarrow \mathrm{Ins}(\varphi',\ k')(i) \neq 
+	i = k \defimpl{\mathrm{Ins}} \mathrm{Ins}(\varphi,\ k)(i)
+\end{gather*}
+Fall 2: $k \neq k'$
+\[  \mathrm{Ins}(\varphi,\ k)(n+1) = k \neq k' = \mathrm{Ins}(\varphi',\ k')(n+1) \]
+\end{proof}
+\newpage
+\begin{lemma}\label{lemma2}
+$\mathrm{Ins}$ ist surjektiv.
+\end{lemma}
+\begin{proof}
+\[ \Leftrightarrow \forall \varphi' \in \pi_{n+1}\ \exists \varphi \in \pi_n\ \exists k \in A_{n+1} : \varphi' = \mathrm{Ins}(\varphi,\ k)\]
+Es sei ein beliebiges $\varphi' \in \pi_{n+1}$ gegeben. Nach Def. $\pi$ folgt die Existenz eines $\varphi'^{-1}$.
+
+Sei $k \coloneqq \varphi'^{-1}(n+1)$ und $\varphi: A_n \rightarrow A_n$
+\[ \varphi(i) \coloneqq \begin{cases}
+	\varphi'(n+1) &\qquad i = k \\
+	\varphi'(i) &\qquad \text{sonst}
+\end{cases} \]
+$\varphi$ ist nach Konstruktion bijektiv und erfüllt
+\[ \varphi' = \mathrm{Ins}(\varphi,\ k) \]
 \end{proof}
 
+\task
+
+\ttask
+\begin{theorem}
+\[ \forall y \in X : \left(  \forall x \in X : x \neq y \Rightarrow x > y \right) \Leftrightarrow \nexists x \in X : x < y\]	
+\end{theorem}
+\begin{proof}
+Für ein beliebiges $y \in X$
+\begin{align*}
+	&\quad\forall x \in X : x \neq y \Rightarrow x > y \\
+	\defImpl{\Rightarrow}	&\quad\forall x \in X : x = y \vee x > y \\
+	\defImpl{\geq}&\quad\forall x \in X : x \geq y \\
+	\Leftrightarrow&\quad\nexists x \in X : x < y
+\end{align*}
+\end{proof}
+
+\task
+
+\begin{theorem}
+Für eine Folge $(M_n)_{n \in \mathbb{N}}$
+	\[ \forall n \in \mathbb{N} : M_n\ \text{abzählbar} \Rightarrow \bigcup_{n \in \mathbb{N}}M_n\quad\text{abzählbar}\]
+\end{theorem}
+\begin{proof}
+\[ \txtimpl{Def. abz.} \forall n \in \mathbb{N}\ \exists \varphi_n:\mathbb{N} \rightarrow M_n\ ,\ \varphi_n\ \text{bijektiv} \]
+Es sei
+\[ \sigma : \mathbb{N}^2 \rightarrow \bigcup_{n \in \mathbb{N}}M_n\ ,\ (i,\ j) \mapsto \varphi_i(j) \]
+$\sigma$ ist nach Konstruktion surjektiv. Da nach Satz 1.5.3 $\mathbb{N}^2$ abzählbar ist, sodass eine Bijektion $\tau : \mathbb{N} \rightarrow \mathbb{N}^2$ existiert.
+\[ \Rightarrow \sigma \circ \tau : \mathbb{N} \rightarrow \bigcup_{n \in \mathbb{N}}M_n \quad \text{surjektiv} \]
+\end{proof}
+
+\newpage
+\task
+
+\begin{theorem}
+	\[ \sqrt{2} + \sqrt{3}\ \text{irrational} \]
+\end{theorem}
+\begin{proof} durch Widerspruch\\
+\begin{align*}
+	&&\sqrt{2} + \sqrt{3} \in \mathbb{Q} &\defImpl{\mathbb{Q}} \exists p,\ q \in \mathbb{Z} : \sqrt{2} + \sqrt{3} = \frac{p}{q} \\
+	\Rightarrow&& p &= (\sqrt{2} + \sqrt{3})q \\
+	\Rightarrow&& p^2 &= (5+2\sqrt{6})q^2 \\
+	\Rightarrow&& \sqrt{6} &= \frac{1}{2}\left( \left( \frac{p}{q} \right)^2 - 5 \right)  \in \mathbb{Q} \qquad \text{da $\mathbb{Q}$ abgeschlossen} \\
+	\\
+	\Rightarrow&& \exists r,\ s \in \mathbb{Z} : \sqrt{6} &= \frac{r}{s} \\
+	\Rightarrow&& r^2 &= 6s^2 = 2^13^1s^2 \\ 
+\end{align*}
+Es gibt eine eindeutige Primzahlfaktorzerlegung für $|r|,\ |s|$. Die Primzahlfaktorzerlegung von $r^2,\ s^2$ besteht nach Potenzgesetzen nur aus geraden Expontenten. Jedoch sind nach obiger Formel die Exponenten von 2 und 3 in $r^2$ jeweils um eins größer als in $s^2$. \Large\Lightning
+\end{proof}
 \end{document}
