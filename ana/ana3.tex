@@ -79,7 +79,7 @@ Es sei $\mathrm{Ins}: \pi_n \times A_{n+1} \rightarrow \pi_{n+1}$ definiert als
 Jeder Wert von $\mathrm{Ins}(\varphi,\ k)$ ist nach Definition bijektiv und bildet $A_{n+1}$ auf $A_{n+1}$ ab, und ist somit in $\pi_{n+1}$ enthalten.
 
 Nach Lemma \ref{lemma1} und Lemma \ref{lemma2} ist $\mathrm{Ins}$ bijektiv, womit
-\[ |\pi_{n+1}| = |\pi_n \times A_{n+1}| = |\pi_n| \cdot |A_{n+1}| = n! \cdot (n+1) = (n+1)! \]
+\[ |\pi_{n+1}| = |\pi_n \times A_{n+1}| \stackrel{\text{Lemma \ref{cart}}}{=} |\pi_n| \cdot |A_{n+1}| = n! \cdot (n+1) = (n+1)! \]
 \end{proof}
 \begin{lemma}\label{lemma1}
 $\mathrm{Ins}$ ist injektiv.
@@ -116,6 +116,24 @@ $\varphi$ ist nach Konstruktion bijektiv und erfüllt
 \[ \varphi' = \mathrm{Ins}(\varphi,\ k) \]
 \end{proof}
 
+\begin{lemma}\label{cart}
+Für zwei endliche Mengen $M,\ N$ gilt
+\[ | M \times N| = |M| \cdot |N| \]
+\end{lemma}
+\begin{proof}
+Sei $m \coloneqq |M|,\ n \coloneqq |N|$. Nach Def. Endlichkeit gibt es bijektive $\alpha,\ \beta$
+\[ \alpha: M \rightarrow A_m \qquad \beta : N \rightarrow A_n \]
+Es sei nun eine Abbildung $\varphi : M \times N \rightarrow A_{n \cdot m}$
+\[ \varphi(a,\ b) \coloneqq n \cdot (\alpha(a) - 1) + \beta(b) \]
+Die Größte Zahl wird bei $a = \alpha^{-1}(m),\ b = \beta^{-1}(n)$ erreicht mit
+\[ \varphi_{max} = n \cdot (m - 1) + n = n \cdot m\]
+\[ \forall a \in M\ \forall b \in N : \alpha(a) \leq m \wedge \beta(b) \leq n \ \Rightarrow\  \varphi(a,\ b) \leq m \cdot n \]
+Jede Zahl lässt sich eindeutig in ein Vielfaches von $n$ und einen Rest aufteilen, sodass
+\[ i = \varphi(a,\ b) \Leftrightarrow b = \beta^{-1}(i \!\!\!\!\mod n) \ \wedge\ a = \alpha^{-1}\left( 1+\frac{i - i \!\!\!\!\mod n}{n} \right)  \]
+Es existiert demnach ein $\varphi^{-1}$, sodass $\varphi$ bijektiv.
+\[  M \times N \sim A_{n \cdot m} \defimpl{\#} |M \times N| = |M| \cdot |N| \]
+\end{proof}
+
 \task
 
 \ttask
@@ -131,8 +149,11 @@ Für ein beliebiges $y \in X$
 	\Leftrightarrow&\quad\nexists x \in X : x < y
 \end{align*}
 \end{proof}
+\newpage
+\ttask
 
-\task
+Keine der beiden Richtungen hält ohne das Anordungsaxiom, da im vorletzten Schritt überhaupt kein logischer Zusammenhang zwischen den Aussagen $x \geq y$ und $x < y$ besteht.
+\\
 
 \begin{theorem}
 Für eine Folge $(M_n)_{n \in \mathbb{N}}$
@@ -144,8 +165,26 @@ Es sei
 \[ \sigma : \mathbb{N}^2 \rightarrow \bigcup_{n \in \mathbb{N}}M_n\ ,\ (i,\ j) \mapsto \varphi_i(j) \]
 $\sigma$ ist nach Konstruktion surjektiv. Da nach Satz 1.5.3 $\mathbb{N}^2$ abzählbar ist, sodass eine Bijektion $\tau : \mathbb{N} \rightarrow \mathbb{N}^2$ existiert.
 \[ \Rightarrow \sigma \circ \tau : \mathbb{N} \rightarrow \bigcup_{n \in \mathbb{N}}M_n \quad \text{surjektiv} \]
+Nach Lemma \ref{surj} ist $\bigcup_{n \in \mathbb{N}}M_n$ somit abzählbar.
 \end{proof}
 
+\begin{lemma}\label{surj}
+	Gibt es für eine Menge $M$ eine surjektive Abbildung $\varphi:\mathbb{N} \rightarrow M$, so ist $M$ abzählbar.	
+\end{lemma}
+\begin{proof}
+\renewcommand*{\thefootnote}{\textdagger}
+\begin{gather*}
+	\txtimpl{Def. Surj.} \forall x \in M \ \exists n \in \mathbb{N} : \varphi(n) = s \\
+	\Rightarrow \forall x \in M : \varphi^{-1}(\{x\}) \neq \emptyset \tag*{\footnotemark}
+\end{gather*}
+\footnotetext{Es handelt sich bei $\varphi^{-1}(\{x\})$ nicht eine Umkehrfunktion, sondern lediglich um das Urbild.}
+Es sei nun eine Abbildung $\theta: M \rightarrow \mathbb{N}$, welche ein $x \in M$ auf das kleinste Element in seinem Urbild abbildet. Es existiert ein eindeutiges kleinstes Element, da $\varphi^{-1}(\{x\}) \subseteq \mathbb{N}$.
+\[ \theta(x) \coloneqq \min\big(\varphi^{-1}(\{x\})\big) \]
+Surjektivität bleibt nach Konstruktion erhalten, und aus der Eindeutigkeit des kleinsten Elements folgt
+\[ \forall x,\ y \in M : \min\big(\varphi^{-1}(\{x\})\big) = \min\big(\varphi^{-1}(\{y\})\big) \eqqcolon n \Rightarrow x = \varphi(n) = y\]
+sodass $\theta$ injektiv und so bijektiv ist.
+\[ \defimpl{\sim} M \sim \mathbb{N} \txtimpl{Def. abz.} M\ \text{abzählbar} \]
+\end{proof}
 \newpage
 \task
 
@@ -164,4 +203,13 @@ $\sigma$ ist nach Konstruktion surjektiv. Da nach Satz 1.5.3 $\mathbb{N}^2$ abz�
 \end{align*}
 Es gibt eine eindeutige Primzahlfaktorzerlegung für $|r|,\ |s|$. Die Primzahlfaktorzerlegung von $r^2,\ s^2$ besteht nach Potenzgesetzen nur aus geraden Expontenten. Jedoch sind nach obiger Formel die Exponenten von 2 und 3 in $r^2$ jeweils um eins größer als in $s^2$. \Large\Lightning
 \end{proof}
+\vfill
+\begin{flushright}
+	\begin{tabular}{c|c|c|c}
+	1 & 2 & 3 & $\Sigma$ \\
+	\hline
+	\hspace*{4em}& \hspace*{4em}& \hspace*{4em}&\hspace*{4em} \\
+	&&&\\
+	\end{tabular}
+\end{flushright}
 \end{document}
