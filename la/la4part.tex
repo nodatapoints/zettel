@@ -1,0 +1,142 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})}
+
+\setcounter{taski}{13}
+
+\begin{document}
+\task
+
+\ttask
+\begin{gather*}
+	U_1 = \mathrm{Lin}\left( \left\{ \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix},\ \begin{pmatrix} -2 \\ 1 \\ 3 \end{pmatrix} \right\} \right) \qquad
+	U_2 = \mathrm{Lin}\left( \left\{ \begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix},\ \begin{pmatrix} 0 \\ 3 \\ 2 \end{pmatrix} \right\} \right) \qquad
+	U_3  = \mathrm{Lin}\left( \left\{ \begin{pmatrix} 1 \\ 1 \\ 2 \end{pmatrix} \right\} \right)
+\end{gather*}
+\ttask
+\begin{gather*}
+	\begin{pmatrix} 1 \\ 4 \\ 3 \end{pmatrix} = \frac{9}{5}\begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} + \frac{2}{5} \begin{pmatrix} -2 \\ 1 \\ 3 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 2 \\ -1 \\ 0 \end{pmatrix} + \frac{3}{2}\begin{pmatrix} 0 \\ 3 \\ 2 \end{pmatrix}
+\end{gather*}
+\setcounter{taski}{14}
+\task
+\setcounter{taskii}{1}
+\ttask
+\begin{theorem}
+\[ \mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) = \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\}) \]
+\end{theorem}
+\begin{proof}\ \\
+1. Richtung \quad $\mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) \supseteq \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})$
+\begin{gather*}
+	 a_0v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0) = \underbrace{(a_0 - a_1 - \dots - a_r)}_{a_0'} v_0 + a_1v_1 + \dots + a_rv_r
+\end{gather*}
+2. Richtung \quad $\mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) \subseteq \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})$
+\begin{gather*}
+	 a_0v_0 + \dots + a_rv_r = \underbrace{(a_0 + \dots + a_r)}_{a_0'}v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0)
+\end{gather*}
+\end{proof}
+\ttask
+
+Es gilt nicht. Man betrachte den Vektorraum $(V,\ +) = (\mathbb{R},\ +)$ über den Körper $K = \mathbb{R}$ mit üblicher Multiplikation.
+\[ \mathrm{Lin}(\{1\}) = \mathrm{Lin}(\{2\}) = \mathrm{Lin}(\{1\}) \cap \mathrm{Lin}(\{2\}) = \mathbb{R} \neq \{0\} = \mathrm{Lin}(\emptyset) = \mathrm{Lin}(\{1\}\cap\{2\}) \]
+\task
+\setcounter{taskii}{1}
+\ttask
+
+\begin{theorem}
+\[ \nexists M \subseteq U_1 : M\ \text{endlich}\ \wedge\ \mathrm{Lin}(M) = U_1 \]
+\end{theorem}
+\begin{proof}
+durch Widerspruch
+
+Es sei ein endliches $M \subseteq U_1$ mit $\mathrm{Lin}(M) = U_1$. Da nach Def. $U_1$
+\[ \forall (F_n)_{n \in \mathbb{N}} \in M\ \exists s \in \mathbb{N}\ \forall n \in \mathbb{N} : n > s \Rightarrow F_n = 0 \]
+existiert eine Menge
+\[ S = \left\{ s \in \mathbb{N} \mid F \in M \right\} \]
+sodass
+\begin{equation}\label{schrank}
+	\forall (F_n)_{n \in \mathbb{N}} \in M\ \exists s \in S\ \forall n \in \mathbb{N} : n > s \Rightarrow F_n = 0
+\end{equation}
+Nach Lemma \ref{max} gibt es ein $z \in \mathbb{N}$ sodass
+\begin{gather*}
+	\forall s \in S : s < z \\
+	\Rightarrow \forall (F_n)_{n \in \mathbb{N}} \in M\ \forall n \in \mathbb{N} : n > z \Rightarrow F_n = 0 \tag*{nach \eqref{schrank}} \\
+	\Rightarrow \forall (F_n)_{n \in \mathbb{N}} \in M : F_{z+1} = 0
+\end{gather*}
+So ist für jede beliebige Reihe $(\xi_n)_{n \in \mathbb{N}} \in \mathrm{Lin}(M)$
+\[ \xi_{z+1} = \sum_{F \in M} a(F)F_{z+1} = 0 \tag{$a:M \rightarrow \mathbb{R}$} \]
+Sei $(\xi_n)_{n \in \mathbb{N}}$
+\[ \xi_n \coloneqq \begin{cases}
+	1 &\qquad n = z+1 \\
+	0 &\qquad \text{sonst}
+\end{cases} \]
+$(\xi_n)_{n \in \mathbb{N}} \in U_1$ da nach Konstuktion $\forall n \in N : n > z+1 \Rightarrow \xi_n = 0$
+
+Jedoch ist $\xi_{n+1} = 1 \neq 0$, womit $(\xi_n)_{n \in \mathbb{N}} \notin \mathrm{Lin}(M)$
+\[ \Rightarrow \mathrm{Lin}(M) \neq U_1 \]
+\end{proof}
+
+\begin{lemma}\label{max}
+Sei $N \subseteq \mathbb{N}$ eine endliche Menge
+	\[ \exists s \in \mathbb{N} : \forall n \in N : n < s \]
+\end{lemma}
+\begin{proof}
+durch vollständige Induktion
+\paragraph*{Induktionsanfang} $N \eqqcolon \{e\} \subseteq \mathbb{N}$ , $N \sim A_1$ \hfill ($e \in \mathbb{N}$)
+\[ \forall i \in N : i < e+1 \]
+\paragraph*{Induktionsbehauptung} $\forall N \subseteq \mathbb{N}\:\wedge N \sim A_n\ \exists s \in \mathbb{N} : \forall n \in N : n < s$
+
+Es sei ein $N' = N \cup \{e\}$ mit $e \in \mathbb{N} \:\wedge\:e \notin N$. Nach Konstruktion gilt $N' \sim A_{n+1}\:\wedge\:N' \subseteq \mathbb{N}$.
+Es sei $s' \in \mathbb{N}$ definiert als
+\[ s' \coloneqq \begin{cases}
+	e+1 &\qquad e > s\\
+	s &\qquad \text{sonst}
+\end{cases} \]
+Nach Konstruktion gilt
+\[ s' > e \ \wedge\ \forall n \in N : n < s \leq s'\]
+sodass
+\[ \forall n \in N' : n < s' \]
+\end{proof}
+\end{document}
