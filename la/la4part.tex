@@ -45,9 +45,15 @@
 \newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}}
 \newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})}
 
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+
 \setcounter{taski}{13}
 
 \begin{document}
+\hfill \textit{Ellen, Kamal}\\
 \task
 
 \ttask
@@ -69,12 +75,54 @@
 \end{theorem}
 \begin{proof}\ \\
 1. Richtung \quad $\mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) \supseteq \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})$
+\begin{gather}
+	\begin{gathered}\label{subsetbed}
+	\defImpl{\subseteq} \forall v \in \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\}) : v \in \mathrm{Lin}(\{v_0,\ \dots,\ v_n\})
+	\end{gathered}\\
+	\begin{gathered}\label{lindiff}
+	\forall v \in V : v \in \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\}) \txtImpl{Def. Lin} \exists a_0,\ \dots,\ a_r \in \mathbb{R}: \\
+		a_0v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0) = v
+	\end{gathered}\\\nonumber\\
+	\begin{gathered}\label{lin}
+	\forall v \in V : v \in \mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) \txtImpl{Def. Lin} \exists a_0',\ \dots,\ a_r' \in \mathbb{R}: \\
+		a_0'v_0 + a_1'v_1 + \dots + a_r'v_r 
+	\end{gathered}
+\end{gather}
+Es wird angenommen dass $v \in \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})$
 \begin{gather*}
-	 a_0v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0) = \underbrace{(a_0 - a_1 - \dots - a_r)}_{a_0'} v_0 + a_1v_1 + \dots + a_rv_r
+	\txtimpl{\eqref{lindiff}} \exists a_0,\ \dots,\ a_r \in \mathbb{R}: a_0v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0) = v \\
+	\text{nach \eqref{subsetbed} z. Z.} \quad v \in \mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) \\
+\end{gather*}
+Es seien $a_0',\ \dots,\ a_r' \in \mathbb{R}$
+\[ a_i' \coloneqq \begin{cases}
+	a_0 - a_1 - \dots - a_r &\qquad i = 0 \\
+	a_i &\qquad\text{sonst}
+\end{cases} \tag{$i \in \mathbb{N}_0 \wedge 0 \leq i \leq r$} \]
+sodass
+\begin{gather*}
+	 a_0v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0) = (a_0 - a_1 - \dots - a_r)v_0 + a_1v_1 + \dots + a_rv_r \\
+	 = a_0'v_0 + a_1'v_1 + \dots + a_r'v_r \\
+	 \txtimpl{\eqref{lin}} v \in \mathrm{Lin}(\{v_0,\ \dots,\ v_n\})
 \end{gather*}
 2. Richtung \quad $\mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) \subseteq \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})$
+\begin{gather}\label{subsetbed2}
+	\defImpl{\subseteq} \forall v \in \mathrm{Lin}(\{v_0,\ \dots,\ v_n\}) : v \in \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})
+\end{gather}
+Es wird angenommen dass $v \in \mathrm{Lin}(\{v_0,\ \dots,\ v_n\})$
 \begin{gather*}
-	 a_0v_0 + \dots + a_rv_r = \underbrace{(a_0 + \dots + a_r)}_{a_0'}v_0 + a_1(v_1-v_0) + \dots + a_r(v_r - v_0)
+	\txtimpl{\eqref{lin}} \exists a_0,\ \dots,\ a_r \in \mathbb{R}: a_0v_0 + a_1v_1 + \dots + a_rv_r = v\\
+	\text{nach \eqref{subsetbed2} z. Z.} \quad v \in \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\}) \\
+\end{gather*}
+Es seien $a_0',\ \dots,\ a_r' \in \mathbb{R}$
+\[ a_i' \coloneqq \begin{cases}
+	a_0 + a_1 + \dots + a_r &\qquad i = 0 \\
+	a_i &\qquad\text{sonst}
+\end{cases} \tag{$i \in \mathbb{N}_0 \wedge 0 \leq i \leq r$} \]
+sodass
+\begin{gather*}
+	 a_0v_0 + a_1v_1 + \dots + a_rv_r = (a_0 + a_1 + \dots + a_r)v_0 + a_1(v_1 - v_0) + \dots + a_r(v_r - v_0) \\
+	 = a_0'v_0 + a_1'v_1 + \dots + a_r'v_r \\
+	 \txtimpl{\eqref{lindiff}} v \in \mathrm{Lin}(\{v_0,\ v_1 - v_0,\ \dots,\ v_r - v_0\})
 \end{gather*}
 \end{proof}
 \ttask
@@ -99,6 +147,7 @@ sodass
 \begin{equation}\label{schrank}
 	\forall (F_n)_{n \in \mathbb{N}} \in M\ \exists s \in S\ \forall n \in \mathbb{N} : n > s \Rightarrow F_n = 0
 \end{equation}
+\newpage
 Nach Lemma \ref{max} gibt es ein $z \in \mathbb{N}$ sodass
 \begin{gather*}
 	\forall s \in S : s < z \\
