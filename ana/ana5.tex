@@ -1,0 +1,153 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{marvosym}
+
+\usepackage[left=2cm, right=2cm, top=1cm]{geometry}
+
+\allowdisplaybreaks
+\setkomafont{paragraph}{\normalfont\itshape}
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+\newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
+\newcommand{\refImpl}[1]{\txtImpl{\eqref{#1}}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\begin{flushright}
+	Kamal\\
+	Maximilian Neumann
+\end{flushright}
+\begin{center}
+	\bfseries Analysis I Blatt 5
+\end{center}
+\task
+\ttask
+
+Es sei eine reell-wertige Folge $(a_n)_{n \in \mathbb{N}}$ welche einen Grenzwert $\lambda \in \mathbb{R}$ besitzt.
+\[ \lambda = \lim_{n \rightarrow \infty} a_n \]
+Weiterhin gebe es eine \emph{Umordnung} $(b_n)_{n \in \mathbb{N}}$, für welche es eine bijektive Abbildung $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ gibt sodass
+\[ \forall n \in \mathbb{N}: a_n = b_{\varphi(n)} \]
+\begin{theorem}
+	\[ \lim_{n \rightarrow \infty} b_n = \lambda \]
+\end{theorem}
+\begin{proof}
+\[ \defimpl{\lim} \forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow |a_n-\lambda| < \varepsilon \]
+Es sei ein beliebiges $\varepsilon,\ n_0$ gegeben. Es gilt
+\begin{equation} \label{eq:lim}
+	\exists s \in \mathbb{N} : \forall m \in \varphi(A_{n_0}) : m < s
+\end{equation}
+Das Bild $\varphi(A_{n_0})$ ist eine endliche Menge, sodass nach Lemma \ref{max}
+\begin{align}
+	\exists s \in \mathbb{N}\ &\forall m \in \varphi(A_{n_0}) : m < s \label{eq:schranke}\\
+	\refimpl{eq:lim}\qquad &\forall m \in \mathbb{N}: s < m \Rightarrow m \in \mathbb{N}\backslash\varphi(A_{n_0}) \nonumber\\
+	\refimpl{eq:schranke}\qquad &\forall m \in \mathbb{N}: s < m \Rightarrow |b_m - \lambda| < \varepsilon \nonumber\\
+	\Rightarrow \forall \varepsilon \in \mathbb{R}_+\ \exists s \in \mathbb{N}\ &\forall m \in \mathbb{N} : s < m \Rightarrow |b_m-\lambda| < \varepsilon \nonumber\\
+	\defimpl{\lim} \lim_{m \rightarrow \infty} b_m = \lambda \nonumber
+\end{align}
+\end{proof}
+\begin{lemma}\label{max}
+Für eine endliche Menge $N \subseteq \mathbb{N}$ gilt
+	\[ \exists s \in \mathbb{N} : \forall n \in N : n < s \]
+\end{lemma}
+\begin{proof}
+durch vollständige Induktion
+\paragraph*{Induktionsanfang} $N \eqqcolon \{e\} \subseteq \mathbb{N}$ , $N \sim A_1$ \hfill ($e \in \mathbb{N}$)
+\[ \forall i \in N : i < e+1 \]
+\paragraph*{Induktionsbehauptung} $\forall N \subseteq \mathbb{N}\:\wedge N \sim A_n\ \exists s \in \mathbb{N} : \forall n \in N : n < s$
+
+Es sei ein $N' = N \cup \{e\}$ mit $e \in \mathbb{N} \:\wedge\:e \notin N$. Nach Konstruktion gilt $N' \sim A_{n+1}\:\wedge\:N' \subseteq \mathbb{N}$.
+Es sei $s' \in \mathbb{N}$ definiert als
+\[ s' \coloneqq \begin{cases}
+	e+1 &\qquad e > s\\
+	s &\qquad \text{sonst}
+\end{cases} \]
+Nach Konstruktion gilt
+\[ s' > e \ \wedge\ \forall n \in N : n < s \leq s'\]
+sodass
+\[ \forall n \in N' : n < s' \]
+\end{proof}
+\ttask
+
+Es sei eine reell-wertige Folge $(a_n)_{n \in \mathbb{N}}$ welche einen Grenzwert $\lambda \in \mathbb{R}$ besitzt.
+\[ \lambda = \lim_{n \rightarrow \infty} a_n \]
+Weiterhin gebe es eine \emph{Teilfolge} $(b_n)_{n \in \mathbb{N}}$, für welche es eine streng monoton steigende injektive Abbildung $(\nu_n)_{n \in \mathbb{N}} : \mathbb{N} \rightarrow \mathbb{N}$ gibt sodass
+\begin{equation}\label{eq:nu}
+	\forall n \in \mathbb{N}: a_{\nu_n} = b_n
+\end{equation}
+\begin{theorem}
+	\[ \lim_{n \rightarrow \infty} b_n = \lambda \]
+\end{theorem}
+\begin{proof}
+\[ \defimpl{\lim} \forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow |a_n-\lambda| < \varepsilon \]
+Es sei ein beliebiges $\varepsilon,\ n_0$ gegeben. Es gilt
+\begin{align*}
+	\defimpl{\lim}\qquad &\forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow |a_n-\lambda| < \varepsilon \\
+	\txtimpl{Lemma \ref{lemma:nu}}\qquad  &\forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \leq \nu_n \Rightarrow |a_{\nu_n}-\lambda| < \varepsilon \\
+	\refimpl{eq:nu} \qquad  &\forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow |b_n-\lambda| < \varepsilon \\
+	\defimpl{\lim} \qquad & \lim_{n \rightarrow \infty} b_n = \lambda
+\end{align*}
+\end{proof}
+\begin{lemma}\label{lemma:nu}
+	\[ \forall n \in \mathbb{N}: n \leq \nu_n \]
+\end{lemma}
+\begin{proof}
+durch vollständige Induktion
+
+\paragraph*{Induktionsanfang} $\quad 1 \leq \nu_1\ \text{nach Axiom TODO}$
+\paragraph*{Induktionsbehauptung} $\quad n \leq \nu_n$
+\paragraph*{Induktionsschritt} Z. z. $\quad n+1 \leq \nu_{n+1}$
+\[ 	\txtimpl{Monoton}\quad  n \leq \nu_n < \nu_{n+1} \quad\Rightarrow \quad n < \nu_{n+1} \quad\txtimpl{TODO} \quad n+1 \leq \nu_{n+1} \]
+\end{proof}
+
+\task
+
+\begin{theorem}
+\[ \lim_{n \rightarrow \infty} a_n \coloneqq \lim_{n \rightarrow \infty} \frac{3n^3 - 5n^2 + 6(-1)^n}{5n^3 - 3n} = \frac{3}{5} \]
+\end{theorem}
+\begin{proof}
+\[ \defImpl{\lim} \forall \varepsilon \in \mathbb{R}_+\ \exists n_0\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow \left\lvert a_n - \tfrac{3}{5}\right\rvert < \varepsilon\]
+Es sei ein beliebiges $\varepsilon \in \mathbb{R}_+$ gegeben.
+\end{proof}
+\end{document}
