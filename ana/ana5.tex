@@ -87,6 +87,7 @@ Das Bild $\varphi(A_{n_0})$ ist eine endliche Menge, sodass nach Lemma \ref{max}
 	\defimpl{\lim} \lim_{m \rightarrow \infty} b_m = \lambda \nonumber
 \end{align}
 \end{proof}
+\newpage
 \begin{lemma}\label{max}
 Für eine endliche Menge $N \subseteq \mathbb{N}$ gilt
 	\[ \exists s \in \mathbb{N} : \forall n \in N : n < s \]
@@ -129,25 +130,67 @@ Es sei ein beliebiges $\varepsilon,\ n_0$ gegeben. Es gilt
 	\defimpl{\lim} \qquad & \lim_{n \rightarrow \infty} b_n = \lambda
 \end{align*}
 \end{proof}
+\newpage
 \begin{lemma}\label{lemma:nu}
 	\[ \forall n \in \mathbb{N}: n \leq \nu_n \]
 \end{lemma}
 \begin{proof}
 durch vollständige Induktion
 
-\paragraph*{Induktionsanfang} $\quad 1 \leq \nu_1\ \text{nach Axiom TODO}$
+\paragraph*{Induktionsanfang} $\quad 1 \leq \nu_1\ \text{nach Axiom 1.1 3 ii}$
 \paragraph*{Induktionsbehauptung} $\quad n \leq \nu_n$
 \paragraph*{Induktionsschritt} Z. z. $\quad n+1 \leq \nu_{n+1}$
-\[ 	\txtimpl{Monoton}\quad  n \leq \nu_n < \nu_{n+1} \quad\Rightarrow \quad n < \nu_{n+1} \quad\txtimpl{TODO} \quad n+1 \leq \nu_{n+1} \]
+\[ 	\txtimpl{Monoton}\quad  n \leq \nu_n < \nu_{n+1} \quad\Rightarrow \quad n < \nu_{n+1} \quad\txtimpl{Satz 1.1 v} \quad n+1 \leq \nu_{n+1} \]
 \end{proof}
 
 \task
+Sei $(a_n)_{n \in \mathbb{N}}$ o. B. d. A eine positive Nullfolge, sodass $\lim_{n \rightarrow \infty} a_n = 0$
+\[ \defimpl{\lim} \forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow |a_n| < \varepsilon \]
+Es sei ein beliebiges $\varepsilon,\ n_0$ gegeben. Für ein beliebiges $d \in \mathbb{N}$ gilt
+\begin{gather*}
+	b_{n_0 + d} = \frac{1}{n_0 + d} \left( n_0b_{n_0} + \sum_{k = n_0}^{n_0+d} a_k \right) \\
+	\forall n \in \mathbb{N} : n_0 < n \Rightarrow |a_n| < \varepsilon \quad \Longrightarrow \quad \sum_{k = n_0}^{n_0+d} a_k < d \cdot \varepsilon \\
+	b_{n_0 + d} < \frac{n_0b_{n_0} + d \cdot \varepsilon}{n_0 + d} = \left( 1 - \frac{1}{1+\frac{n_0}{d}} \right)b_{n_0} + \frac{1
+	}{1+\frac{n_0}{d}}\varepsilon   \\
+	b_{n_0 + d} - b_{n_0}= - \frac{b_{n_0} - \varepsilon}{1+\frac{n_0}{d}} \\
+\end{gather*}
+\emph{Irgentwas mit Cauchy, keinen Plan}
+
+\newpage
+\task
 
 \begin{theorem}
-\[ \lim_{n \rightarrow \infty} a_n \coloneqq \lim_{n \rightarrow \infty} \frac{3n^3 - 5n^2 + 6(-1)^n}{5n^3 - 3n} = \frac{3}{5} \]
+\begin{align*}
+ 	\lim_{n \rightarrow \infty} \frac{3n^3 - 5n^2 + 6(-1)^n}{5n^3 - 3n} &= \lim_{n \rightarrow \infty} \frac{3 - 5n^{-1} + 6(-1)^nn^{-3}}{5 - 3n^{-2}} \\
+ 	\txtimpl{Satz 3.3.2}\qquad &= \frac{3 - \lim_{n \rightarrow \infty} 5n^{-1} + 6(-1)^nn^{-3}}{5 - \lim_{n \rightarrow \infty} 3n^{-2}} \\
+ 	\txtimpl{Lemma \ref{lemma:geo}}\qquad &= \frac{3 - 6\lim_{n \rightarrow \infty} (-1)^nn^{-3}}{5} \\
+ 	\txtimpl{Lemma \ref{lemma:alternating}}\qquad &= \frac{3}{5} \\
+ \end{align*}
 \end{theorem}
+
+\begin{lemma}\label{lemma:geo}
+Sei $n \in \mathbb{N}$
+\[ \lim_{k \rightarrow \infty} k^{-n} = 0 \]
+\end{lemma}
 \begin{proof}
-\[ \defImpl{\lim} \forall \varepsilon \in \mathbb{R}_+\ \exists n_0\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow \left\lvert a_n - \tfrac{3}{5}\right\rvert < \varepsilon\]
-Es sei ein beliebiges $\varepsilon \in \mathbb{R}_+$ gegeben.
+\[ \lim_{n \rightarrow \infty} k^{-n} \stackrel{\text{Satz 3.3.2}}{=} \left( \lim_{n \rightarrow \infty} \frac{1}{k}  \right)^n \stackrel{3.2.1}{=} 0 \]
 \end{proof}
+\begin{lemma}\label{lemma:alternating}
+	\[ \lim_{n \rightarrow \infty} \frac{(-1)^n}{n} = 0 \]
+\end{lemma}
+\begin{proof}
+Es sei ein beliebiges $\varepsilon \in \mathbb{R}_+$ gegeben, so gilt für beliebige $n \in \mathbb{N}$
+\[ \frac{1}{n} = \left| \frac{(-1)^n}{n} \right| \qquad \left|\frac{1}{n}\right| < \varepsilon \Rightarrow \left| \frac{(-1)^n}{n} \right| < \varepsilon \]
+Nach Lemma \ref{lemma:geo} folgt aus der Definition von $\lim$
+\begin{gather*}
+	\forall \varepsilon \in \mathbb{R}_+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow \left|\frac{1}{n}\right| < \varepsilon \Rightarrow \left|\frac{(-1)^n}{n}\right| < \varepsilon \\ 
+	\defimpl{\lim} \lim_{n \rightarrow \infty} \frac{(-1)^n}{n} = 0
+\end{gather*}
+\end{proof}
+\begin{align*}
+	\lim_{n \rightarrow \infty} \left( 1 - \frac{1}{n^2} \right)^n &= \lim_{n \rightarrow \infty} \left( 1 + \frac{1}{n} \right)^n\left( 1 - \frac{1}{n} \right)^n \\
+	\defimpl{e} \qquad &= e \lim_{n \rightarrow \infty} \left( 1 - \frac{1}{n} \right)^n = e\lim_{n \rightarrow \infty} \left( \frac{n}{n-1} \right)^{-n} = e\lim_{n \rightarrow \infty} \left( 1 + \frac{1}{n-1} \right)^{-n}\\
+	&= e\lim_{n \rightarrow \infty} \left( 1 + \frac{1}{n-1} \right)^{-(n-1)}\underbrace{\left( 1 + \frac{1}{n-1} \right)^{-1}}_1 = e \left(\lim_{n \rightarrow \infty} \left( 1 + \frac{1}{n-1} \right)^{(n-1)}\right)^{-1} \\
+	\defimpl{e} \qquad &= e \cdot e^{-1} = 1
+\end{align*}
 \end{document}
