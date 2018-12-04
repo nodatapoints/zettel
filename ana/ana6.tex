@@ -1,0 +1,130 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{marvosym}
+
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[left=1.8cm, right=1.8cm, top=1cm]{geometry}
+
+\allowdisplaybreaks
+\setkomafont{paragraph}{\normalfont\itshape}
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+\newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
+\newcommand{\refImpl}[1]{\txtImpl{\eqref{#1}}}
+
+\begin{document}
+\begin{flushright}
+	Kamal\\
+	Maximilian Neumann
+\end{flushright}
+\begin{center}
+	\bfseries Analysis I Blatt 6
+\end{center}
+\task
+\ttask
+
+\begin{theorem}
+	Sei $(a_n)_{n \in \mathbb{N}}$ eine reell-wertige Folge
+	\[ \lim_{n \rightarrow \infty} a_{2n} = \lim_{n \rightarrow \infty} a_{2n+1} = a \quad \Rightarrow \quad \lim_{n \rightarrow \infty} a_n = a \]
+\end{theorem}
+\begin{proof}
+\[ \defimpl{\lim} \quad \forall \varepsilon \in \mathbb{R}^+\ \exists k,\ \ell \in \mathbb{N}\ \forall n \in \mathbb{N} : (2k<n \vee 2\ell+1<n) \Rightarrow |a_n - a| < \varepsilon \]
+Seien beliebige $\varepsilon,\ k,\ \ell$ welche obige Bedingung erfüllen gegeben.
+\begin{gather*}	
+	n_0 \coloneqq \max(2k,\ 2\ell+1) + 1 \qquad 2k < n_0\ ,\ 2\ell+1 < n_0\\
+	\Longrightarrow \quad \forall \varepsilon \in \mathbb{R}^+\ \exists n_0 \in \mathbb{N}\ \forall n \in \mathbb{N} : n_0 < n \Rightarrow |a_n - a| < \varepsilon \\
+	\defimpl{\lim} \quad \lim_{n \rightarrow \infty} a_n = a
+\end{gather*}
+\end{proof}
+
+\ttask
+
+$(a_{6n})_{n \in \mathbb{N}}$ ist eine Teilfolge von $(a_{2n})_{n \in \mathbb{N}}$ und $(a_{3n})_{n \in \mathbb{N}}$, sodass
+\[ A = \lim_{n \rightarrow \infty} a_{6n} = C \]
+$(a_{3(2n+1)})_{n \in \mathbb{N}}$ ist eine Teilfolge von $(a_{2n+1})_{n \in \mathbb{N}}$ und $(a_{3n})_{n \in \mathbb{N}}$, sodass
+\[ B = \lim_{n \rightarrow \infty} a_{3(2n+1)} = C \]
+Aus (a) folgt da $A = B$ sofort dass
+\[ a = A = B = C \]
+
+\task
+Nach Rechenregeln für konvergente Folgen (3.3)
+\begin{align*}
+	\lim_{n \rightarrow \infty} \frac{n}{2^n} &= 2 \lim_{n \rightarrow \infty} \frac{n}{2^{n+1}} = 2 \lim_{n \rightarrow \infty} \frac{n+1}{2^{n+1}} - \underbrace{\quad\lim_{n \rightarrow \infty} \frac{1}{2^{n+1}}\quad}_{=0\ \text{nach 3.3 Bsp 1}} \\
+	\lim_{n \rightarrow \infty} \frac{n}{2^n} &= 2 \lim_{n \rightarrow \infty} \frac{n}{2^n} \\
+	0 &= \lim_{n \rightarrow \infty} \frac{n}{2^n}
+\end{align*}
+
+Nach ÜB 1 ist
+\begin{align*}
+	6(1^2 + \dots + n^2) &= n(n+1)(2n+1) \\
+	b_n = \frac{1^2 + \dots + n^2}{n^3} &= \frac{n(n+1)(2n+1)}{6n^3} = \frac{2n^3 + 3n^2 + n}{6n^3} = \frac{1}{3} + \frac{1}{2}n^{-1} + \frac{1}{6}n^{-2} \\\\
+	\lim_{n \rightarrow \infty} b_n &= \frac{1}{3} + \frac{1}{2}\lim_{n \rightarrow \infty} n^{-1} + \frac{1}{6} \lim_{n \rightarrow \infty} n^{-2} \stackrel{\text{(3.3 Bsp 1)}}{=} \frac{1}{3}
+\end{align*}
+\newpage
+\task
+\begin{theorem}
+	Jede reell-wertige Folge $(a_n)_{n \in \mathbb{N}}$ hat eine monotone Teilfolge.
+\end{theorem}
+\begin{proof}
+	Sei $\mathcal{H}$ definiert als
+\[ \mathcal{H} \coloneqq \left\{ n_0 \mid n_0 \in \mathbb{N}\ ,\ \forall n \in \mathbb{N} : n_0 < n\ \Rightarrow\ a_{n_0} \leq a_n \right\} \]
+\emph{Fall 1}: $\mathcal{H}$ ist unendlich. Es kann demnach ein $(b_{n_0})_{n_0 \in \mathcal{H}}$ konstruiert werden welches nach Konstruktion monoton steigend ist.
+
+\emph{Fall 2}: $\mathcal{H}$ ist endlich.
+
+Demnach gibt es eine obere Schranke $S \in \mathbb{N}$ mit einer Abbildung $\nu : \mathbb{N} \rightarrow \mathbb{N}$ sodass
+\begin{gather*}
+	\forall n_0 \in \mathbb{N} : \quad S < n_0 \Rightarrow \exists \nu(n_0) \in \mathbb{N} : n_0 < \nu(n_0)\ \wedge\ a_{n_0} > a_{\nu(n_0)} \\
+	S < n_0 < \nu(n_0)
+\end{gather*}
+Es kann so ein streng monoton steigendes $(\sigma_k)_{k \in \mathbb{N}}$ mit einem beliebigen $\sigma_1 \in \mathbb{N}$ , $\sigma_1 > S$ erzeugt werden mit
+\[ \sigma_{n_0+1} = \nu(\sigma_{n_0}) \]
+Demnach ist die Teilfolge $(b_{\sigma_k})_{k \in \mathbb{N}}$ monoton fallend, da
+\[ \forall k \in \mathbb{N} : \sigma_k < \sigma_{k+1} \ \wedge\ a_{\sigma_k} > a_{\sigma_{k+1}} \]
+\end{proof}
+Ansatz: Philip Geißler, \url{http://tiny.cc/TelegramGruppe}, \url{https://github.com/AlcedoAttis}
+\end{document}
