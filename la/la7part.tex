@@ -1,0 +1,123 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+\newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
+\setcounter{taski}{25}
+
+\begin{document}
+\hfill \textit{Ellen, Kamal}\\
+\task
+
+\ttask
+
+\begin{gather*}
+	\begin{pmatrix}
+		0 & 1 & 2 & 3 & 4 & 5 \\
+		2 & 1 & 0 & 3 & 4 & 5 \\
+		0 & 1 & 2 & 3 & 5 & 4 \\
+		3 & 4 & 5 & 2 & 1 & 0
+	\end{pmatrix}
+	\begin{matrix}
+		\\\cdot 3\\\\\cdot 2 \\
+	\end{matrix} \rightarrow
+	\begin{pmatrix}
+		0 & 1 & 2 & 3 & 4 & 5 \\
+		6 & 3 & 0 & 9 & 12 & 15 \\
+		0 & 1 & 2 & 3 & 5 & 4 \\
+		6 & 8 & 10 & 4 & 2 & 0
+	\end{pmatrix}\begin{matrix}
+		\mathbf{Z2}\\\mathbf{Z1}\\\\-\mathbf{Z2}
+	\end{matrix}\rightarrow
+	\begin{pmatrix}
+		6 & 3 & 0 & 9 & 12 & 15 \\
+		0 & 1 & 2 & 3 & 4 & 5 \\
+		0 & 1 & 2 & 3 & 5 & 4 \\
+		0 & 5 & 10 & -5 & -10 & -15
+	\end{pmatrix}\begin{matrix}
+		\\-\tfrac{1}{5}\mathbf{Z4}\\-\mathbf{Z2}\\\\
+	\end{matrix} \\ \rightarrow
+	\begin{pmatrix}
+		6 & 3 & 0 & 9 & 12 & 15 \\
+		0 & 0 & 0 & 4 & 6 & 8 \\
+		0 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 5 & 10 & -5 & -10 & -15
+	\end{pmatrix}\begin{matrix}
+		\\\mathbf{Z4}\\\mathbf{Z2}\\\mathbf{Z3}
+	\end{matrix}\rightarrow
+	\begin{pmatrix}
+		6 & 3 & 0 & 9 & 12 & 15 \\
+		0 & 5 & 10 & -5 & -10 & -15 \\
+		0 & 0 & 0 & 4 & 6 & 8 \\
+		0 & 0 & 0 & 0 & 1 & -1
+	\end{pmatrix} \qquad \curvearrowright \mathrm{ZR}_{\mathbb{Q}}(M) = 4
+\end{gather*}
+
+\begin{gather*}
+	\begin{pmatrix}
+		0 & 1 & 2 & 3 & 4 & 0 \\
+		2 & 1 & 0 & 3 & 4 & 0 \\
+		0 & 1 & 2 & 3 & 0 & 4 \\
+		3 & 4 & 0 & 2 & 1 & 0
+	\end{pmatrix}
+	\begin{matrix}
+		\mathbf{Z2}\\\mathbf{Z1}\\-\mathbf{Z1}\\+\mathbf{Z2}
+	\end{matrix} \rightarrow
+	\begin{pmatrix}
+		0 & 1 & 2 & 3 & 4 & 0 \\
+		2 & 1 & 0 & 3 & 4 & 0 \\
+		0 & 0 & 0 & 0 & 1 & 4 \\
+		0 & 0 & 0 & 0 & 0 & 0
+	\end{pmatrix} \qquad \curvearrowright \mathrm{ZR}_{\mathbb{F}_5}(M) = 3
+\end{gather*}
+
+\end{document}
