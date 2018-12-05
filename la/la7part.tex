@@ -9,6 +9,7 @@
 \usepackage{framed}
 \usepackage{float}
 \usepackage{mathtools}
+\usepackage{marvosym}
 
 \usepackage{tikz}
 \usepackage{chngcntr}
@@ -123,6 +124,73 @@ Im folgenden werden mehrere elementare Zeilenoperationen zusammengefasst. Die Be
 \setcounter{taski}{27}
 \task
 
+\ttask
+\begin{theorem}
+	Seien $A,\ B \in M(n \times n,\ K)$, so
+	\[ \mathrm{ZR}(AB) \leq \mathrm{ZR}(A) \]
+\end{theorem}
+\begin{proof}
+Sei o.B.d.A $A$ bereits in ZSF, so gilt für ein $r \in \mathbb{N}$
+\begin{equation}\label{diegleichung}
+	r \geq \mathrm{ZR}(A) \quad\txtImpl{Def. ZR}\quad \forall i \in \mathbb{N} : (r < i \leq n \ \Rightarrow\ A \in \mathcal{Z}_i)
+\end{equation}
+
+Sei nun $r = \mathrm{ZR}(A)$. Es folgt aus Lemma \ref{daslemma}
+\begin{align*}
+	\quad& \forall i \in \mathbb{N} : (r < i \leq n \Rightarrow\ A \in \mathcal{Z}_i\ \Rightarrow\ AB \in \mathcal{Z}_i) \\
+	\refimpl{diegleichung} \quad& r \geq \mathrm{ZR}(AB) \\
+	\defimpl{r} \quad& \mathrm{ZR}(AB) \leq \mathrm{ZR}(A)
+\end{align*}
+\end{proof}
+
+\ttask
+
+\tttask
+
+\begin{theorem}
+	\[ \mathrm{ZR}(A) < n \ \Longleftrightarrow\ \exists v \in K^n\backslash \left\{ 0 \right\} : v \cdot A = 0 \]
+\end{theorem}
+\begin{proof}
+``$\Rightarrow$'': Es sei ein beliebiges $A \in M(n \times n,\ K)$ , $\mathrm{ZR}(A) < n$ , $A$ in ZSF
+\[ \refimpl{diegleichung} \quad A \in \mathcal{Z}_n \]
+Sei $v \in K^n\backslash \left\{ 0 \right\}$ definiert als
+\[ v_{1k} \coloneqq \begin{cases}
+	1 &\quad k = n \\
+	0 &\quad \text{sonst}
+\end{cases} \]
+Aus Konstruktion folgt
+\begin{align*}
+	\txtimpl{Mat. Mul}\quad (v \cdot A)_{1j} &= \sum_{k=1}^n v_{1k}A_{kj} \\
+	\defimpl{v}\quad\defimpl{\mathcal{Z}_n}\quad &= \sum_{k=1}^n \begin{cases}
+		1 &\quad k = n \\
+		0 &\quad \text{sonst}
+	\end{cases}\ \cdot\ \begin{cases}
+		0 &\quad k = n \\
+		A_{kj} &\quad \text{sonst}
+	\end{cases}
+	\quad= 0
+\end{align*}
+``$\Leftarrow$'':
+\begin{gather*}
+	\quad \exists v \in K^n\backslash \left\{ 0 \right\} : v \cdot A = 0 \quad \txtimpl{Def. Lin. Unabh.} \quad \text{Zeilen von $A$ linear abhängig} \\
+	\txtimpl{Def. Basis}\ \text{Zeilen von $A$ keine Basis}\ \txtimpl{Def. ZR}\ \mathrm{ZR}(A) \neq n
+\end{gather*}
+\end{proof}
+
+\tttask
+\begin{theorem}
+Es sei $A \in M(n \times n,\ K)$
+	\[ \exists A^{-1} \in M(n \times n,\ K) \ \Longrightarrow\ \mathrm{ZR}(A) = n \]
+\end{theorem}
+\begin{proof} indirekt
+\[ \nexists A^{-1} \in M(n \times n,\ K) \ \Longleftarrow\ \mathrm{ZR}(A) < n \]
+durch Widerspruch: Sei ein beliebiges $A,\ A^{-1} \in M(n \times n,\ K)$ , $\mathrm{ZR}(A) < n$ , $A$ in ZSF mit
+\begin{align*}
+	AA^{-1} &= 1 \\
+	\defimpl{1} \quad 1 &= (AA^{-1})_{nn} = \sum_{k=1}^n A_{nk}(A^{-1})_{kn} \\
+	\mathrm{ZR}(A) < n \refimpl{diegleichung} A \in \mathcal{Z}_n \Rightarrow \quad 1 &= 0 \qquad \text{\large \Lightning}
+\end{align*}
+\end{proof}
 \begin{lemma}\label{daslemma}
 	Es sei für ein beliebiges $i \in A_n$ die Menge $\mathcal{Z}_i \subseteq M(n \times n,\ K)$ als
 	\[ \mathcal{Z}_i \coloneqq \left\{ P \mid P \in M(n \times n,\ K)\ ,\ \forall k \in A_n : (P)_{ik} = 0 \right\} \]
@@ -131,7 +199,7 @@ Im folgenden werden mehrere elementare Zeilenoperationen zusammengefasst. Die Be
 \end{lemma}
 \begin{proof}
 Es seien ein beliebiges $i \in A_n$, $A \in \mathcal{Z}_i$ und $B \in M(n \times n,\ K)$
-\[ \txtimpl{Mat. Mul}\quad (AB)_{ij} = \sum_{k = 1}^n (A)_{ik}(B)_{kj} \quad\defimpl{\mathcal{Z}_i}\quad (AB)_{ij} = 0 \quad\defimpl{\mathcal{Z}_i}\quad AB \in \mathcal{Z}_i \]
+\[ \txtimpl{Mat. Mul}\quad (AB)_{ij} = \sum_{k = 1}^n A_{ik}B_{kj} \quad\defimpl{\mathcal{Z}_i}\quad (AB)_{ij} = 0 \quad\defimpl{\mathcal{Z}_i}\quad AB \in \mathcal{Z}_i \]
 \end{proof}
-
+\emph{Anmerkung}: Jede elementare Zeilenumformung ist invertierbar und lässt den Zeilenrang invariant. Demnach kann o.B.d.A in (i) und (ii) von ZSF ausgegangen werden.
 \end{document}
