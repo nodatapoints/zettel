@@ -60,7 +60,7 @@
 \task
 
 \ttask
-Im folgenden werden mehrere elementare Zeilenoperationen zusammengefasst. Die Bezeichnungen $\mathbf{Z1},\ \dots,\ \mathbf{Z4}$ beziehen sich auf die Zeilen der \emph{vorherigen} Matrix. Steht kein Operator dabei, so wird die annotierte Zeile durch die jeweilige Zeile aus der vorherigen Matrix ersetzt, um das Tauschen von Zeilen zu simulieren.
+Im folgenden werden mehrere elementare Zeilenoperationen zusammengefasst. Die Bezeichnungen $\mathbf{Z1},\ \cdots,\ \mathbf{Z4}$ beziehen sich auf die Zeilen der \emph{vorherigen} Matrix. Steht kein Operator dabei, so wird die annotierte Zeile durch die jeweilige Zeile aus der vorherigen Matrix ersetzt, um das Tauschen von Zeilen zu simulieren.
 \begin{gather*}
 	\begin{pmatrix}
 		0 & 1 & 2 & 3 & 4 & 5 \\
@@ -114,8 +114,8 @@ Im folgenden werden mehrere elementare Zeilenoperationen zusammengefasst. Die Be
 		\mathbf{Z2}\\\mathbf{Z1}\\-\mathbf{Z1}\\+\mathbf{Z2}
 	\end{matrix} \rightarrow
 	\begin{pmatrix}
-		0 & 1 & 2 & 3 & 4 & 0 \\
 		2 & 1 & 0 & 3 & 4 & 0 \\
+		0 & 1 & 2 & 3 & 4 & 0 \\
 		0 & 0 & 0 & 0 & 1 & 4 \\
 		0 & 0 & 0 & 0 & 0 & 0
 	\end{pmatrix} \qquad \curvearrowright \mathrm{ZR}_{\mathbb{F}_5}(M) = 3
@@ -130,7 +130,7 @@ Im folgenden werden mehrere elementare Zeilenoperationen zusammengefasst. Die Be
 	\[ \mathrm{ZR}(AB) \leq \mathrm{ZR}(A) \]
 \end{theorem}
 \begin{proof}
-Sei o.B.d.A $A$ bereits in ZSF, so gilt für ein $r \in \mathbb{N}$
+Sei $A$ bereits in ZSF, so gilt für ein $r \in \mathbb{N}$
 \begin{equation}\label{diegleichung}
 	r \geq \mathrm{ZR}(A) \quad\txtImpl{Def. ZR}\quad \forall i \in \mathbb{N} : (r < i \leq n \ \Rightarrow\ A \in \mathcal{Z}_i)
 \end{equation}
@@ -173,7 +173,7 @@ Aus Konstruktion folgt
 ``$\Leftarrow$'':
 \begin{gather*}
 	\quad \exists v \in K^n\backslash \left\{ 0 \right\} : v \cdot A = 0 \quad \txtimpl{Def. Lin. Unabh.} \quad \text{Zeilen von $A$ linear abhängig} \\
-	\txtimpl{Def. Basis}\ \text{Zeilen von $A$ keine Basis}\ \txtimpl{Def. ZR}\ \mathrm{ZR}(A) \neq n
+	\txtimpl{Def. Basis}\ \text{Zeilen von $A$ keine Basis}\ \txtimpl{Def. ZR}\ \mathrm{ZR}(A) \neq n \ \Rightarrow\ \mathrm{ZR}(A) < n
 \end{gather*}
 \end{proof}
 
@@ -182,13 +182,13 @@ Aus Konstruktion folgt
 Es sei $A \in M(n \times n,\ K)$
 	\[ \exists A^{-1} \in M(n \times n,\ K) \ \Longrightarrow\ \mathrm{ZR}(A) = n \]
 \end{theorem}
-\begin{proof} indirekt
-\[ \nexists A^{-1} \in M(n \times n,\ K) \ \Longleftarrow\ \mathrm{ZR}(A) < n \]
-durch Widerspruch: Sei ein beliebiges $A,\ A^{-1} \in M(n \times n,\ K)$ , $\mathrm{ZR}(A) < n$ , $A$ in ZSF mit
+\begin{proof}
+
+durch Widerspruch: Sei ein beliebiges $A,\ A^{-1} \in M(n \times n,\ K)$ , $\mathrm{ZR}(A) < n$ \\ $A$ in ZSF mit
 \begin{align*}
 	AA^{-1} &= 1 \\
-	\defimpl{1} \quad 1 &= (AA^{-1})_{nn} = \sum_{k=1}^n A_{nk}(A^{-1})_{kn} \\
-	\mathrm{ZR}(A) < n \refimpl{diegleichung} A \in \mathcal{Z}_n \Rightarrow \quad 1 &= 0 \qquad \text{\large \Lightning}
+	\defimpl{1} \quad (AA^{-1})_{nn} &= 1 \\
+	\mathrm{ZR}(A) < n \refimpl{diegleichung} A \in \mathcal{Z}_n \Rightarrow AA^{-1} \in \mathcal{Z}_n \Rightarrow \quad (AA^{-1})_{nn} &= 0 \qquad \text{\large \Lightning}
 \end{align*}
 \end{proof}
 \begin{lemma}\label{daslemma}
