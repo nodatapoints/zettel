@@ -1,0 +1,164 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+\newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
+\setcounter{taski}{30}
+
+\newcommand{\pvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+
+\begin{document}
+\hfill \textit{Ellen, Kamal}\\
+\task
+
+\ttask
+\begin{gather*}
+	f(v) = f \left( -\frac 1 4 (v_1 - v_2) + v_3 \right) = \ -\frac 1 4 (f(v_1) - f(v_2)) + f(v_3) = -\frac 1 4 (w_1 - w_2) + w_3 = \frac 1 2 \pvec{7 \\ -1 \\ 8} \\
+	f(v') = f \left( v_1 - v_3 \right) = \ f(v_1) - f(v_3) = w_1 - w_3 = \pvec{-2 \\ 1 \\ -3} \\
+\end{gather*}
+
+\ttask
+
+\begin{align*}
+	A
+	\begin{pmatrix}
+		 1 & 1 & 1 \\
+		 1 & 1 & 0 \\
+		 1 & -3 & 1 \\
+	\end{pmatrix} &=
+	\begin{pmatrix}
+	 	1 & 3 & 3 \\
+	 	2 & -4 & 1 \\
+	 	-1 & 7 & 2
+	 \end{pmatrix} \\ 
+	A
+	\begin{pmatrix}
+		 1 & 1 & 1 \\
+		 1 & 1 & 0 \\
+		 1 & -3 & 1 \\
+	\end{pmatrix}
+	\begin{pmatrix}
+	 	1 & 3 & 3 \\
+	 	2 & -4 & 1 \\
+	 	-1 & 7 & 2
+	 \end{pmatrix}^{-1} = A &=
+	\begin{pmatrix}
+	 	1 & 3 & 3 \\
+	 	2 & -4 & 1 \\
+	 	-1 & 7 & 2
+	 \end{pmatrix}
+	 \begin{pmatrix}
+	 	1 & 3 & 3 \\
+	 	2 & -4 & 1 \\
+	 	-1 & 7 & 2
+	 \end{pmatrix}^{-1} \\
+	 A &= \frac 1 2 \begin{pmatrix}
+	 	7 & -4 & 1 \\
+	 	-1&  2 & 3 \\
+	 	8 & -6 & 4
+	 \end{pmatrix}
+\end{align*}
+
+\emph{Anmerkung}: Numerische Berechnung mit \texttt{numpy} durchgeführt.
+
+\ttask
+\begin{gather*}
+	\varphi(0) = \varphi \left( 2\pvec{1 \\ 1 \\ 1} + \pvec{1 \\ 1 \\ -3} - \pvec{3 \\ 3 \\ -1} \right) = 2\pvec{-1 \\ 2 \\ -3} + \pvec{ 1 \\ -3 \\ 4} - \pvec{-1 \\ 1 \\ 2} = \pvec{0 \\ 0 \\ -4} \neq 0 \quad \text{\large \Lightning}
+\end{gather*}
+
+\task
+
+\ttask
+
+\tttask\ nicht linear
+\[ 1 = f_1\left((1,~1)\right) = f_1\left((1,~0) + (0,~1)\right) = f_1\left((1,~0)\right) + f_1\left((0,~1)\right) = 0 + 0 \quad \text{\large \Lightning} \]
+\tttask\ nicht linear
+\[ f_2(0) = (0+1,\ 2 \cdot 0,\ 0 + 0) \neq 0 \quad \text{\large \Lightning} \]
+\tttask\ linear
+\begin{gather*}
+	M = \begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 2 & 0 \\
+		0 & 0 & 0
+	\end{pmatrix} \qquad (x_3,\ 2x_2,\ 0)^\top = A \cdot (x_1,\ x_2,\ x_3)^\top \tag{$\forall x_1\, x_2,\ x_3 \in \mathbb{R}$}\\
+	\curvearrowright \quad f_3 = \widetilde{M}
+\end{gather*}
+\newpage
+
+\ttask
+
+Nach Rechenregeln für Matrizen mit $A,\ B \in M(2 \times 2,
+\ \mathbb{R})$ , $\lambda \in \mathbb{R}$
+\begin{gather*}
+	f_4(A + B) = \pvec{\cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha}(A + B) = \pvec{\cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha} A + \pvec{\cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha} B = f_4(A) + f_4(B)\\
+	f_4(\lambda A) = \pvec{\cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha} (\lambda A) = \lambda \pvec{\cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha} A = \lambda f_4(A)
+\end{gather*}
+sodass beide Bedingungen für lineare Abbildungen erfüllt sind.
+
+\ttask
+
+Für reell-wertige Folgen $(a_n)_{n \in \mathbb{N}},\ (b_n)_{n \in \mathbb{N}},\ (c_n)_{n \in \mathbb{N}},\ (d_n)_{n \in \mathbb{N}}$ und $\lambda \in \mathbb{R}$ sei
+\begin{gather*}
+	(a_n')_{n \in \mathbb{N}} = f_5((a_n)_{n \in \mathbb{N}}) \qquad (b_n')_{n \in \mathbb{N}} = f_5((b_n)_{n \in \mathbb{N}}) \qquad (c_n')_{n \in \mathbb{N}} = f_5((c_n)_{n \in \mathbb{N}})	\qquad (d_n')_{n \in \mathbb{N}} = f_5((d_n)_{n \in \mathbb{N}}) \\
+	\forall n \in \mathbb{N} : c_n = a_n + b_n \\
+	\forall n \in \mathbb{N} : d_n = \lambda a_n
+\end{gather*}
+Es folgt
+\begin{align*}
+	\forall n \in \mathbb{N} : \quad c_n' &= c_{n+1} = a_{n+ 1} + b_{n+1} = a_n' + b_n' \\
+	\Rightarrow \quad & (c'_n)_{n \in \mathbb{N}} = (a_n')_{n \in \mathbb{N}} + (b_n')_{n \in \mathbb{N}} \\\\
+	\forall n \in \mathbb{N} : \quad \lambda a_n' &= \lambda a_{n+1} = d_{n+1} = d_n' \\
+	\Rightarrow \quad & (d_n')_{n \in \mathbb{N}} = \lambda (a_n')_{n \in \mathbb{N}}
+\end{align*}
+sodass beide Bedingungen für lineare Abbildungen erfüllt sind.
+\end{document}
