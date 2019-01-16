@@ -17,6 +17,7 @@
 
 \usepackage{amsthm}
 \usepackage{thmtools}
+\usepackage{wrapfig}
 
 
 \usepackage[left=2cm, right=2cm, top=2cm]{geometry}
@@ -57,7 +58,7 @@
 \newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
 
 
-\setcounter{taski}{38}
+\setcounter{taski}{41}
 
 \newcommand{\pvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 
@@ -67,14 +68,117 @@
 
 \ttask
 
-\begin{tikzcd}[row sep=15mm, column sep=15mm]
-    A \arrow{d}{\Phi^{-1}_A}[above, rotate=90]{\sim} \arrow{r}{f} \arrow[bend left]{rr}{f \circ g} &
-    B \arrow{d}{\Phi^{-1}_B}[above, rotate=90]{\sim}\arrow{r}{g} &
-    \arrow{d}{\Phi^{-1}_C}[above, rotate=90]{\sim}C
-    \\
-    K^r \arrow{r}{\widetilde{M_B^A(f)}} \arrow[bend right]{rr}[below]{\widetilde{M_C^A(f \circ g)}} &
-    K^s \arrow{r}{\widetilde{M_C^B(g)}} &
-    K^t
-\end{tikzcd}
+Der Vektorraum $\mathbb{R}^3$ ist gleich dem Koordinatenraum $\mathbb{R}^3$ des Körpers $\mathbb{R}$. Demnach kann die Koordinatentransformation als Abbildung $\widetilde{H}$ einer Matrix $H \in M(3 \times 3,\ \mathbb{R})$ dargestellt werden. Die Spalten von $H$ sind dabei die Vektoren $v_1,\ v_2,\ v_3$.
+\begin{gather*}
+    H = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 3 \\ 1 & 1 & 2 \end{pmatrix} \quad \Phi_B = \widetilde{H} \qquad\qquad H^{-1} = \frac{1}{2} \begin{pmatrix} 1 & -1 & 1 \\ -3 & -1 & 3 \\ 1 & 1 & -1 \end{pmatrix} \quad \Phi^{-1}_B = \widetilde{H^{-1}} \\
+    \Phi_B^{-1}(w) = H^{-1}w = \frac{1}{2} \pvec{-1 \\ 5 \\ -1}
+\end{gather*}
+
+\ttask
+
+Nach selber Argumentation kann auch $f$ dargestellt werden als $\widetilde{F}$ einer Matrix $F \in M(3 \times 3,\ \mathbb{R})$
+\begin{gather*}
+    F = \begin{pmatrix} 0 & -1 & 1 \\ -3 & -2 & 3 \\ -2 & -2 & 3 \end{pmatrix} \quad f = \widetilde{F} \qquad \qquad F^{-1} = \begin{pmatrix} 0 & -1 & 1 \\ -3 & -2 & 3 \\ -2 & -2 & 3 \end{pmatrix} = F \quad f^{-1} = \widetilde{F^{-1}} = \widetilde{F} = f
+\end{gather*}
+Die gefragten Matrizen ergeben sich demnach direkt aus den entsprechenden Produkten
+\begin{align*}
+    f &= \Phi_{(e_1,e_2,e_3)} \circ \widetilde{M_{(e_1,e_2,e_3)}^{(e_1,e_2,e_3)}}(f) \circ \Phi_{{(e_1,e_2,e_3)}}^{-1}
+    &\Longrightarrow \qquad
+    F &= E_3 \cdot M_{(e_1,e_2,e_3)}^{(e_1,e_2,e_3)}(f) \cdot E_3^{-1} = M_{(e_1,e_2,e_3)}^{(e_1,e_2,e_3)}(f) \\
+    f &= \Phi_{B} \circ \widetilde{M_{B}^{B}}(f) \circ \Phi_{{B}}^{-1}
+    &\Longrightarrow \qquad
+    F &= H \cdot M_B^B(f) \cdot H^{-1} \\
+    && M_B^B(f) &= H^{-1} \cdot F \cdot H = \mathrm{diag}(1,\ 1,\ -1) \\
+    \mathrm{id}_{\mathbb{R}^3} &= \Phi_B \circ \widetilde{M^{(e_1,e_2,e_3)}_B(\mathrm{id}_{\mathbb{R}^3})} \circ \Phi_{(e_1,e_2,e_3)}^{-1}
+    &\Longrightarrow \qquad
+    E_3 &= H \cdot M^{(e_1,e_2,e_3)}_B(\mathrm{id}_{\mathbb{R}^3}) \cdot E_3^{-1} \\
+    && M^{(e_1,e_2,e_3)}_B(\mathrm{id}_{\mathbb{R}^3}) &= H^{-1}
+\end{align*}
+
+\ttask
+
+\begin{align*}
+    f(w) &= \pvec{-1+1\\3-2+3\\2-2+3} = \pvec{0\\4\\3} \\
+    (\Phi_B \circ \widetilde{W_B^B(f)} \circ \Phi_B^{-1})(w) &= \underbrace{\begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & 3 \\ 1 & 1 & 2 \end{pmatrix} \cdot \begin{pmatrix}
+        1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1
+    \end{pmatrix} \cdot \frac{1}{2} \begin{pmatrix} 1 & -1 & 1 \\ -3 & -1 & 3 \\ 1 & 1 & -1 \end{pmatrix}}_F \begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix} = \pvec{0\\4\\3}
+\end{align*}
+
+\newpage
+\setcounter{taski}{43}
+
+\task
+
+\ttask
+
+\begin{wrapfigure}[8]{l}{4cm}
+    \centering
+    \begin{tikzcd}[sep=15mm]
+        V   \arrow{r}{\mathrm{id}_V}
+            \arrow{d}{\Phi^{-1}_B}[above, rotate=90]{\sim}
+        & V  \\
+        K^s \arrow{r}{\widetilde{E_s}}  & K^s \arrow{u}[right]{\Phi_B}[above, rotate=90]{\sim}
+    \end{tikzcd}    
+\end{wrapfigure}
+Wie im Diagramm zu sehen ist führt der obere Weg wie der untere von $V$ nach $V$. Es gilt 
+\[ \mathrm{id}_V = \Phi_B \circ \widetilde{M_B^B(\mathrm{id}_V)} \circ \Phi_B^{-1} = \Phi_B \circ \widetilde{E_s} \circ \Phi_B^{-1} \]
+Nach Eindeutigkeit der Abbildung gilt somit
+\[ \widetilde{M_B^B(\mathrm{id}_V)} = \widetilde{E_s} \quad,\quad {M_B^B(\mathrm{id}_V)} = {E_s}\]
+
+\ttask
+
+\begin{wrapfigure}[8]{l}{6cm}
+    \centering
+    \vspace*{-1em}
+    \begin{tikzcd}[row sep=15mm, column sep=15mm]
+        A \arrow{d}{\Phi^{-1}_A}[above, rotate=90]{\sim} \arrow{r}{f} \arrow[bend left]{rr}{f \circ g} &
+        B \arrow{d}{\Phi^{-1}_B}[above, rotate=90]{\sim}\arrow{r}{g} &
+        \arrow{d}{\Phi^{-1}_C}[above, rotate=90]{\sim}C
+        \\
+        F^r \arrow{r}{\widetilde{M_B^A(f)}} \arrow[bend right]{rr}[below]{\widetilde{M_C^A(f \circ g)}} &
+        F^s \arrow{r}{\widetilde{M_cb(g)}} &
+        F^t
+    \end{tikzcd}
+\end{wrapfigure}
+
+\vspace{1em}
+
+Nach Definition sind beide Quadrate sowie der äußerste Ring kommutativ. Die obere Halbschale $f,\ g,\ f \circ g$ ist klarer Weise auch kommutativ. Demnach muss auch die untere Halbschale kommutativ sein. Es gilt nach den Eigenschaften von Matrizenabbildungen
+\begin{align*}
+    \widetilde{M_cb(g)} &= \widetilde{M_C^B(g)} \circ \widetilde{M_B^A(f)} \\
+    \Rightarrow \qquad M_C^B(g) &= M_C^B(g) \cdot M_B^A(f) \qquad \qquad
+\end{align*}
+
+\ttask
+
+\begin{wrapfigure}[5]{l}{4cm}
+    \centering
+    \vspace*{-1em}
+    \begin{tikzcd}[sep=2cm]
+        V   \arrow{r}{f}[below]{\sim}
+            \arrow{d}{\Phi^{-1}_B}[above, rotate=90]{\sim}
+        & W \arrow{d}{\Phi^{-1}_C}[above, rotate=90]{\sim} \\
+        K^s \arrow{r}{\widetilde{M_C^B(f)}}  &
+        K^s \arrow[bend left]{l}{\widetilde{M_B^C(f^{-1})}}
+    \end{tikzcd}    
+\end{wrapfigure}
+Nach Definition sind sowohl das innere Quadrat als auch der äußere Ring kommutativ. Demnach gilt für den Pfad von $K^s \longrightarrow K^s$
+\begin{align*}
+    \widetilde{M_B^C(f^{-1})} \circ \widetilde{M_C^B(f)} &= \mathrm{id}_{K^s} \qquad\\
+    \Rightarrow \quad \widetilde{M_B^C(f^{-1})} &= \left( \widetilde{M_C^B(f)} \right)^{-1} \\
+    \Rightarrow \quad M_B^C(f^{-1}) &= \left(M_C^B(f)\right)^{-1} \\
+\end{align*}
+
+\ttask
+
+\begin{align*}
+    f(v_1 + v_2) &= f(v_1) + f(v_2) = \left(\Phi_B \circ \widetilde{M_B^B(f)
+    } \circ \Phi_B^{-1}\right)(v_1 + v_2) = \Phi_B \left( M_B^B(f)(e_1 + e_2) \right) \\
+    &= \Phi_B \left( \begin{pmatrix}
+    1 & 2 \\ 3 & 4
+    \end{pmatrix} \begin{pmatrix}
+        1 \\ 1
+    \end{pmatrix} \right) = \Phi_B \left( \pvec{3 \\ 7} \right) = 3v_1 + 7v_2 
+\end{align*}
 
 \end{document}
