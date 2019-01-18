@@ -109,6 +109,8 @@ Die gefragten Matrizen ergeben sich demnach direkt aus den entsprechenden Produk
 
 \task
 
+$\xrightarrow{\sim}$ steht in den folgenden Diagrammen für einen Isomorphismus.
+
 \ttask
 
 \begin{wrapfigure}[8]{l}{4cm}
@@ -131,13 +133,13 @@ Nach Eindeutigkeit der Abbildung gilt somit
     \centering
     \vspace*{-1em}
     \begin{tikzcd}[row sep=15mm, column sep=15mm]
-        A \arrow{d}{\Phi^{-1}_A}[above, rotate=90]{\sim} \arrow{r}{f} \arrow[bend left]{rr}{f \circ g} &
-        B \arrow{d}{\Phi^{-1}_B}[above, rotate=90]{\sim}\arrow{r}{g} &
-        \arrow{d}{\Phi^{-1}_C}[above, rotate=90]{\sim}C
+        U \arrow{d}{\Phi^{-1}_A}[above, rotate=90]{\sim} \arrow{r}{f} \arrow[bend left]{rr}{f \circ g} &
+        V \arrow{d}{\Phi^{-1}_B}[above, rotate=90]{\sim}\arrow{r}{g} &
+        \arrow{d}{\Phi^{-1}_C}[above, rotate=90]{\sim}W
         \\
-        F^r \arrow{r}{\widetilde{M_B^A(f)}} \arrow[bend right]{rr}[below]{\widetilde{M_C^A(f \circ g)}} &
-        F^s \arrow{r}{\widetilde{M_cb(g)}} &
-        F^t
+        K^r \arrow{r}{\widetilde{M_B^A(f)}} \arrow[bend right]{rr}[below]{\widetilde{M_C^A(f \circ g)}} &
+        K^s \arrow{r}{\widetilde{M_C^B(g)}} &
+        K^t
     \end{tikzcd}
 \end{wrapfigure}
 
@@ -145,7 +147,7 @@ Nach Eindeutigkeit der Abbildung gilt somit
 
 Nach Definition sind beide Quadrate sowie der äußerste Ring kommutativ. Die obere Halbschale $f,\ g,\ f \circ g$ ist klarer Weise auch kommutativ. Demnach muss auch die untere Halbschale kommutativ sein. Es gilt nach den Eigenschaften von Matrizenabbildungen
 \begin{align*}
-    \widetilde{M_cb(g)} &= \widetilde{M_C^B(g)} \circ \widetilde{M_B^A(f)} \\
+    \widetilde{M_C^B(g)} &= \widetilde{M_C^B(g)} \circ \widetilde{M_B^A(f)} \\
     \Rightarrow \qquad M_C^B(g) &= M_C^B(g) \cdot M_B^A(f) \qquad \qquad
 \end{align*}
 
@@ -164,9 +166,8 @@ Nach Definition sind beide Quadrate sowie der äußerste Ring kommutativ. Die ob
 \end{wrapfigure}
 Nach Definition sind sowohl das innere Quadrat als auch der äußere Ring kommutativ. Demnach gilt für den Pfad von $K^s \longrightarrow K^s$
 \begin{align*}
-    \widetilde{M_B^C(f^{-1})} \circ \widetilde{M_C^B(f)} &= \mathrm{id}_{K^s} \qquad\\
-    \Rightarrow \quad \widetilde{M_B^C(f^{-1})} &= \left( \widetilde{M_C^B(f)} \right)^{-1} \\
-    \Rightarrow \quad M_B^C(f^{-1}) &= \left(M_C^B(f)\right)^{-1} \\
+    \widetilde{M_B^C(f^{-1})} &= \Phi_B^{-1} \circ f^{-1} \circ \Phi_C \\
+    &= \left( \Phi_C^{-1} \circ f \circ \Phi_B \right)^{-1} = \left(\widetilde{M_B^C(f)}\right)^{-1} \\\\\\
 \end{align*}
 
 \ttask
