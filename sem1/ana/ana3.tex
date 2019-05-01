@@ -1,0 +1,215 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{marvosym}
+
+\usepackage[left=2cm, right=2cm, top=1cm]{geometry}
+
+\allowdisplaybreaks
+\setkomafont{paragraph}{\normalfont\itshape}
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\begin{flushright}
+	Kamal\\
+	Maximilian Neumann
+\end{flushright}
+\begin{center}
+	\bfseries Analysis I Blatt 3
+\end{center}
+\task
+\begin{theorem}
+	Für alle $n$ gibt es genau $n!$ bijektive Abbildungen in $f:A_n \rightarrow A_n$
+\end{theorem}
+\begin{proof}
+Es sei $\pi_n \coloneqq \left\{ f:A_n \rightarrow A_n \mid f\ \text{bijektiv} \right\}$
+\paragraph*{Induktionsanfang} $n = 1$ , $\pi_1 = \{ \mathrm{id}_{A_1}\}$
+\paragraph*{Induktionsbehauptung} $|\pi_n| = n!$
+\paragraph*{Induktionsschritt} z. z. $|\pi_{n+1}| = (n+1)!$
+
+Es sei $\mathrm{Ins}: \pi_n \times A_{n+1} \rightarrow \pi_{n+1}$ definiert als
+\[ \mathrm{Ins}(\varphi,\ k)(i) \coloneqq \begin{cases}
+	n+1 &\qquad i = k \\
+	\varphi(k) &\qquad i = n+1 \\
+	\varphi(i) &\qquad \text{sonst}
+\end{cases} \]
+Jeder Wert von $\mathrm{Ins}(\varphi,\ k)$ ist nach Definition bijektiv und bildet $A_{n+1}$ auf $A_{n+1}$ ab, und ist somit in $\pi_{n+1}$ enthalten.
+
+Nach Lemma \ref{lemma1} und Lemma \ref{lemma2} ist $\mathrm{Ins}$ bijektiv, womit
+\[ |\pi_{n+1}| = |\pi_n \times A_{n+1}| \stackrel{\text{Lemma \ref{cart}}}{=} |\pi_n| \cdot |A_{n+1}| = n! \cdot (n+1) = (n+1)! \]
+\end{proof}
+\begin{lemma}\label{lemma1}
+$\mathrm{Ins}$ ist injektiv.
+\end{lemma}
+\begin{proof}
+\[ \mathrm{Ins}\ \text{injektiv} \txtImpl{Def. Inj.} \left( \forall\varphi,\ \varphi' \in \pi_n\ \forall k,\ k' \in A_{n+1} : \varphi \neq \varphi' \vee k \neq k' \Rightarrow \mathrm{Ins}(\varphi,\ k) \neq \mathrm{Ins}(\varphi',\ k') \right) \]
+Fall 1: $\varphi \neq \varphi' \Leftrightarrow \exists i \in A_n : \varphi(i) \neq \varphi'(i)$
+
+Wenn $k = k'$, so trifft Fall 2 zu, und es ist nichts zu zeigen $
+\curvearrowright$ Es sei $k \stackrel{!}{\neq} k'$
+\begin{gather*}
+	i = k \defimpl{\mathrm{Ins}} \mathrm{Ins}(\varphi,\ k)(i) = n+1 \\
+	i = k \stackrel{k \neq k'}{\Longrightarrow} i \neq k' \defimpl{\mathrm{Ins}} \mathrm{Ins}(\varphi',\ k')(i) = \varphi'(i)\\\\
+	\defimpl{\varphi'} \varphi'(i) \neq n+1 \Rightarrow \mathrm{Ins}(\varphi',\ k')(i) \neq 
+	i = k \defimpl{\mathrm{Ins}} \mathrm{Ins}(\varphi,\ k)(i)
+\end{gather*}
+Fall 2: $k \neq k'$
+\[  \mathrm{Ins}(\varphi,\ k)(n+1) = k \neq k' = \mathrm{Ins}(\varphi',\ k')(n+1) \]
+\end{proof}
+\newpage
+\begin{lemma}\label{lemma2}
+$\mathrm{Ins}$ ist surjektiv.
+\end{lemma}
+\begin{proof}
+\[ \Leftrightarrow \forall \varphi' \in \pi_{n+1}\ \exists \varphi \in \pi_n\ \exists k \in A_{n+1} : \varphi' = \mathrm{Ins}(\varphi,\ k)\]
+Es sei ein beliebiges $\varphi' \in \pi_{n+1}$ gegeben. Nach Def. $\pi$ folgt die Existenz eines $\varphi'^{-1}$.
+
+Sei $k \coloneqq \varphi'^{-1}(n+1)$ und $\varphi: A_n \rightarrow A_n$
+\[ \varphi(i) \coloneqq \begin{cases}
+	\varphi'(n+1) &\qquad i = k \\
+	\varphi'(i) &\qquad \text{sonst}
+\end{cases} \]
+$\varphi$ ist nach Konstruktion bijektiv und erfüllt
+\[ \varphi' = \mathrm{Ins}(\varphi,\ k) \]
+\end{proof}
+
+\begin{lemma}\label{cart}
+Für zwei endliche Mengen $M,\ N$ gilt
+\[ | M \times N| = |M| \cdot |N| \]
+\end{lemma}
+\begin{proof}
+Sei $m \coloneqq |M|,\ n \coloneqq |N|$. Nach Def. Endlichkeit gibt es bijektive $\alpha,\ \beta$
+\[ \alpha: M \rightarrow A_m \qquad \beta : N \rightarrow A_n \]
+Es sei nun eine Abbildung $\varphi : M \times N \rightarrow A_{n \cdot m}$
+\[ \varphi(a,\ b) \coloneqq n \cdot (\alpha(a) - 1) + \beta(b) \]
+Die Größte Zahl wird bei $a = \alpha^{-1}(m),\ b = \beta^{-1}(n)$ erreicht mit
+\[ \varphi_{max} = n \cdot (m - 1) + n = n \cdot m\]
+\[ \forall a \in M\ \forall b \in N : \alpha(a) \leq m \wedge \beta(b) \leq n \ \Rightarrow\  \varphi(a,\ b) \leq m \cdot n \]
+Jede Zahl lässt sich eindeutig in ein Vielfaches von $n$ und einen Rest aufteilen, sodass
+\[ i = \varphi(a,\ b) \Leftrightarrow b = \beta^{-1}(i \!\!\!\!\mod n) \ \wedge\ a = \alpha^{-1}\left( 1+\frac{i - i \!\!\!\!\mod n}{n} \right)  \]
+Es existiert demnach ein $\varphi^{-1}$, sodass $\varphi$ bijektiv.
+\[  M \times N \sim A_{n \cdot m} \defimpl{\#} |M \times N| = |M| \cdot |N| \]
+\end{proof}
+
+\task
+
+\ttask
+\begin{theorem}
+\[ \forall y \in X : \left(  \forall x \in X : x \neq y \Rightarrow x > y \right) \Leftrightarrow \nexists x \in X : x < y\]	
+\end{theorem}
+\begin{proof}
+Für ein beliebiges $y \in X$
+\begin{align*}
+	&\quad\forall x \in X : x \neq y \Rightarrow x > y \\
+	\defImpl{\Rightarrow}	&\quad\forall x \in X : x = y \vee x > y \\
+	\defImpl{\geq}&\quad\forall x \in X : x \geq y \\
+	\Leftrightarrow&\quad\nexists x \in X : x < y
+\end{align*}
+\end{proof}
+\newpage
+\ttask
+
+Keine der beiden Richtungen hält ohne das Anordungsaxiom, da im vorletzten Schritt überhaupt kein logischer Zusammenhang zwischen den Aussagen $x \geq y$ und $x < y$ besteht.
+\\
+
+\begin{theorem}
+Für eine Folge $(M_n)_{n \in \mathbb{N}}$
+	\[ \forall n \in \mathbb{N} : M_n\ \text{abzählbar} \Rightarrow \bigcup_{n \in \mathbb{N}}M_n\quad\text{abzählbar}\]
+\end{theorem}
+\begin{proof}
+\[ \txtimpl{Def. abz.} \forall n \in \mathbb{N}\ \exists \varphi_n:\mathbb{N} \rightarrow M_n\ ,\ \varphi_n\ \text{bijektiv} \]
+Es sei
+\[ \sigma : \mathbb{N}^2 \rightarrow \bigcup_{n \in \mathbb{N}}M_n\ ,\ (i,\ j) \mapsto \varphi_i(j) \]
+$\sigma$ ist nach Konstruktion surjektiv. Da nach Satz 1.5.3 $\mathbb{N}^2$ abzählbar ist, sodass eine Bijektion $\tau : \mathbb{N} \rightarrow \mathbb{N}^2$ existiert.
+\[ \Rightarrow \sigma \circ \tau : \mathbb{N} \rightarrow \bigcup_{n \in \mathbb{N}}M_n \quad \text{surjektiv} \]
+Nach Lemma \ref{surj} ist $\bigcup_{n \in \mathbb{N}}M_n$ somit abzählbar.
+\end{proof}
+
+\begin{lemma}\label{surj}
+	Gibt es für eine Menge $M$ eine surjektive Abbildung $\varphi:\mathbb{N} \rightarrow M$, so ist $M$ abzählbar.	
+\end{lemma}
+\begin{proof}
+\renewcommand*{\thefootnote}{\textdagger}
+\begin{gather*}
+	\txtimpl{Def. Surj.} \forall x \in M \ \exists n \in \mathbb{N} : \varphi(n) = s \\
+	\Rightarrow \forall x \in M : \varphi^{-1}(\{x\}) \neq \emptyset \tag*{\footnotemark}
+\end{gather*}
+\footnotetext{Es handelt sich bei $\varphi^{-1}(\{x\})$ nicht eine Umkehrfunktion, sondern lediglich um das Urbild.}
+Es sei nun eine Abbildung $\theta: M \rightarrow \mathbb{N}$, welche ein $x \in M$ auf das kleinste Element in seinem Urbild abbildet. Es existiert ein eindeutiges kleinstes Element, da $\varphi^{-1}(\{x\}) \subseteq \mathbb{N}$.
+\[ \theta(x) \coloneqq \min\big(\varphi^{-1}(\{x\})\big) \]
+Surjektivität bleibt nach Konstruktion erhalten, und aus der Eindeutigkeit des kleinsten Elements folgt
+\[ \forall x,\ y \in M : \min\big(\varphi^{-1}(\{x\})\big) = \min\big(\varphi^{-1}(\{y\})\big) \eqqcolon n \Rightarrow x = \varphi(n) = y\]
+sodass $\theta$ injektiv und so bijektiv ist.
+\[ \defimpl{\sim} M \sim \mathbb{N} \txtimpl{Def. abz.} M\ \text{abzählbar} \]
+\end{proof}
+\newpage
+\task
+
+\begin{theorem}
+	\[ \sqrt{2} + \sqrt{3}\ \text{irrational} \]
+\end{theorem}
+\begin{proof} durch Widerspruch\\
+\begin{align*}
+	&&\sqrt{2} + \sqrt{3} \in \mathbb{Q} &\defImpl{\mathbb{Q}} \exists p,\ q \in \mathbb{Z} : \sqrt{2} + \sqrt{3} = \frac{p}{q} \\
+	\Rightarrow&& p &= (\sqrt{2} + \sqrt{3})q \\
+	\Rightarrow&& p^2 &= (5+2\sqrt{6})q^2 \\
+	\Rightarrow&& \sqrt{6} &= \frac{1}{2}\left( \left( \frac{p}{q} \right)^2 - 5 \right)  \in \mathbb{Q} \qquad \text{da $\mathbb{Q}$ abgeschlossen} \\
+	\\
+	\Rightarrow&& \exists r,\ s \in \mathbb{Z} : \sqrt{6} &= \frac{r}{s} \\
+	\Rightarrow&& r^2 &= 6s^2 = 2^13^1s^2 \\ 
+\end{align*}
+Es gibt eine eindeutige Primzahlfaktorzerlegung für $|r|,\ |s|$. Die Primzahlfaktorzerlegung von $r^2,\ s^2$ besteht nach Potenzgesetzen nur aus geraden Expontenten. Jedoch sind nach obiger Formel die Exponenten von 2 und 3 in $r^2$ jeweils um eins größer als in $s^2$. \Large\Lightning
+\end{proof}
+\vfill
+\begin{flushright}
+	\begin{tabular}{c|c|c|c}
+	1 & 2 & 3 & $\Sigma$ \\
+	\hline
+	\hspace*{4em}& \hspace*{4em}& \hspace*{4em}&\hspace*{4em} \\
+	&&&\\
+	\end{tabular}
+\end{flushright}
+\end{document}

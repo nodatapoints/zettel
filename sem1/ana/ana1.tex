@@ -1,0 +1,112 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+
+\usepackage{marvosym}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{marvosym}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
+
+\begin{document}
+\hfill Kamal
+\begin{center}
+	\bfseries Analysis I Blatt 1
+\end{center}
+\task
+\ttask
+\begin{theorem}
+	\[ n > m \Rightarrow pn > pm \tag*{$m,\ n,\ p \in \mathbb{N}$} \]
+\end{theorem}
+\begin{proof}
+\begin{align*}
+	n &= m + r \tag*{$r \in \mathbb{N}$} \\
+	pn &= p(m + r) = pm + pr \tag*{$pr \in \mathbb{N}$} \\
+	pn &> pm
+\end{align*}
+\end{proof}
+Obiger Beweis gilt analog für $m < n$. Für den Fall $m = n$ folgt sofort $pm = pn$.
+
+\ttask
+\begin{theorem}
+	\[ m > n \:\wedge\: p > q \ \Rightarrow\ mp > nq \tag*{$m,\ n,\ p,\ q \in \mathbb{N}$} \]
+\end{theorem}
+\begin{proof}
+\[ m = n + r \qquad p = q + s \tag*{$r,\ s \in \mathbb{N}$} \]
+\begin{align*}
+	mp &= (n+r)(q+s) = n(q+s) + r(q+s) = nq + \underbrace{(ns + rq + rs)}_{\in\:\mathbb{N}} \\
+	mp &> nq
+\end{align*}
+\end{proof}
+
+\task
+\begin{theorem}
+	\[ \nexists m,\ n \in \mathbb{N}\ (n < m < n+1) \]
+\end{theorem}
+\begin{proof}
+Es wird das Gegenteil der Behauptung angenommen.
+\[ n + r = m \qquad m + s = n+1 \tag*{$r,\ s \in \mathbb{N}$} \]
+\begin{align*}
+	m + s = (n + r) + s &= n + 1 \\
+	r + s &= 1 \\
+	r &< 1 \qquad \text{\Lightning}
+\end{align*}
+\end{proof}
+\newpage
+\task
+\begin{theorem}
+	\[ 6(1^2 + 2^2 + \hdots + n^2) = n(n+1)(2n+1) \tag*{$n \in \mathbb{N}$} \]
+\end{theorem}
+\begin{proof}
+Für $n = 1$
+\begin{equation}\label{IS}
+	6(1^2) = 1(1+1)(2 \cdot 1 + 1) = 6 \qquad \text{w. A.}
+\end{equation}
+Gilt es als Induktionsannahme für ein beliebiges $n$, so ist
+\begin{align}
+	6(1^2 + 2^2 + \hdots + n^2) &= n(n+1)(2n+1) \nonumber\\
+	6(1^2 + 2^2 + \hdots + n^2) + 6(n+1)^2 &= n(n+1)(2n+1)+ 6(n+1)^2 \nonumber\\
+	6(1^2 + 2^2 + \hdots + (n+1)^2) &= (n+1)\left( n(2n+1) + 6(n+1) \right) \nonumber\\
+	&= (n+1)\left( 2n^2 + 7n + 6 \right) = (n+1)(n+2)(2n+3) \nonumber\\ 
+	6(1^2 + 2^2 + \hdots + (n+1)^2) &= (n+1)\left( (n+1)+1 \right)\left( 2(n+1)+1 \right)  \qquad, \label{IA}
+\end{align}
+sodass es für $n+1$ gilt. Aus Richtigkeit von Induktionsstart \eqref{IS} und Induktionsschritt \eqref{IA} folgt die Richtigkeit der Behauptung.
+\end{proof}
+\end{document}

@@ -1,0 +1,77 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{marvosym}
+
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[left=1.8cm, right=1.8cm, top=1cm]{geometry}
+
+\allowdisplaybreaks
+\setkomafont{paragraph}{\normalfont\itshape}
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+\newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
+\newcommand{\refImpl}[1]{\txtImpl{\eqref{#1}}}
+
+\begin{document}
+\begin{flushright}
+	Kamal\\
+	Maximilian Neumann
+\end{flushright}
+\begin{center}
+	\bfseries Analysis I Blatt 10
+\end{center}
+\task
+\ttask
+
+\begin{align*}
+    \lim_{x \rightarrow 2} \frac{1}{2-x} - \frac{12}{8-x^3} &= \lim_{x \rightarrow 2} \frac{1}{2-x} - \frac{12}{(2)}
+\end{align*}
+
+\ttask
+Sei $ax \eqqcolon y \in \mathbb{R}$. Da $a \neq 0$, ist $x = \frac{1}{a}y$
+\[ \lim_{x \rightarrow \infty} \frac{f(ax)}{x} = \lim_{y \rightarrow \infty} \frac{f(y)}{\frac{1}{a}y} = a \lim_{y \rightarrow \infty} \frac{f(y)}{y} = ac \]
+\end{document}
