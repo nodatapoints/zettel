@@ -1,0 +1,185 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{mathrsfs}
+
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{marvosym}
+
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[left=1.8cm, right=1.8cm, top=1cm]{geometry}
+
+\allowdisplaybreaks
+\setkomafont{paragraph}{\normalfont\itshape}
+
+\setlength{\parindent}{0pt}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\\}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\par}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\par}
+
+\newcommand{\defimpl}[1]{\stackrel{\text{Def.}\;#1}{\Longrightarrow}}
+\newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
+\newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
+\newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+\newcommand{\refimpl}[1]{\txtimpl{\eqref{#1}}}
+\newcommand{\refImpl}[1]{\txtImpl{\eqref{#1}}}
+
+\begin{document}
+\begin{flushright}
+	Kamal\\
+	Maximilian Neumann
+\end{flushright}
+\begin{center}
+	\bfseries Analysis I Blatt 11
+\end{center}
+\task
+
+\ttask
+
+\ttask
+
+Für beliebiges $f \in \mathscr{B}(M)$ gilt
+\begin{align*}
+	\forall x \in M : 0 &\leq |f(x)| \leq \sup_{x \in M} |f(x)| = \Vert f \Vert_M \\
+	\Rightarrow \quad 0 &\leq \Vert f \Vert_M
+\end{align*}
+Ist $\Vert f \Vert_M = 0$, so
+\begin{align*}
+	\lVert f \rVert_M =& \sup_{x \in M} |f(x)| = 0 \\
+	\Rightarrow \quad\forall x \in M &: |f(x)| \leq 0 \\
+	\xRightarrow{0 \leq |f(x)|} \quad \forall x \in M &: f(x) = 0 \\
+	\Rightarrow \quad f =&\ 0_M \qquad (0_M : M \rightarrow R~,~x \mapsto 0)
+\end{align*}
+Hat man zwei Funktionen $f,\ g \in \mathscr{B}(M)$, so gilt nach Dreiecksungleichung
+\begin{align*}
+	\forall x \in M : |f(x) + g(x)| \leq |f(x)| + |g(x)|
+\end{align*}
+\begin{theorem}
+Für jede Funktion $f \in \mathscr{B}(M)$ mit beliebigem $\lambda \in \mathbb{R}$ gilt
+\[ \Vert \lambda \cdot f(x) \Vert_M = \sup_{x \in M} |\lambda \cdot f(x)| = \lambda \sup_{x \in M} |f(x)| = \lambda \Vert f(x) \Vert \] 
+\end{theorem}
+\begin{proof}
+Es sei $S \coloneqq \sup_{x \in M} |f(x)| = \Vert f \Vert_M$
+
+Fall 1: $\exists x_m \in M : |f(x_m)| = S$
+\begin{align*}
+	\forall x \in M : |f(x)| &\leq S ~\Rightarrow~ |\lambda f(x)| = |(\lambda \cdot f)(x)| \leq |\lambda| S \\
+	\exists x_m \in M : |f(x)| &= S ~\Rightarrow~ |\lambda|S = |(\lambda \cdot f)(x_m)| \\
+	\xRightarrow{\max} \quad |\lambda| S = \max_{x \in M} |(\lambda \cdot S)(x)| &= \sup_{x \in M} |(\lambda \cdot S)(x)| = \Vert \lambda \cdot f \Vert_M
+\end{align*}
+Fall 2: $\exists x_m \in M : |f(x_m)| = S \quad,\quad \forall \varepsilon \in R_+ : \left\{ x \mid f(x) \in \mathcal{U}_\varepsilon(S) ~,~ x \in M \right\} \text{ unendlich}$ \\
+Sei $\mathcal{H}_{S,\varepsilon}(f) \coloneqq \left\{ x \mid f(x) \in \mathcal{U}_\varepsilon(S) ~,~ x \in M \right\}$
+\begin{align*}
+	\forall \varepsilon \in \mathbb{R}_+ : \forall x \in &\:\mathcal{H}_{S,\varepsilon}(f) : |f(x) - S| < \varepsilon \\
+	\Rightarrow \quad \forall \varepsilon \in \mathbb{R}_+ : \forall x \in &\:\mathcal{H}_{S,\varepsilon}(f) : |\lambda f(x) - \lambda S| < |\lambda|\varepsilon \
+	\Rightarrow x \in \mathcal{H}_{|\lambda S|,|\lambda|\varepsilon}(\lambda \cdot f) \\
+	\Rightarrow \quad \forall \varepsilon' \in \mathbb{R_+} : &\:\mathcal{H}_{|\lambda S|,\varepsilon'}(\lambda \cdot f) \text{ unendlich} \qquad \varepsilon(\varepsilon') = \frac{\varepsilon'}{|\lambda|} \tag{$\ast$} \\
+	\\
+	\forall x \in M : &\:|f(x)| < S \\
+	\Rightarrow \quad \forall x \in M: &\:|(\lambda \cdot f)(x)| < |\lambda| S \tag{$\ast\ast$} \\\\
+	\xRightarrow{\ast,\ast\ast} |\lambda|S = \sup_{x \in M} |(\lambda \cdot f)(x)| &= \Vert \lambda \cdot f \Vert_M
+\end{align*}
+\end{proof}
+\ttask
+\begin{theorem}
+Jede \textsc{Cauchy}-Funktionsfolge $(a_n)_{n \in \mathbb{N}}$ unter der Norm $\Vert \cdot \Vert_M$ ist konvergent.
+\end{theorem}
+\begin{proof}
+\begin{gather*}
+	\forall \varepsilon \in \mathbb{R}_+ :\exists N \in \mathbb{N} : \forall n,\ m \in \mathbb{N} ~,~ n,\ m > N: \Vert a_n - a_m \Vert_B < \varepsilon \\
+	\xRightarrow{\sup} \quad \forall \varepsilon \in \mathbb{R}_+ :\exists N \in \mathbb{N} : \forall n,\ m \in \mathbb{N} ~,~ n,\ m > N: \forall x \in M : |a_n(x) - a_m(x) | \leq \sup_{x \in M} |(a_n - a_m)(x)| < \varepsilon \\
+	\Rightarrow \quad \forall x \in M : \bigg(\forall \varepsilon \in \mathbb{R}_+ :\exists N \in \mathbb{N} : \forall n,\ m \in \mathbb{N} ~,~ n,\ m > N:  |a_n(x) - a_m(x) | < \varepsilon \bigg) \\
+	\xRightarrow{\textsc{Cauchy}} \quad \forall x \in M: (a_n(x))_{n \in \mathbb{N}} \text{ konvergent} \quad \Longrightarrow a \text{ punktweise konvergent}
+\end{gather*}
+\end{proof}
+\task
+\ttask
+
+\begin{theorem}
+	\[ f: \mathbb{R}_+ \rightarrow \mathbb{R}~,~ x \mapsto \sqrt{x} \qquad \text{gleichmäßig stetig} \]
+\end{theorem}
+\begin{proof}
+Seien beliebige $x,\ y \in \mathbb{R}_+$ mit $0 \leq x \leq y$ gegeben.
+\begin{align*}
+	y &= x + (y-x) \leq y + \overbrace{2\sqrt{x}\sqrt{y-x}}^{\geq 0} + (y-x) = (\sqrt{x} + \sqrt{y-x})^2 \\
+	\sqrt{y} &\leq \sqrt{x} + \sqrt{y-x} \\
+	\sqrt{y} - \sqrt{x} &\leq \sqrt{y-x}
+\intertext{mit $\varepsilon \coloneqq \delta^2$}
+	\forall x,\ y \in \mathbb{R}_+ ~,~ |y-x| < \delta \ : |\sqrt{y} - \sqrt{x}|  &\leq \sqrt{|y-x|} = \sqrt{\delta} = \varepsilon
+\end{align*}
+\end{proof}
+Gleichmäßige Stetigkeit impliziert Stetigkeit.
+
+\ttask
+\begin{theorem}
+Für zwei Funktionen $f,\ g: M \rightarrow \mathbb{R}$ ist die Maximumsfunktion
+\[ \mathrm{max}_{f,g} : M \rightarrow \mathbb{R} ~,~ x \mapsto \max \left\{ f(x),\ g(x) \right\} \]
+stetig über $M$.
+\end{theorem}
+\begin{proof}
+Der Definitionsbereich $M$ kann in drei Mengen $M_f,\ M_g$ partitioniert werden, sodass
+\begin{gather*}
+	M = M_f \cup M_g \qquad M_f \cap M_g= \emptyset \\
+	M_f \coloneqq \left\{ x : f(x) \geq g(x) ~,~ x \in M \right\} \qquad M_g \coloneqq \left\{ x : f(x) < g(x) ~,~ x \in M \right\} \\
+\end{gather*}
+Es gilt
+\[ \forall x \in M_f : \mathrm{max}_{f,g}(x) = f(x) \qquad \forall x \in M_g : \mathrm{max}_{f,g}(x) = g(x)  \]
+An allen Rändern $x^*$ von kompakten Intervallen zwischen $M_f$ und $M_g$ gilt $f(x^*) = g(x^*)$, sodass
+\[ \lim_{x \rightarrow x^*_-} \mathrm{max}_{f,g}(x) = g(x^*) = f(x^*) = \lim_{x \rightarrow x^*_+} \mathrm{max}_{f,g}(x) \]
+Demnach ist $\mathrm{max}_{f,g}(x)$ auf $M_f \cup M_g = M$ stetig.
+\end{proof}
+
+\task
+
+\begin{theorem}
+	Eine \textsc{Lipschitz}-stetige Funktion $f: M \rightarrow \mathbb{R}$ mit $L \in \mathbb{R_+}$ sodass
+	\[ \forall x,\ x' \in M: |f(x)-f(x)'| < L|x-x'| \]
+	ist gleichmäßig stetig
+\end{theorem}
+\begin{proof}
+Es sei $\varepsilon \coloneqq L\delta$
+\begin{align*}
+	\xRightarrow{\textsc{Lipschitz}} \quad & \forall x,\ x' \in M: |f(x)-f(x)'| < L|x-x'| \\
+	\Longrightarrow \quad & \forall x,\ x' \in M ~,~ |x-x'| < \delta\ : |f(x)-f(x')| < L \delta = \varepsilon
+\end{align*}
+\end{proof}
+
+In Aufgabe 2a wurde bereits gezeigt, dass die Funktion $f: \mathbb{R}_+ \rightarrow \mathbb{R}~,~ x \mapsto \sqrt{x}$ gleichmäßig stetig ist. Setzt man jedoch $x' = 0$ und betrachtet $\lim_{x \rightarrow 0} |f(x)-f(x')|$ so folgt für $L$
+\[
+	L > \lim_{x \rightarrow 0} \frac{|f(x)-f(x')|}{|x-x'|} = \lim_{x \rightarrow 0} \frac{\sqrt{x}}{x} = \lim_{x \rightarrow 0} \frac{1}{\sqrt{x}} = \infty
+\]
+sodass $L$ nicht existieren kann. Demnach ist die Funktion gleichmäßig stetig, aber nicht \textsc{Lipschitz}-stetig.
+\end{document}
