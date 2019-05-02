@@ -60,28 +60,38 @@
          \hline  
     \end{tabular}
 \end{center}
-
-\hline
-\bgroup
+\begingroup
 \def\arraystretch{1.5}
 \begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
-    Übungsgruppe: & Tutor(in): \\
-    Namen: &\\
+	\hline
+    Übungsgruppe: Mo 14:15 ~~ SR B& Tutor(in): Sebastian Groß\\
+    Namen: Ellen, Kamal &\\
+    \hline
 \end{tabular}
-\egroup
-\hline
+\endgroup
 \vspace{2em}
-\setcounter{\taski}{2}
+\setcounter{taski}{1}
 
 \task
 
-\ttask
+$\lambda_1,\ \lambda_2$ \emph{aus Hinweis}
 \begin{align*}
 	A &= \mqty(1 & 1 \\ 1 & 0) \\
 	\chi_A(\lambda) &= \lambda^2 - \lambda - 1 = (\lambda - \lambda_1)(\lambda - \lambda_2) \\
-
-\ttask
-\[ \mqty(2 & 1 \\ 1 & 1) = A^2 &= A + 1 \]
+	\Rightarrow \text{Eigenwerte}\ &\qty{\lambda_1,\ \lambda_2} \\\\
+	\mqty( 1 - \lambda & 1 \\ 1 & -\lambda)v &= 0 \qquad \curvearrowright \quad \text{Hom. LGS} \\
+	\mqty( 1 & \frac 1 {1-\lambda} \\ 1 & - \lambda) &\rightarrow \mqty( 1 & -\lambda \\ 1 & - \lambda)
+	\rightarrow \mqty(1 & -\lambda \\ 0 & 0) \qquad (\lambda = \lambda_1,\ \lambda_2) \\
+	\Rightarrow \text{Eigenvektoren} &\quad (\lambda_1,\ 1)^\top ~,~ (\lambda_2,\ 1)^\top \quad,\quad \text{sei } \mathcal E = (v_1,\ v_2) \text{ Basis von $V$}\\\\
+	M_{\mathcal E}^{\mathcal E}(\widetilde A\,) &= \textrm{diag}(\lambda_1,\ \lambda_2) \\
+	M_{\mathcal E}^{\mathcal E}(\widetilde A^n) &= \textrm{diag}(\lambda_1^n,\ \lambda_2^n) \qquad n \in \mathbb{N}_0 \\
+	A^n &= T^{\mathcal E}_{e_1,e_2} M^{\mathcal E}_{\mathcal E}(\widetilde A^n) T_{\mathcal E}^{e_1,e_2} = \mqty(\lambda_1 & \lambda_2 \\ 1 & 1) \mqty(\diagonalmatrix{\lambda_1^n, \lambda_2^n}) \mqty(\lambda_1 & \lambda_2 \\ 1 & 1)^{-1} \\
+	&= \mqty(\lambda_1 & \lambda_2 \\ 1 & 1) \mqty(\diagonalmatrix{\lambda_1^n, \lambda_2^n}) \mqty(\diagonalmatrix{\frac 1 {\lambda_1^2+1}, \frac 1 {\lambda_2^2+1}})\mqty(\lambda_1 & 1 \\ \lambda_2 & 1) \\
+	\mqty(a_n \\ b_n) = A^n \mqty(1 \\ 1) &= \mqty(\lambda_1 & \lambda_2 \\ 1 & 1) \mqty(\diagonalmatrix{\frac{\lambda_1^n}{\lambda_1^2+1}, \frac{\lambda_2^n}{\lambda_2^2+1}}) \mqty(\lambda_1^2 \\ \lambda_2^2) = \mqty(\frac{\lambda_1^{n+3}}{\lambda_1^2+1} + \frac{\lambda_2^{n+3}}{\lambda_2^2+1} \\ \cdots) \\
+	a_n &= \frac{\lambda_1^{n+3}}{\lambda_1^2+1} + \frac{\lambda_2^{n+3}}{\lambda_2^2+1} = \frac{\lambda_1^{n+3}}{\lambda_1^2-\lambda_1\lambda_2} + \frac{\lambda_2^{n+3}}{\lambda_2^2-\lambda_1\lambda_2} = \frac{\lambda_1^{n+2}}{\lambda_1-\lambda_2}+ \frac{\lambda_2^{n+2}}{\lambda_2-\lambda_1} \\
+	&= \frac{\lambda_2^{n+2}-\lambda_1^{n+2}}{\lambda_2-\lambda_1}
+\end{align*}
+\newpage
 
 \task
 
@@ -95,10 +105,26 @@ Es sei ein beliebiges $\varphi \in \mathrm{End}_K(V)$ und $v \in V \backslash \{
 
 \ttask\ 
 Sei $p = \sum_{k=0}^n c_kt^k ~,~ c_0,\ \dots,\ c_n \in K ~,~ n = \mathrm{Grad}\  p$
-\[ p(\varphi)(v) &= \sum_{k=0}^n c_k\varphi^k(v) = v\sum_{k=0}^n c_k\lambda^k = p(\lambda)v \]
+\[ p(\varphi)(v) = \sum_{k=0}^n c_k\varphi^k(v) = v\sum_{k=0}^n c_k\lambda^k = p(\lambda)v \]
 
 \ttask\ 
-Da alle $v \in V$ Eigenvektoren sind, existiert ein $s: V \rightarrow K$ sodass 
-\[ \varphi(v) = s(v)v \qquad \forall v \in V \]
+Es sei ein festes $v \in V \backslash \qty{0} ~,~ \lambda \in K$ mit $\varphi(v) = \lambda v$. Für jedes $w \in V \backslash \qty{0}$ gibt es ein $\mu \in K$ sodass $\varphi(w) = \mu w$. \\
+Fall 1: $v,\ w$ lin. abhängig \\
+\begin{align*}
+	\Rightarrow \exists c \in K : w &= cv \\
+	\mu w = \varphi(w) &= \varphi(cv) = c \lambda v = \lambda w \qquad (w \neq 0) \\
+	\mu &=\lambda
+\end{align*}
+Fall 2: $v,\ w$ lin. unabhängig \\
+\begin{gather*}
+	\Rightarrow (v,\ w) \text{ Basis von Lin} (\qty{v,\ w}) \\
+	v+w \in V \quad \Rightarrow \exists \quad \gamma \in K : \varphi(v+w) = \gamma (v+w) \\
+	\lambda v + \mu w = \varphi(v+w) = \gamma v + \gamma w \\
+	\xRightarrow{\text{Basis}} \qquad \Phi_{v,w}^{-1}(\lambda v + \mu w) = \mqty(\lambda \\ \mu) = \mqty(\gamma \\ \gamma) = \Phi_{v,w}^{-1}(\gamma(v+w))\quad \Rightarrow \quad \mu = \gamma = \lambda
+\end{gather*}
+Somit gilt
+\begin{gather*}
+	\forall w \in V: \varphi(w) = \lambda w = (\lambda \cdot \textrm{id}_V)(w)
+\end{gather*}
 \end{document}
 
