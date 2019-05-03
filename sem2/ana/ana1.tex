@@ -1,0 +1,74 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+
+\task
+\ttask
+\begin{align*}
+	\dv{x} \qty(-\frac 1 {1+x^2}) &= \frac x {(1+x^2)^2} \\
+	\int_0^1 \dd x \frac x {(1+x^2)^2} &= \int_0^1 \dd x \dv{x} \qty(-\frac 1 {1+x^2}) \\
+	\xRightarrow{\text {Hauptsatz}} \qquad &= -\frac 1 {1+x^2} \bigg|_0^1 = - \frac 1 2 + 1 = \frac 1 2
+\end{align*}
+\ttask
+\begin{align*}
+	\int_0^1 \dd x \frac{2x^2}{(1+x^2)^2} &= \int_0^1 \dd x\ {2x} \cdot \frac{x}{(1+x^2)^2} \\
+	\xRightarrow{\text{part. Int.}} \qquad
+	&= 2x \qty(-\frac 1 {1+x^2}) \Bigg|_0^1 - 2\int_0^1 \dd x\ \frac x {(1+x^2)^2} = -1 - 1 = -2
+\end{align*}
+\[ 	\dv{x} \tan x = 1 + \tan^2 x ~ \xRightarrow{\text{Umkehrfkt.}} ~ \dv{x}\arctan x = \frac 1 { \tan'(\arctan x )} = \frac 1 {1 + \tan^2(\arctan x)} = \frac 1 {1+x^2}  \]
+\[ \int_0^1 \dd x\ \frac 1 {1+x^2} = \int_0^1 \dd x\ \dv{x}\arctan x \stackrel{\text{HS}}{=} \arctan x \Big|_0^1 = \frac \pi 4 \]
+
+\begin{align*}
+	\int_0^1 \dd x \frac{x^2-1}{(1+x^2)^2} &= \int_0^1 \dd x \frac{2x^2}{(1+x^2)^2} - \int_0^1 \dd x \frac 1 {1+x^2} \\
+	&= 2 - \frac \pi 4
+\end{align*}
+\end{document}
