@@ -1,0 +1,75 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+\task
+\begin{theorem}
+	Sei $I = [a,b] ~,~ a<b$ ein Intervall mit $x_0 \in I$, $f: I \rightarrow \mathbb{R}$ stetig diff'bar auf $I \setminus \qty{x_0}$ mit 
+	\[ \lim_{\substack{x \rightarrow x_0 \\ x \neq x_0}} f'(x) \coloneqq \alpha \]
+	so ist $f$ in $x_0$ diff'bar mit $f'(x_0) = \alpha$.
+\end{theorem}
+\begin{proof}
+\begin{align*}
+	\lim_{\varepsilon \rightarrow 0} \varepsilon &= \lim_{\varepsilon \rightarrow 0} f(x_0+\varepsilon)-f(x_0) = 0 \\
+	\lim_{\varepsilon \rightarrow 0} \frac{f(x_0+\varepsilon)-f(x_0)}{\varepsilon} &\overset{\textsc{L'Hospital}}{=}
+\end{align*}
+\end{proof}
+\task
+\begin{align*}
+	\dv{\Phi(v)}{v} &= \dv v \frac 1 2 \qty(A(v) + v\sqrt{1-v^2})
+	= \frac 1 2 \qty(\dv v \int_0^v \dd u\, \frac 1 {\sqrt{1-u^2}} + \sqrt{1-v^2} - \frac{v^2}{\sqrt{1-v^2}}) \\
+	\xRightarrow{\text{HS}} \qquad &= \frac 1 2 \qty(\frac{1}{\sqrt{1-0^2}} + \sqrt{1-v^2} - \frac{v^2}{\sqrt{1-v^2}} ) = \frac 1 2 \qty(\frac{1-v^2}{\sqrt{1-v^2}} + \sqrt{1-v^2} ) = \sqrt{1-v^2} \tag{$v \in [0,1)$} \\
+	\intertext{Sei $\varepsilon > 0$}
+	4 \int_0^{1-\varepsilon} \dd v\,\sqrt{1-v^2} &= 2 (A(v) + v\sqrt{1-v^2}) \eval_0^{1-\varepsilon} = 2(A(1)-A(0)) = 2\int_0^{1-\varepsilon} \dd u\,\frac{1}{\sqrt{1-u^2}} \\
+	4 \int_0^{1\phantom{-\varepsilon}} \dd v\,\sqrt{1-v^2} &= 4 \cdot \lim_{\varepsilon \rightarrow 0}\int_0^{1-\varepsilon} \dd v\,\sqrt{1-v^2}
+	= 2 \cdot \lim_{y \rightarrow 1^-} \int_0^y \dd u\,\frac{1}{\sqrt{1-u^2}} = \pi
+\end{align*}
+\end{document}
