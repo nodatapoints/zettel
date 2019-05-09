@@ -26,7 +26,6 @@
 
 \setkomafont{paragraph}{\normalfont\itshape}
 
-
 \declaretheoremstyle[%
   spaceabove=0,%
   spacebelow=6pt,%
@@ -50,25 +49,36 @@
 \newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
 
 \begin{document}
-
+\setcounter{taski}{1}
+\task
+\begin{lemma}
+Es sei eine Funktion $f: U \rightarrow \mathbb{R} ~,~ U \subseteq \mathbb{R}$ mit $x_0 \in U$ an der Stelle $x_0$ diff'bar. So gilt
+\[ f'(x_0) > 0 \quad \Rightarrow \quad \exists \varepsilon > 0 : \forall x \in (x_0,x_0+\varepsilon] : f(x) > f(x_0) \]
+\end{lemma}
+\begin{proof} durch Widerspruch. Gegenbehauptung:
+\[ f'(x_0) > 0 \quad \wedge \quad \forall \varepsilon > 0: \exists x \in (x_0,x_0+\varepsilon] : f(x) \leq f(x_0) \]
+Es kann demnach eine Folge $(a_n)_{n \in \mathbb{N}} \in \mathbb{R}^\mathbb{N}$ konstruiert werden: Man nehme eine beliebige positive Nullfolge $(\delta_n)_{n \in \mathbb{N}} \in \mathbb{R}_+^\mathbb{N}$. Nach Beh. mit $\varepsilon = \delta_n$ existiert für beliebiges $n$ ein $a_n \in (x_0,x_0+\delta_n]$ mit $f(x_0 + a_n) \leq f(x_0)$. Nach Majorantenkriterium
+\[ \lim_{n \rightarrow \infty} \delta_n = 0 \quad \wedge \quad \forall n \in \mathbb{N}: 0 < a_n \leq \delta_n \qquad \Longrightarrow \qquad \lim_{n \rightarrow \infty} a_n = 0^+\]
+Betrachten wir den Limes
+\[ \lim_{n \rightarrow \infty} \frac{f(x_0+a_n)-f(x_0)}{a_n} = f'(x_0) \]
+Da nach Beh. $f(x_0+a_n) \leq f(x_0)$ und $a_n > 0$ gilt
+\[ f'(x_0) \leq 0 \quad \text{\Large\Lightning} \]
+\end{proof}
 \task
 \ttask
 \begin{align*}
-	\dv{x} \qty(-\frac 1 {1+x^2}) &= \frac x {(1+x^2)^2} \\
-	\int_0^1 \dd x \frac x {(1+x^2)^2} &= \int_0^1 \dd x \dv{x} \qty(-\frac 1 {1+x^2}) \\
-	\xRightarrow{\text {Hauptsatz}} \qquad &= -\frac 1 {1+x^2} \bigg|_0^1 = - \frac 1 2 + 1 = \frac 1 2
+	\dv{x} \qty(-\frac 1 {2(1+x^2)}) &= \frac x {(1+x^2)^2} \\
+	\int \dd x \frac x {(1+x^2)^2} &= \int \dd x \dv{x} \qty(-\frac 1 {2(1+x^2)}) \\
+	\xRightarrow{\text {Hauptsatz}} \qquad &= -\frac 1 {2(1+x^2)} + C
 \end{align*}
 \ttask
 \begin{align*}
-	\int_0^1 \dd x \frac{2x^2}{(1+x^2)^2} &= \int_0^1 \dd x\ {2x} \cdot \frac{x}{(1+x^2)^2} \\
+	\int_0^1 \dd x \frac{2x^2}{(1+x^2)^2} &= \int_0^1 \dd x\ {x} \cdot \frac{2x}{(1+x^2)^2} \\
 	\xRightarrow{\text{part. Int.}} \qquad
-	&= 2x \qty(-\frac 1 {1+x^2}) \Bigg|_0^1 - 2\int_0^1 \dd x\ \frac x {(1+x^2)^2} = -1 - 1 = -2
+	&= x \qty(-\frac 1 {1+x^2}) \Bigg|_0^1 + \int_0^1 \dd x\ \frac 1 {1+x^2} = - \frac 1 2 + \int_0^1 \dd x\ \frac 1 {1+x^2}
 \end{align*}
-\[ 	\dv{x} \tan x = 1 + \tan^2 x ~ \xRightarrow{\text{Umkehrfkt.}} ~ \dv{x}\arctan x = \frac 1 { \tan'(\arctan x )} = \frac 1 {1 + \tan^2(\arctan x)} = \frac 1 {1+x^2}  \]
-\[ \int_0^1 \dd x\ \frac 1 {1+x^2} = \int_0^1 \dd x\ \dv{x}\arctan x \stackrel{\text{HS}}{=} \arctan x \Big|_0^1 = \frac \pi 4 \]
-
 \begin{align*}
-	\int_0^1 \dd x \frac{x^2-1}{(1+x^2)^2} &= \int_0^1 \dd x \frac{2x^2}{(1+x^2)^2} - \int_0^1 \dd x \frac 1 {1+x^2} \\
-	&= 2 - \frac \pi 4
+	\int_0^1 \dd x \frac{x^2-1}{(1+x^2)^2} &= \int_0^1 \dd x \frac{2x^2}{(1+x^2)^2} - \int_0^1 \dd x \frac 1 {1+x^2} = - \frac 1 2 + \int_0^1 \dd x\ \frac 1 {1+x^2} -\int_0^1 \dd x\ \frac 1 {1+x^2} \\
+	&= - \frac 1 2
 \end{align*}
 \end{document}
