@@ -1,0 +1,95 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage{bbm}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\setcounter{taski}{5}
+\begin{document}
+\task
+\begin{theorem}
+Seien $M,\,N \in M(n \times n,\, K)$ nilpotente Matrizen mit $M^i = N^j = 0 ~,~ i,\, j \in \mathbb{N}$, so ist $M + N$ ebenfalls nilpotent.
+\end{theorem}
+\begin{proof}
+Sei $k = i+j$
+\begin{align*}
+	(M+N)^k &= \sum_{\ell=0}^k \binom{k}{\ell} M^{k-\ell}N^\ell
+	\intertext{Da $\ell < j \Leftrightarrow k - \ell > k - j = i$ gilt immer $k-\ell \geq i ~\vee~ \ell \geq j$ und somit $\forall \ell: M^{k-\ell}N^\ell = 0 $}
+	\Rightarrow \quad(M+N)^k &= 0
+\end{align*}
+\end{proof}
+
+\task
+\ttask
+
+\tttask
+Sei $A,\, B,\, C \in M(n \times n,\, K)$ mit $A = (a_{ij}) ~,~ B = (b_{ij})~,~ C = (c_{ij})$ und $\lambda \in K$
+\begin{align*}
+	\gamma(A,\, B) &= \mathrm{Spur}(A^\top B) = \sum_{j=1}^n (A^\top B)_{jj} = \sum_{j=1}^n \sum_{i=1}^n a_{ij}b_{ij} \\
+	\gamma(B,\, A) &= \sum_{j=1}^n \sum_{i=1}^n b_{ij}a_{ij} = \sum_{j=1}^n \sum_{i=1}^n a_{ij}b_{ij}  = \gamma(A,\, B) \\
+	\gamma(A+B,\, C) &= \sum_{j=1}^n \sum_{i=1}^n (a_{ij}+b_{ij})c_{ij} = \sum_{j=1}^n \sum_{i=1}^n a_{ij}c_{ij} + \sum_{j=1}^n \sum_{i=1}^n b_{ij}c_{ij} = \gamma(A,\, B) + \gamma(A,\, C) \\
+	\gamma(\lambda A,\, B) &= \lambda \sum_{j=1}^n \sum_{i=1}^n a_{ij}b_{ij} = \lambda \gamma(A,\, B)
+\end{align*}
+\tttask
+\begin{gather*}
+	\gamma(E_{11},\, E_{11})  = \gamma(E_{12},\, E_{12}) = \gamma(E_{21},\, E_{21}) = \gamma(E_{22},\, E_{22}) = 1 \quad \text{sonst } 0 \\
+	\curvearrowright \qquad M_\mathcal{B}^*(\gamma) = \mathbbm{1}_4
+\end{gather*}
+\ttask
+\tttask
+Durch $ \qty(M_\mathcal{B}^*(\gamma))_{ij} = \gamma(b_i,\, b_j) \qquad \text{mit } \mathcal{B} = (b_1,\, b_2,\, b_3)$
+\[  M_\mathcal{B}^*(\gamma) = \mqty(3&3&5\\3&5&9\\5&9&17)\]
+\tttask
+\begin{gather*}
+	T_\mathcal{C}^\mathcal{B} = \mqty(-1&1&1\\0&-1&1\\0&0&-1) \qquad
+	M_\mathcal{C}^*(\gamma) = \qty(T_\mathcal{C}^\mathcal{B})^\top M_\mathcal{B}^*(\gamma) T_\mathcal{C}^\mathcal{B} 
+	= \mqty(3&0&-1\\0&2&2\\-1&2&3) \\
+	\gamma(t-t^2,\, 1-t^2) = \gamma\qty(-1 + (1+t-t^2),\, (1-t) +(1+t-t^2) ) = \mqty(1&0&1) \mqty(3&0&-1\\0&2&2\\-1&2&3) \mqty(0 \\ 1 \\ 1) = 4
+\end{gather*}
+\end{document}
