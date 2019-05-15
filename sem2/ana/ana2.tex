@@ -49,7 +49,30 @@
 \newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
 \newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
 
+\pagenumbering{gobble}
+
 \begin{document}
+\begin{center}
+    \textbf{Analysis II\\2. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maler \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup
+\\
+
 \task
 \begin{theorem}
 	Sei $I = [a,b] ~,~ a<b$ ein Intervall mit $x_0 \in I$, $f: I \rightarrow \mathbb{R}$ stetig diff'bar auf $I \setminus \qty{x_0}$ mit 
@@ -60,8 +83,14 @@
 \begin{align*}
 	\lim_{\varepsilon \rightarrow 0} \varepsilon &= \lim_{\varepsilon \rightarrow 0} f(x_0+\varepsilon)-f(x_0) = 0 \\
 	\lim_{\varepsilon \rightarrow 0} \frac{f(x_0+\varepsilon)-f(x_0)}{\varepsilon} &\overset{\textsc{L'Hospital}}{=}
+    = \lim_{\varepsilon \rightarrow 0} \frac{\dv{\varepsilon}(f(x_0+\varepsilon)-f(x_0))}{\dv{\varepsilon}\varepsilon}
+    \overset{\text{Kettenregel}}{=} \lim_{\varepsilon \rightarrow 0} \frac{f'(x_0+\varepsilon)\cdot 1 - 0}{1} \\
+    &= \lim_{\varepsilon \rightarrow 0} f'(x_0+\varepsilon) = \lim_{\substack{x \rightarrow x_0 \\ x \neq x_0}} f'(x) = \alpha 
 \end{align*}
+Analog für den linksseitigen Differentialquotienten. Da beide Limes existieren und gleich $\alpha$ sind, ist $f$ in $x_0$ diff'bar und es gilt
+\[ f'(x_0) = \alpha \]
 \end{proof}
+\addtocounter{taski}{1}
 \task
 \begin{align*}
 	\dv{\Phi(v)}{v} &= \dv v \frac 1 2 \qty(A(v) + v\sqrt{1-v^2})
