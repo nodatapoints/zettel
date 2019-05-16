@@ -37,6 +37,7 @@
 ]{mystyle}
 
 \declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+A
 \declaretheorem[name={Lemma}, style=mystyle]{lemma}
 \declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
 \let\proof\oldproof
@@ -50,20 +51,50 @@
 \newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
 \newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
 
-\setcounter{taski}{5}
+\setcounter{taski}{9}
 \begin{document}
+\begin{center}
+    \textbf{1. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Mo 14:15 ~~ SR B& Tutor(in): Sebastian Groß\\
+    Namen: Ellen, Kamal &\\
+    \hline
+\end{tabular}
+\endgroup
+\newpage
+
 \task
+\ttask
+\tttask
 \begin{theorem}
 Seien $M,\,N \in M(n \times n,\, K)$ nilpotente Matrizen mit $M^i = N^j = 0 ~,~ i,\, j \in \mathbb{N}$, so ist $M + N$ ebenfalls nilpotent.
 \end{theorem}
 \begin{proof}
 Sei $k = i+j$
 \begin{align*}
-	(M+N)^k &= \sum_{\ell=0}^k \binom{k}{\ell} M^{k-\ell}N^\ell
+	(M+N)^k &= \sum_{\ell=0}^k \binom{k}{\ell} M^{k-\ell}N^\ell \qq{da} MN = NM
 	\intertext{Da $\ell < j \Leftrightarrow k - \ell > k - j = i$ gilt immer $k-\ell \geq i ~\vee~ \ell \geq j$ und somit $\forall \ell: M^{k-\ell}N^\ell = 0 $}
 	\Rightarrow \quad(M+N)^k &= 0
 \end{align*}
 \end{proof}
+\tttask
+\begin{gather*}
+	A = \mqty(0&1&0\\0&0&0\\0&0&0) \quad B = \mqty(0&0&0\\0&0&1\\0&0&0) \quad C = \mqty(0&1&0\\0&0&0\\1&0&0) \\
+	A^2 = B^2 = C^3 = 0 \qquad AB = \mqty(0&0&1\\0&0&0\\0&0&0) \neq 0 = BA \quad BC = \mqty(0&0&0\\1&0&0\\0&0&0) \neq \mqty(0&0&1\\0&0&0\\0&0&0) = CB \\
+	(A+B)^3 = 0 \qquad (A+C)^3 = \mathbbm{1}
+\end{gather*}
+Somit ist $A+B$ nilpotent, aber $A+C$ nicht.\\
 
 \task
 \ttask
@@ -81,6 +112,7 @@ Sei $A,\, B,\, C \in M(n \times n,\, K)$ mit $A = (a_{ij}) ~,~ B = (b_{ij})~,~ C
 	\gamma(E_{11},\, E_{11})  = \gamma(E_{12},\, E_{12}) = \gamma(E_{21},\, E_{21}) = \gamma(E_{22},\, E_{22}) = 1 \quad \text{sonst } 0 \\
 	\curvearrowright \qquad M_\mathcal{B}^*(\gamma) = \mathbbm{1}_4
 \end{gather*}
+\newpage
 \ttask
 \tttask
 Durch $ \qty(M_\mathcal{B}^*(\gamma))_{ij} = \gamma(b_i,\, b_j) \qquad \text{mit } \mathcal{B} = (b_1,\, b_2,\, b_3)$
@@ -90,6 +122,35 @@ Durch $ \qty(M_\mathcal{B}^*(\gamma))_{ij} = \gamma(b_i,\, b_j) \qquad \text{mit
 	T_\mathcal{C}^\mathcal{B} = \mqty(-1&1&1\\0&-1&1\\0&0&-1) \qquad
 	M_\mathcal{C}^*(\gamma) = \qty(T_\mathcal{C}^\mathcal{B})^\top M_\mathcal{B}^*(\gamma) T_\mathcal{C}^\mathcal{B} 
 	= \mqty(3&0&-1\\0&2&2\\-1&2&3) \\
-	\gamma(t-t^2,\, 1-t^2) = \gamma\qty(-1 + (1+t-t^2),\, (1-t) +(1+t-t^2) ) = \mqty(1&0&1) \mqty(3&0&-1\\0&2&2\\-1&2&3) \mqty(0 \\ 1 \\ 1) = 4
 \end{gather*}
+\tttask
+\[	\gamma(t-t^2,\, 1-t^2) = \gamma\qty(-1 + (1+t-t^2),\, (1-t) +(1+t-t^2) ) = \mqty(1&0&1) \mqty(3&0&-1\\0&2&2\\-1&2&3) \mqty(0 \\ 1 \\ 1) = 4 \]
+\task
+Im folgenden gilt die binomische Formel für $v,\, w \in V$
+\begin{equation}\label{eq:binom}
+	q(v \pm w) = \gamma(v,\, v \pm w) \pm \gamma(w, v \pm w) = \gamma(v,\, v) \pm 2\gamma(v,\, w) + \gamma(w,\, w) 
+\end{equation}
+\ttask
+\begin{align*}
+	q(\lambda v) &= \gamma(\lambda v,\, \lambda v) = \lambda \gamma(v,\, \lambda v) = \lambda^2 \gamma(v,\, v) = \lambda^2 q(v) \qquad \forall v \in V \\
+	q(v+w) + q(v-w) &= \gamma(v+w,\, v+w) + \gamma(v-w,\, v-w) \\
+					&\overset{\text{\eqref{eq:binom}}}{=} \gamma(v,\, v) + 2 \gamma(v,\, w) + \gamma(w,\, w) + \gamma(v,\, v) - 2 \gamma(v,\, w) + \gamma(w,\, w) \\
+					&= 2 \qty(q(v) + q(w)) \qquad \forall v,\, w \in V
+\end{align*}
+\ttask Seien $v,\, w \in V$ , $\mathrm{char}\,K \neq 2$
+\begin{align}
+	q(v+w) &= q(v) + 2 \gamma(v,\, w) + q(w) \tag*{nach \eqref{eq:binom}} \notag\\
+	\gamma(v,\, w) &= \frac{1}{2} \qty(q(v+w) - q(v) - q(w))  \label{eq:fromq}
+\end{align}
+\ttask Alle Werte von $\gamma(v,\, v) ~,~ v \in V$ zu kennen ist äquivalent zur Kenntnis der Funktion $q$ aus der vorherigen Teilaufgabe. Mit \eqref{eq:fromq} kann so für beliebige $v,\, w \in V$ ein $\gamma(v,\, w)$ aus Funktionswerten von $q$ erhalten werden.
+
+\ttask
+Seien $\gamma_A,\, \gamma_B \in \mathrm{Bil}_K(V)$ mit den Abbildungsmatrizen auf der Einheitsbasis $(e_1,\, e_2)$
+\[ A = \mqty(0&1\\0&0) \qquad B = A^\top = \mqty(0&0\\1&0) \]
+Es gilt für alle $v \in V$
+\[ \gamma_A(v,\, v) = v^\top A v = (v^\top A v)^\top = v^\top B v = \gamma_B(v,\, v) \]
+jedoch mit
+\[ v = \mqty(1\\0) \quad w = \mqty(0\\1) \qc \gamma_A(v,\, w) = 1 \quad \gamma_B(v,\, w) = 0 \]
+
 \end{document}
+
