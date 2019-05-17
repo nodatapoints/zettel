@@ -1,0 +1,156 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+\DeclareMathOperator{\arsinh}{arsinh}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+\begin{center}
+    \textbf{Analysis II\\3. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maier \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup
+\\
+
+\task
+
+\ttask
+\[  \int_0^{\frac{\pi}{2}} \dd{x} \cos x \,e^{\sin x} = \int_0^{\frac{\pi}{2}} \dd{x} \dv{x} \qty(e^{\sin x}) \overset{\text{HSI}}{=} e^{\sin x} \eval_0^{\frac{\pi}{2}} = e-1 \]
+\ttask
+\begin{align*}
+\int_0^{\sqrt[3]{\pi}} \dd{x} x^5\cos x^3
+    &= \int_0^{\frac{\pi}{2}} \dd{x} \frac{1}{3} x^3 \dv{x} \qty(\sin x^3)
+    \overset{\text{part.Int.}}= \frac{1}{3} x^3 \sin x^3\eval_0^{\sqrt[3]{\pi}} - \int_0^{\sqrt[3]{\pi}} \dd{x} x^2\sin x^3 \\
+    &= \frac{1}{3} x^3 \sin x^3\eval_0^{\sqrt[3]{\pi}} + \int_0^{\sqrt[3]{\pi}} \dd{x} \dv{x} \qty(\frac{1}{3}\cos x^3)
+    \overset{\text{HSI}}= \frac{1}{3} \qty(x^3\sin x^3 + \cos x^3) \eval_0^{\sqrt[3]{\pi}}
+    = - \frac{2}{3} 
+\end{align*}
+\ttask
+\[  \int_1^e \dd x\, x \ln x
+    \overset{\text{part.Int.}}= \frac{1}{2}x^2\ln x \eval_1^e - \int_1^e \dd x \frac 1 2 x^2 \cdot \frac 1 x
+    = \frac{1}{2}x^2\ln x - \frac 1 4 x^2\eval_1^e 
+    = \frac{1}{4}x^2(2\ln x - 1)\eval_1^e = \frac 1 4 (e^2+1)
+\]
+\task
+
+Es sei $a > 0 ~,~ a \neq 1$.
+
+\ttask Aus \textbf{(b)} folgt $\frac{\ln x}{\ln a} = \log_a x$. Da $\ln a = $ konst. und $\ln x$ nach Definition diff'bar, ist $\log_a$ ebenfalls diff'bar.
+\[ (\log_a)'(x) = \qty(\frac{\ln x}{\ln a})' = \frac{1}{x \ln a} \quad \forall x \in \mathbb{R}_+ \]
+\ttask Sei $x \in \mathbb{R}_+$
+\begin{align*}
+    a^{\frac{\ln{x}}{\ln a}} &= e^{\ln a\frac{\ln x }{\ln a}} = e^{\ln x} = x \\
+    \log_a\qty(a^{\frac{\ln{x}}{\ln a}}) &= \log_a x \\
+    \frac{\ln x}{\ln a} &= \log_a x
+\end{align*}
+\newpage
+\task
+\ttask Seien $x,\, y \in \mathbb{R}$
+\begin{align*}
+    \sinh(x+y) &= \frac{1}{2} \qty(e^{x+y} - e^{-x+y})
+    = \frac{1}{4}\qty(2e^{x+y} + \overbrace{e^{x-y} - e^{-x+y} - e^{x-y} + e^{-x+y} }^0 - 2e^{-x-y}) \\
+               &= \frac{1}{4}\qty( \qty(e^x - e^{-x})\qty(e^y + e^{-y}) + \qty(e^x + e^{-x})\qty(e^y - e^{-y}))
+               = \sinh x \cosh y + \cosh x \sinh y \\
+    \cosh(x+y) &= \frac{1}{2} \qty(e^{x+y} + e^{-x+y})
+    = \frac{1}{4}\qty(2e^{x+y} + \overbrace{e^{x-y} + e^{-x+y} - e^{x-y} - e^{-x+y} }^0 + 2e^{-x-y}) \\
+               &= \frac{1}{4}\qty( \qty(e^x + e^{-x})\qty(e^y + e^{-y}) + \qty(e^x - e^{-x})\qty(e^y - e^{-y}))
+               = \cosh x \cosh y + \sinh x \sinh y
+\end{align*}
+
+\ttask
+\begin{theorem}
+    Die Funktion $\sinh : \mathbb{R} \rightarrow \mathbb{R}$ ist bijektiv und besitzt die Umkehrfunktion $\arsinh : \mathbb{R} \rightarrow \mathbb{R}$ mit
+    \[ \arsinh x = \ln \qty(x+\sqrt{x^2+1}) \]
+\end{theorem}
+\begin{proof}
+$\sinh \in C^1$, es gilt für beliebige $x \in \mathbb{R}$
+\[ \sinh'(x) = \cosh x = \frac{1}{2}\qty(e^x + e^{-x}) > 0 \qq{da} \exp(\mathbb{R}) = \mathbb{R_+} \quad, \]
+womit $\sinh$ streng monoton steigend auf $\mathbb{R}$ ist. In der VL wurde daraus gefolgert, dass $\sinh$ damit injektiv ist.
+\[
+    \lim_{x \rightarrow \infty} \sinh x =  \lim_{x \rightarrow \infty} \frac{1}{2}(e^x - \overbrace{e^{-x}}^{\rightarrow 0}) = \infty \qquad \lim_{x \rightarrow -\infty} \sinh x =  \lim_{x \rightarrow \infty} \frac{1}{2}(\overbrace{e^{-x}}^{\rightarrow 0} - e^{x}) = -\infty
+\]
+Da $\sinh$ stetig auf $\mathbb{R}$ folgt aus Zwischenwertsatz so die Surjektivität $\sinh \mathbb{R} = \mathbb{R}$. Somit ist $\sinh$ bijektiv.
+
+Nach Satz der invsersen Funktion gilt für $x \in \mathbb{R}$
+\[
+\arsinh'x = \frac{1}{\cosh(\arsinh x)}
+= \frac{1}{\sqrt{1 + \sinh^2(\arsinh x)}}
+= \frac{1}{\sqrt{1+x^2}}  \qq{nach} \cosh^2 x - \sinh^2 x = 1
+\]
+Sei $\displaystyle f: \mathbb{R} \rightarrow \mathbb{R} ~,~ x \mapsto \ln \qty(x+\sqrt{x^2+1})$ \\
+Da $x^2+1 > x^2 > 0$ und somit $|x| < \sqrt{x^2+1}$, ist das Argument der Wurzel sowie des Logarithmus immer $>0$ für alle $x \in \mathbb{R}$. Da alle Teilfunktionen diff'bar auf ihren Wertebereichen sind, ist die Komposition welche $f$ darstellt ebenfalls diff'bar.
+\[ 
+    f'(x) = \dv{x} \ln \qty(x+\sqrt{x^2+1})
+    = \frac{1}{x+\sqrt{x^2+1}} \qty(1+\frac{x}{\sqrt{x^2+1}})
+    = \frac{x+\sqrt{x^2+1}}{\sqrt{x^2+1}} \cdot \frac{1}{x+\sqrt{x^2+1}}
+    = \frac{1}{\sqrt{x^2+1}} 
+\]
+Somit gilt für $x \in \mathbb{R}$
+\begin{gather*}
+    f'(x) - \arsinh'(x) = 0 \qc f(x) - \arsinh x \overset{\text{HSI}}= \int \dd x (f'(x) - \arsinh'(x)) = \int \dd x \, 0 = C \in \mathbb{R}\\
+    f(0) - \arsinh 0 = 0 - 0 = 0 = C \\
+    \implies f(x) = \arsinh x
+\end{gather*}
+
+\end{proof}
+\end{document}
