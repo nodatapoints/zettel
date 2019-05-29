@@ -1,0 +1,110 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\pagenumbering{gobble}
+
+\begin{document}
+\begin{center}
+    \textbf{Analysis II\\4. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maier \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup
+\\
+
+\task
+\ttask Sowohl $f$ als auch $g$ sind Kompositionen von $C^\infty(\mathbb{R}_+)$ Funktionen, und somit zwei mal diff'bar in einem beliebigen Punkt $x \in \mathbb{R}_+$.
+\begin{align*}
+	f(x) &= x^x = e^{x \ln x} \\
+	f'(x) &= e^{x \ln x} \dv{x}(x \ln x) = x^x \qty(x \cdot \frac{1}{x} + \ln x) = x^x(1 + \ln x) \\
+	f''(x) &= \dv{x}f'(x) = \dv{x} x^x(1 + \ln x) = x^x\frac{1}{x} + f'(x)(1 + \ln x) = x^x \qty(\frac{1}{x} + (1+\ln x)^2) \\\\
+	g(x) &= x^{x^x} = e^{x^x \ln x} = e^{f(x)\cdot\ln x}\\
+	g'(x) &= g(x)\dv{x}(f(x)\cdot\ln x)  = x^{x^x} \qty(\overbrace{x^x(1+\ln x)}^{f'(x)}\ln x + x^x\frac{1}{x})
+	= x^{x+x^x} \qty(\frac{1}{x} + (1+\ln x)\ln x) \\
+	g''(x) &= g(x)\dv{x}x^x\qty(\frac{1}{x} + (1+\ln x)\ln x) + g'(x)x^x\qty(\frac{1}{x} + (1+\ln x)\ln x) \\
+		   &= x^{x+x^x}\qty(\frac{1}{x} + (1+\ln x)\ln x)^2 + x^{x+x^x-1}\qty(3\ln x + 2 - \frac{1}{x} + x\ln x(1+\ln x)^2)
+\end{align*}
+\ttask Sei $x \in \mathbb{R}_+$
+\begin{align*}
+	\lim_{x \rightarrow 1^+} (\ln x)^{\ln x} &\overset{\text{Subst.}}= \lim_{x \rightarrow 0^+} x^x
+	= \lim_{x \rightarrow 0^+} e^{x \ln x} \overset{\exp \in C^\infty(\mathbb{R}_+)}= \exp\qty(\lim_{x \rightarrow 0^+} x\ln x)  \\
+	\lim_{x \rightarrow 0^+} x\ln x &= \lim_{x \rightarrow 0^+} \frac{\ln x}{x^{-1}}
+	\intertext{$\displaystyle\lim_{x \rightarrow 0^+} \ln x = -\lim_{x \rightarrow 0^+} x^{-1} = -\infty$ . Da Nenner und Zähler diff'bar auf $\mathbb{R}_+$ sind und  $x^{-1} \neq 0$ für $x \in \mathbb{R}_+$ gilt nach \textsc{L'Hospital}}
+	&= \lim_{x  \rightarrow 0^+} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{x \rightarrow 0^+} -x = 0 \\
+	\lim_{x \rightarrow 1^+} (\ln x)^{\ln x} &= e^0 = 1 
+\end{align*}
+\newpage
+\task
+
+Es gilt $\exp \in C^\infty(\mathbb{R})$. Nach Satz von \textsc{Taylor} gilt mit
+\[ (e^x)^{(n)} = e^x \quad \forall x \in \mathbb{R},\,n \in \mathbb{N} \quad, \]
+dass
+\[ e^1 = \sum_{k=0}^8 \frac{e^0}{k!}(1-0) + R_8(1-0) \quad.\]
+Es wurde in der Vorlesung gezeigt, dass der Konvergenzradius $\infty$ ist. Für das Restglied gilt
+\[ R_8(1) = \frac{e^\xi}{9!}(1-0)^9 = \frac{e^\xi}{9!}\qquad \xi \in (0;1) \]
+In der VL wurde gezeigt, dass $e < 3$. Da sowohl $e^x$ als auch $x^a ~,~ a=\text{konst.}$ streng monoton auf $\mathbb{R}_+$ steigen, gilt
+\[ \frac{1}{9!} < R_8(1) < \frac{3^1}{9!} \approx 8.26 \cdot 10^{-6} \]
+Demnach gilt nach obiger Näherung
+\[ \sum_{k=0}^8 \frac{1}{k!} \approx 2.718278 < e < 2.718287 \approx \sum_{k=0}^8 \frac{1}{k!} + \frac{3}{9!}  \]
+\end{document}
