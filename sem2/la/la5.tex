@@ -85,6 +85,31 @@ Unter Verwendung des üblichen Skalarprodukts folgt
 \]
 \begin{align*}
     p_U(y) &= X(X^tX)^{-1}X^ty = X\mqty(n & \sum_ix_i \\\\ \sum_ix_i & \sum_ix_i^2)^{-1}\mqty(\sum_i y_i \\\\ \sum_ix_iy_i) \\
-           &= X\frac{1}{n\sum_i{x_i} - \qty(\sum_ix_i)^2}\mqty(\qty(\sum_ix_i)^2 & - n\sum_i{x_i} \\\\ - n\sum_i{x_i} & n)\mqty(\sum_i y_i \\\\ \sum_ix_iy_i) \\
+   &= X\frac{1}{n\sum_i{x_i^2} - \qty(\sum_ix_i)^2}\mqty(\qty(\sum_ix_i)^2 & - n\sum_i{x_i} \\\\ - n\sum_i{x_i} & n)\mqty(\sum_i y_i \\\\ \sum_ix_iy_i) \\
+   &= X\frac{1}{\frac{1}{n}\sum_i{x_i^2} -\bar{x}^2} \mqty(\bar{x}^2 & -\bar{x} \\ -\bar{x} & \frac{1}{n}) \mqty(n\bar{y} \\ \sum_ix_iy_i)
+   = X\frac{1}{\frac{1}{n}\sum_i(x_i^2-\bar{x}^2)} \mqty(n\bar{x}^2\bar{y} -\bar{x}\sum_ix_iy_i \\
+	-n\bar{x}\bar{y} + \frac{1}{n}\sum_ix_iy_i) \\
+	\frac{1}{n}\sum_i(x_i^2-\bar{x}^2) &= S_{xx}+2\bar{x}\frac{1}{n}\sum_ix_i - 2\bar{x}^2 = S_{xx} \\
+	b &= \frac{1}{S_{xx}} \qty(-n\bar{x}\bar{y} + \frac{1}{n}\sum_ix_iy_i)
+	= \frac{1}{S_{xx}} \qty(n\bar{x}\bar{y} \overbrace{- \sum_i\bar{x}y_i - \sum_i\bar{y}x_i}^{-2n\bar{x}\bar{y}} + \frac{1}{n}\sum_ix_iy_i) \\
+	  &= \frac{1}{S_{xx}} \frac{1}{n}\sum(x_iy_i - \bar{x}y_i - \bar{y}x_i + \bar{x}\bar{y}) = \frac{S_{xy}}{S_{xx}}  \\
+	a &= \frac{1}{S_{xx}}\qty(n\bar{x}^2\bar{y}-\bar{x} \sum_ix_iy_i)
 \end{align*}
+\newpage
+\ttask
+\[ \hat{a} = -3 \qquad \hat{b} = \frac{13}{5}  \]
+\begin{center}
+	\includegraphics[width=.7\textwidth]{polyfit}
+\end{center}
+\task
+\ttask
+Mit der Billinearform $\gamma_A$ wobei $A = \mathrm{diag}(w_1,\, \dots,\, w_n)$ gilt nach \textsc{Cauchy-Schwarz} für $a,\, b \in \mathbb{R}^n$
+\begin{align*}
+	\gamma_A(a,\, b) &\leq \gamma_A(a,\, a) \cdot \gamma_A(b,\, b) \\
+	\sum_{i=1}^nw_ia_ib_i &\leq \qty(\sum_{i=1}^nw_ia_i^2)\cdot\qty(\sum_{i=1}^nw_ib_i^2)
+\end{align*}
+\ttask Es sei die Bilinearform $\gamma_B$ mit $B = \frac{1}{n}E_n$.  $a = (x_1^{-1},\, \dots,\, x_n^{-1})^t$, $b = (x_1,\, \dots,\, x_n)^t$.
+
+$\gamma_B(a,\, b) = 1$
+\[  \]
 \end{document}
