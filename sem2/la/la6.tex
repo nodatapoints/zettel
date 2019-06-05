@@ -1,0 +1,149 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage{bbm}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\DeclareMathOperator*{\Spur}{Spur}
+\DeclareMathOperator*{\Lin}{Lin}
+
+\setcounter{taski}{21}
+\begin{document}
+\begin{center}
+    \textbf{6. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l|l||p{18mm}|}
+        \hline
+        Aufgabe 21 & Aufgabe 22 & Aufgabe 23 & Aufgabe 24 & Summe:~ \\
+        \hline &&&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Mo 14:15 ~~ SR B& Tutor(in): Sebastian Groß\\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\task
+\ttask
+\tttask
+\begin{align*}
+    \Spur(v^tAv) &= \sum_{i=1}^n (v^tAv)_{ii} = \sum_{i=1}^n \qty(\sum_{j=1}^n\sum_{k=1}^nv^t_{ij}A_{jk}v_{ki})
+    = \sum_{i=1}^n v_i^tAv_i \\
+    \xRightarrow{A \text{ pos. def.}} \quad v_i \neq 0 &\implies v_i^tAv_i > 0 \quad \forall i = 1,\, \dots,\, n \\
+    \Rightarrow \quad v \neq 0 &\implies \gamma(v,\, v) = \sum_{i=1}^n v_i^tAv_i > 0 \\ 
+\end{align*}
+Sei $v,\, w \in V$.
+\[ \gamma(v,\, w) = \Spur(v^tAw) = \Spur \qty( (v^tAw)^t ) = \Spur (w^tA^tv) \overset{A\text{ sym}}= \Spur(w^tAv) = \gamma(w,\, v)\]
+Da $\gamma$ positiv definit ist und symmetrisch, handelt es sich um ein Skalarprodukt.
+
+\tttask
+\begin{gather*}
+    \norm{v_1} = 3 \qc w_1 = \frac{1}{3} v_1 = \frac{1}{3} \mqty(-1&2\\-2&0) \\
+    \widetilde{w_2}
+    = v_2 - \expval{w_1,\, v_2}w_1
+    = \mqty(1&2\\-3&-2) - 2\mqty(-1&2\\-2&0)
+    = \mqty(3&-2\\1&-2) \qc w_2
+    = \frac{1}{3} \mqty(3&-2\\1&-2)
+    \\
+    \widetilde{w_3}
+    = v_3 - \expval{w_1,\,v_3}w_1 - \expval{w_2,\,v_3}w_2
+    = \mqty(3&2\\-4&-4) - 3\mqty(-1&2\\-2&0) - 2 \mqty(3&-2\\1&-2) = 0
+\end{gather*}
+Demnach ist $v_3 \in \Lin(w_1,\,w_2) = \Lin(v_1,\,v_2) = W$. Die ONB lautet
+\[ \mathcal{B} = (w_1,\, w_2) = \qty(\frac{1}{3} \mqty(-1&2\\-2&0),\, \frac{1}{3} \mqty(3&-2\\1&-2)) \]
+\newpage
+\ttask
+\tttask
+\glqq$\Rightarrow$\grqq\\
+\begin{theorem}
+    \[ \forall p \in V\backslash\qty{0} : \gamma(p,\, p) \neq 0 \implies \forall i,\, j : i \neq j \Rightarrow x_i \neq x_j \]
+\end{theorem}
+\begin{proof} indirekt. Seien $x_i = x_j$ mit $i \neq j$. Z.z.: $\exists p \in V\backslash\qty{0} : \gamma(p,\, p) = 0$
+Sei das Polynom $p \in V$ gegeben als
+\begin{align*}
+    p = \overbrace{(t-x_i)}^{\mathrm{grad} ~=~ 1}\cdot\overbrace{\prod_{\substack{k = 1\\k \neq i,\, j}}^n(t-x_k)}^{\mathrm{grad}~ =~ n-2} \quad \in \mathbb{R}[t]_{\leq n-1}
+\end{align*}
+Es gilt $p \neq 0$ und $p(x_i) = 0$ für $i = 1,\, \dots,\, n$. Es folgt
+\[ \gamma(p,\, p) = \sum_{i=1}^n p(x_i)^2 = 0, \]
+womit $\gamma$ kein Skalarprodukt sein kann.
+\end{proof}
+\glqq$\Leftarrow$\grqq\\
+\begin{theorem}
+    \[ \forall i,\, j : i \neq j \Rightarrow x_i \neq x_j \implies \forall p \in V\backslash\qty{0} : \gamma(p,\, p) \neq 0 \]
+\end{theorem}
+\begin{proof}
+    Jedes Polynom $p \in \mathbb{R}[t]_{\leq n-1}$ kann maximal $n-1$ paarweise verschiedene Nullstellen haben. Nach Schubfachprinzip gibt es somit immer ein $x_k$ mit $1 \leq k \leq n$, sodass $p(x_k) \neq 0$. Es folgt
+    \[ \gamma(p,\, p) = \sum_{i=1}^n p(x_i)^2 \geq p(x_k)^2 > 0 \qq{da} (p(x_i)^2 \geq 0) \]
+Aus Kommutitativiät von $\cdot$ folgt sofort die Symmetrie von $\gamma$. Demnach ist $\gamma$ ein Skalarprodukt.
+\end{proof}
+\tttask Es wird in Koordinaten der Standardbasis $E=(e_0,\, e_1,\, e_2) = (1,\, t,\, t^2)$ für $W$ gerechnet.
+\[ M_\gamma^E = (\gamma(t^i,\, t^j))_{ij} = \mqty(4&2&6\\2&6&8\\6&8&18) \]
+\begin{gather*}
+    \norm{e_0} = \frac{1}{2} \qc w_0 = \frac{1}{2}e_0 \\
+    \widetilde{w_1} = e_1 - \gamma(w_0,\, e_1)w_0 = e_1 - \frac{1}{2} e_0 = \qty(-\frac{1}{2},\, 1,\, 0)^t \qc \norm{\widetilde{w_1}} = \sqrt{5} \qc w_1 = \frac 1 {\sqrt 5} \qty(-\frac{1}{2},\, 1,\, 0)^t \\
+    \widetilde{w_2} = e_2 - \gamma(w_0,\, e_2)w_0 - \gamma(w_1,\, e_2)w_1 = e_2 - \frac{3}{2}e_0 - \sqrt{5}\frac 1 {\sqrt 5} \mqty(-\frac{1}{2}\\ 1\\ 0) = \mqty(-1\\-1\\1) \\
+    \norm{\widetilde{w_2}} = 2 \qc w_2 = \frac{1}{2} \mqty(-1\\-1\\1) \\
+\end{gather*}
+Die ONB ergibt sich als
+\[ (\Phi_E(w_0),\, \Phi_E(w_1),\,\Phi_E(w_2)) = \qty(\frac{1}{2}~,~ \frac{1}{2\sqrt{5}}(-1 + 2t)~,~ \frac{1}{2}(-1-t+t^2))  \]
+\tttask
+Die vollständige Darstellungsmatrix von $\gamma$ auf $V$ ergibt sich als
+\[ M_\gamma^{E_4} = \mqty(4&2&6&8\\2&6&8&18\\6&8&18&32\\8&18&32&66) \]
+\begin{gather*}
+    p_W(e_3) = \sum_{i=0}^2 \gamma(w_i,\, e_3)w_i = 4w_0 + \frac{14}{\sqrt 5}w_1 + 3w_2 = \frac{1}{5}\mqty(-9\\13\\15\\0) \\
+    p_W(t^3) = \frac{1}{5}\qty(-9 + 13t + 15t^2) \\
+    W_\perp = \Lin(p_W(t^3)) \qq{da} W \oplus W_\perp = V \qq{und} \dim W = 3
+\end{gather*}
+\end{document}
