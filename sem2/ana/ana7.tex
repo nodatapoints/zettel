@@ -1,0 +1,159 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+\begin{center}
+    \textbf{Analysis II\\7. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maier \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\task
+\begin{theorem}
+    Ist $(X,\,d)$ ein metrischer Raum, so gilt
+    \begin{enumerate}[(i)]
+        \item $X$ und $\emptyset$ sind offen.
+        \item Wenn $A,\,B \subset X$ offen, so ist $A \cup B$ offen.
+        \item Wenn $A,\,B \subset X$ offen, so ist $A \cap B$ offen.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) Nach Definition gilt für jedes $x \in X$, $\delta > 0$ dass $U_\delta(x) \subseteq X$. Demnach ist $X$ offen. Da $\emptyset$ keine Elemente enthält, können auch keine Punkte in $X$ in einem Abstand zu \glqq Punkten\grqq~ in $\emptyset$ kleiner als ein $\delta$ existieren. Daher
+\[ \forall x \in \emptyset : \forall \delta > 0 : U_\delta(x) = \emptyset \overset{\text{Axiom}}\subset X \]
+
+(ii) Seien $A,\,B \subset X$ beliebig und offen, sodass
+\[ \forall x \in A : \exists \delta > 0: U_\delta(x) \subset A \qquad \forall x \in B : \exists \delta > 0: U_\delta(x) \subset B \]
+Sei ein $x \in A \cup B$
+\begin{align*}
+    x \in A &\implies \exists \delta > 0: U_\delta(x) \subset A \subset A \cup B \\
+    x \in B &\implies \exists \delta > 0: U_\delta(x) \subset B \subset A \cup B \\
+    x \in A \cup B &\implies (x \in A) \vee (x \in B) \implies \exists \delta > 0: U_\delta(x) \subset A \cup B \\
+\end{align*}
+
+Sei ein $x \in A \cap B$
+\begin{align*}
+    x \in A \cap B &\implies (x \in A) \wedge (x \in B) \\
+    &\implies \exists \delta_A > 0: U_{\delta_A}(x) \subset A \quad\wedge\quad \exists \delta_B > 0: U_{\delta_B}(x) \subset B
+\end{align*}
+Sei $\delta \coloneqq \min \qty{\delta_A,\,\delta_B}$. Aus den Eigenschaften von $U$ folgt
+\begin{gather*}
+    \delta \leq \delta_A \implies U_\delta(x) \subseteq U_{\delta_A}(x) \subset A \qquad  \delta \leq \delta_B \implies U_\delta(x) \subseteq U_{\delta_B}(x) \subset B \\
+    \implies U_\delta(x) \subseteq U_{\delta_A}(x) \cap U_{\delta_B}(x) ~\subset~ A \cap B 
+\end{gather*}
+Aus Assotiativität von $\cap$ und $\cup$ folgt die Gültigkeit der Aussagen für beliebig viele Teilmengen von $X$.
+\end{proof}
+
+\newpage
+
+\task
+\ttask
+\begin{theorem}
+    Sei $A \in \mathbb{R}^n$, $(x_i)_{i \in \mathbb{N}} \in A^\mathbb{N}$. $x$ konvergent mit $\lim_{n \rightarrow \infty} x_n = x_0$.
+    \[ x_0 \in \overline{A} \]
+\end{theorem}
+\begin{proof}
+\begin{align*}
+    \lim_{n \rightarrow \infty} x_n = x_0 &\implies \forall \varepsilon > 0 : \exists N \in \mathbb{N} : \forall m > N: x_m \in U_\varepsilon(x_0) \\
+    &\implies \forall \varepsilon > 0: U_\varepsilon(x_0) \cap A \neq \emptyset \tag{$\ast$}
+\end{align*}
+Fall 1: $\displaystyle \exists \varepsilon > 0: U_\varepsilon(x_0) \subset A$
+\[ \xRightarrow{\text{Def. int}} x_0 \in \mathrm{int}\,A. \]
+Fall 2: $\displaystyle \nexists \varepsilon > 0: U_\varepsilon(x_0) \subset A$
+\begin{gather*}
+    \forall \varepsilon > 0: \exists v \in U_\varepsilon(x_0): v \notin A\qc \forall \varepsilon > 0: \exists v \in U_\varepsilon(x_0): v \in A^c, \\
+    \xRightarrow{(\ast)} \exists v,\,w \in U_\varepsilon(x_0): v \in A~,~w \in A^c \quad\implies\quad x_0 \in \partial A.
+\end{gather*}
+Demnach $x \in \mathrm{int}\,A $ oder $ x \in \partial A$, sodass $x \in \overline{A}$.
+\end{proof}
+\begin{note}
+    Der untere Teil der Argumentation kann losgelöst angewendet werden, sodass für $x_0 \in \mathbb{R}^n ~,~ A \subset \mathbb{R}^n$ gilt
+    \[ \forall \varepsilon > 0: U_\varepsilon(x_0) \cap A \neq \emptyset \Longleftrightarrow x_0 \in \overline{A} \]
+    \glqq$\Leftarrow$\grqq~ folgt direkt aus der Definition von $\overline{A} = A \cup \partial A$.
+\end{note}
+\ttask Es sei im folgenden die Familie $\qty{A_i}_{i \in I}$ aus Teilmengen $\mathbb{R}^n$ gegeben.
+\begin{theorem}
+    \[ \bigcup_{i\in I} \overline{A_i} \subseteq \overline{\bigcup_{i\in I} A_i} \]
+\end{theorem}
+\begin{proof}
+Sei $x \in \bigcup_{i\in I} \overline{A_i}$. Demnach muss es mindestens ein $n \in I$ geben sodass $x \in \overline{A_n}$. Aus der Bemerkung folgt
+\begin{gather*}
+    \forall \varepsilon > 0 : \exists a \in U_\varepsilon(x_0) : a \in A_i \subseteq \bigcup_{i\in I} {A_i} \implies \forall \varepsilon > 0 : U_\varepsilon(x_0) \cap \bigcup_{i\in I} {A_i} \neq \emptyset \\
+    \implies x \in \overline{\bigcup_{i\in I} A_i}
+\end{gather*}
+\end{proof}
+\begin{theorem}
+    \[ \overline{\bigcap_{i\in I} A_i} \subseteq \bigcap_{i\in I} \overline{A_i} \]
+\end{theorem}
+\begin{proof}
+Sei $x \in \overline{\bigcap_{i\in I} A_i}$. Aus der Bemerkung folgt
+\begin{gather*}
+    \forall \varepsilon > 0 : \exists a \in U_\varepsilon(x_0) : a \in \bigcap_{i\in I} {A_i}\qc \forall \varepsilon > 0 : \exists a \in U_\varepsilon(x_0) : \forall i \in I : a \in A_i~. \\
+    \implies \forall i \in I : \forall \varepsilon > 0 : \exists a \in U_\varepsilon(x_0) : a \in A_i~\qc \forall i \in I: x \in \overline{A_i} \\
+    \implies x \in \bigcap_{i\in I} \overline{A_i}
+\end{gather*}
+\end{proof}
+\end{document}
