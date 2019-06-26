@@ -1,0 +1,93 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage{bbm}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\DeclareMathOperator*{\Lin}{Lin}
+\DeclareMathOperator*{\id}{id}
+
+\setcounter{taski}{32}
+\begin{document}
+\begin{center}
+    \textbf{8. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l|l||p{18mm}|}
+        \hline
+        Aufgabe 33 & Aufgabe 34 & Aufgabe 35 & Aufgabe 36 & Summe:~ \\
+        \hline &&&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Mo 14:15 ~~ SR B& Tutor(in): Sebastian Groß\\
+    Namen: Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\task
+\ttask
+\begin{gather*}
+    M^{E_3}_{E_1}(g^*(\varphi))
+    = M^{E_3}_{E_1}(\varphi \circ g)
+    = M^E_{E_1}(\varphi)\underbrace{M^{E_3}_E(g)}_{\mathbbm{1}} = \mqty(3 & 3 & 5) \\
+    g^*(\varphi) = \mqty(3 \\ 3 \\ 5)^*
+\end{gather*}
+\ttask $v_1,\, v_2$ sind linear unabhängig und bilden daher eine Basis für $U$. Diese Basis wird ergänzt durch einen Vektor $v_3$
+\[ v_3 = 2 + t + 2t^2 \]
+welcher linear unabhängig zu $v_1,\, v_2$ ist. Damit bildet $(v_1,\, v_2,\, v_3)$ eine Basis von $V$. Nach Satz 22.10 ist demnach $(v_3^*)$ eine Basis von $U^0$. Dabei ist $v_3^*$
+\[ v_3^* = \Phi_{E^*}\qty((2,\, 1,\, 2)^t) \]
+\ttask
+
+\end{document}
