@@ -39,7 +39,6 @@
 \declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
 \declaretheorem[name={Lemma}, style=mystyle]{lemma}
 \declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
-\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
 \let\proof\oldproof
 \declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
 
@@ -53,7 +52,6 @@
 
 \DeclareMathOperator*{\Spur}{Spur}
 \DeclareMathOperator*{\Lin}{Lin}
-\DeclareMathOperator*{\id}{id}
 
 \setcounter{taski}{29}
 \begin{document}
@@ -101,72 +99,5 @@ Sei $\chi_\varphi = \sum_{i=0}^{2m} a_i t^i$ mit $a_0,\,\dots,\,a_{2m} \in \math
 \begin{align*}
     \chi_\varphi(\varphi)(w) &= \sum_{i=0}^{2m} a_i \varphi^i(w)
 \end{align*}
-\end{proof}
-\ttask
-\begin{theorem}
-    Sei $\varphi$ eine Isometrie und $W \subseteq V$ ein $\varphi$-invarianter UVR.
-\end{theorem}
-
-\ttask
-\begin{theorem}
-    Sei $\varphi$ eine Isometrie. Dann gibt es stets eine Basis $\mathcal{B} = (v_1,\, \dots,\, v_n)$, sodass $M^{\mathcal{B}}_{\mathcal{B}}(\varphi)$ in Isometrie-Normalform ist.
-\end{theorem}
-\begin{proof} durch vollständige Induktion \\
-\emph{Induktionsanfang}
-
-$n = 1$ \quad Die Isometrien auf einem $\mathbb{R}$-VRs $V$ mit $\dim_K V = 1$ sind $\id_V$ und $-\id_V$. Demnach ist $M^{\mathcal{B}}_{\mathcal{B}}(\varphi)$ entweder $E_1$ oder $-E_1$, welche beide in Isometrie-Normalform gegeben sind durch
-\[ (r,\, s,\, k) \in \qty{(1,0,0),\, (0,1,0)} \]
-
-$n = 2$ \quad Es wurde in der VL gezeigt, dass jede Isometrie eines $\mathbb{R}$-VRs $V$ mit $\dim_ \mathbb{R} = 2$ bezüglich einer ONB sich durch ein Drehkästchen $A(\alpha)$ mit $\alpha \in [0,2\pi)$ darstellen lässt. Für die zwei Spezialfälle $0, \pi$ gilt
-\[ A(0) = E_2 \qquad A(\pi) = -E_2 \]
-Demnach ist die Isometrie-Normalform immer gegeben durch eine der folgenden Kombinationen
-\[ (r,\, s,\, k) \in \qty{(1, 0, 0),\, (0,1,0),\, (0, 0, 1)} \]
-
-\emph{Induktionsbehauptung} Für alle $\mathbb{R}$-VR $V$ mit $\dim_ \mathbb{R} V < n$ gibt es ONB, sodass $\varphi$ in Isometrie-Normalform vorliegt.
-
-\emph{Induktionsschritt} Für einen $\mathbb{R}$-VR $V$ mit $\dim_ \mathbb{R} V = n$ gibt es eine ONB $\mathcal{C}$, sodass $\varphi$ in Isometrie-Normalform vorliegt.
-
-Aus \textbf{(b)} folgt die Existenz eines $\varphi$-invarianten UVRs $W \subseteq V$ mit $\dim_K W \in \qty{1,\, 2}$. Nach Induktionsanfang gibt es eine Basis $\mathcal{B}$ mit $M^{\mathcal{B}}_{\mathcal{B}}\qty(\varphi\eval_W)$ in Isometrie-Normalform.
-
-Nach \textbf{(c)} ist $W^\perp$ ebenfalls $\varphi$-invariant. Da
-\[ V = W \oplus W^\perp \qc n = \dim_ \mathbb{R} V = \overbrace{\dim_ \mathbb{R} W}^{\geq 1} + \dim_ \mathbb{R} W^\perp \qc \dim_ \mathbb{R} W^\perp < n, \]
-gibt es nach Induktionsbehauptung für $W^\perp$ eine ONB $\mathcal{C}$ mit $M^{\mathcal{C}}_{\mathcal{C}}\qty(\varphi\eval_{W^\perp})$ in Isometrie-Normalform. Da $V = W \oplus W^\perp$ ergibt die Vereinigung $\mathcal{B}'$ der Basen $\mathcal{B}$ und $\mathcal{C}$ eine Basis von $V$, wobei sich die gesamte Darstellungsmatrix für $\varphi$ sich ergibt als
-\[ M_{\mathcal{B}'}^{\mathcal{B}'}(\varphi) = \mqty(\diagonalmatrix{M^{\mathcal{B}}_{\mathcal{B}}\qty(\varphi\eval_{W}), M^{\mathcal{C}}_{\mathcal{C}}\qty(\varphi\eval_{W^\perp})}) \]
-welches ebenfalls in Isometrie-Normalform vorliegt.
-\end{proof}
-\begin{note}
-    Aus der Induktion geht weiterhin hervor, dass sich $V$ immer aus $\varphi$-invarianten UVRs $W_1,\,\dots,\,  W_m \subseteq V ~,~m \leq n$ mit $\dim_ \mathbb{R} W_i \in \qty{1,\, 2}$ darstellen lässt sodass
-    \[ V = \bigoplus_{i=1}^m W_i \]
-\end{note}
-\setcounter{taski}{31}
-\newpage
-\task
-\begin{lemma}
-    Jede Isometrie $\varphi$ des euklidischen Raums $(\mathbb{R}^2, \expval{\cdot,\cdot})$ lässt sich aus höhstens zwei Spiegelungen darstellen.
-\end{lemma}
-\begin{proof}
-Sei $v \in \mathbb{R}^2 ~,~ \varphi$ Isometrie. Man spiegele zuerst entlang $v$ und dann an $v + \varphi(v)$. 
-\begin{align*}
-    s_v(v) &= v - 2\frac{\expval{v,v}}{\expval{v,v}}v = -v \\
-    s_{v + \varphi(v)}(-v) &= -v - 2 \cdot \frac{\expval{-v, v+\varphi(v)}}{\norm{v+\varphi(v)}^2} \cdot (v+\varphi(v))
-    = -v + 2\frac{\expval{v,v} + \expval{v,\varphi(v)}}{\norm{v+\varphi(v)}^2}\cdot (v+\varphi(v)) \\
-                           &= -v + \frac{\norm{v+\varphi(v)}^2 + \overbrace{\norm{v}^2 -\norm{\varphi(v)}^2}^0}{\norm{v+\varphi(v)}^2}\cdot (v+\varphi(v)) = -v + v + \varphi(v) = \varphi(v) \\\\
-    \implies \varphi&= s_{v+\varphi(v)} \circ s_v 
-\end{align*}
-\end{proof}
-
-\begin{theorem}
-    Jede Isometrie auf einem euklidischen Raum $(\mathbb{R}^n,\, \expval{\cdot,\cdot})$ lässt sich als Verkettung von höhstens $n$ Spiegelungen darstellen.
-\end{theorem}
-\begin{proof} Sei $V = \mathbb{R}^n$, $\varphi$ Isometrie.
-Nach der Bemerkung gibt es $\varphi$-invariante UVRs $W_1,\,\dots,\,  W_m \subseteq V ~,~m \leq n$ mit $\dim_ \mathbb{R} W_i \in \qty{1,\, 2}$ sodass
-\[ V = \bigoplus_{i=1}^m W_i \tag{$\ast$} \]
-Betrachte man eine Einschränkung $\varphi_i \coloneqq \varphi\eval_{W_i}$. Wenn $\dim_ \mathbb{R} W_i = 1$, so ist $\varphi_i \in \qty{\id_{W_i},\, -\id_{W_i}}$. Letzteres lässt sich darstellen durch
-\[ -\textrm{id}_{W_i} = s_w \qquad w \in W_i \quad (W_i \neq \qty{0}) \]
-Aus dem Lemma folgt, dass für $\dim_ \mathbb{R} W_i = 2$ sich $\varphi_i$ als Verkettung zweier Spiegelungen darstellen lässt.
-
-Aus $(\ast)$ folgt
-\[ \varphi = \varphi_1 \circ \cdots \circ \varphi_m \]
-wobei jedes $\varphi_i$ keiner, einer oder zwei Spiegelungen entspricht. Die Anzahl der Spiegelungen in einem $\varphi_i$ ist dabei kleiner gleich $\dim_ \mathbb{R} W_i$, sodass insgesamt maximal $n$ Spiegelungen verkettet werden.
 \end{proof}
 \end{document}
