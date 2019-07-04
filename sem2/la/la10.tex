@@ -1,0 +1,124 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage{bbm}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\DeclareMathOperator*{\Lin}{Lin}
+\DeclareMathOperator*{\id}{id}
+
+\let\widetilde\oldwidetilde
+\def\widetilde#1{\overset{\resizebox{\widthof{\ensuremath{#1}}+1mm}{1.5mm}{\tikz[baseline,thick]{\draw(0,0)..controls(0.25,0.25)and(0.75,-0.25)..(1,0);}}}{\ensuremath{#1}}}
+
+\setcounter{taski}{32}
+\begin{document}
+\begin{center}
+    \textbf{8. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l|l||p{18mm}|}
+        \hline
+        Aufgabe 33 & Aufgabe 34 & Aufgabe 35 & Aufgabe 36 & Summe:~ \\
+        \hline &&&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Mo 14:15 ~~ SR B& Tutor(in): Sebastian Groß\\
+    Namen: Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\task
+\ttask
+\begin{align*}
+    \forall w \in W: f^{ad}(w) &\overset{\text{ONB}}=
+    \sum_{i=1}^n \expval{f^{ad}(w),v_i}_Vv_i
+    \overset{\text{adj.}}= \sum_{i=1}^n \expval{w,f(v_i)}_Vv_i
+\end{align*}
+\ttask
+\begin{align*}
+    f^{ad} &= \Gamma_V^{-1} \circ f^* \circ \Gamma_W
+    = \Gamma_V^{-1} \circ \Phi_{\mathcal{B}^*} \circ \widetilde{M_{\mathcal{B}^*}^{\mathcal{C}^*}(f^*)} \circ \Phi_{\mathcal{C}^*}^{-1} \circ \Gamma_W \\
+    f^{ad} &= \Phi_\mathcal{B} \circ \widetilde{M_\mathcal{B}^{\mathcal{C}}(f^{ad})} \circ \Phi_\mathcal{C}^{-1} \\
+    \widetilde{M_\mathcal{B}^{\mathcal{C}}(f^{ad})}
+    &= \Phi_\mathcal{B}^{-1} \circ f^{ad} \circ \Phi_\mathcal{C}
+    = \Phi_\mathcal{B}^{-1} \circ \Gamma_V^{-1} \circ \Phi_{\mathcal{B}^*} \circ \widetilde{M_{\mathcal{B}^*}^{\mathcal{C}^*}(f^*)} \circ \Phi_{\mathcal{C}^*}^{-1} \circ \Gamma_W \circ \Phi_\mathcal{C} \\ 
+    &= \underbrace{\qty(\Phi_{\mathcal{B}^*}^{-1} \circ \Gamma_W \circ \Phi_\mathcal{B})^{-1}}_{\displaystyle\widetilde{M_\mathcal{B}^*\qty(\expval{\cdot,\cdot}_V)^{-1}}}
+    \circ \widetilde{M_{\mathcal{B}^*}^{\mathcal{C}^*}(f^*)} \circ 
+    \underbrace{\Phi_{\mathcal{C}^*}^{-1} \circ \Gamma_W \circ \Phi_\mathcal{C}}_{\displaystyle\widetilde{M_\mathcal{C}^*\qty(\expval{\cdot,\cdot}_W)}}
+\end{align*}
+\task
+\ttask
+\begin{align*}
+    \expval{f(\lambda v+w), \lambda v+w} &= \expval{\lambda f(v)+f(w), \lambda v}+\expval{\lambda f(v)+f(w), w} \\
+    &= \lambda\expval{f(v), \lambda v} + \expval{f(w), \lambda v} + \lambda\expval{f(v),w} + \expval{f(w), w} \\
+    &= \lambda\overline{\lambda}\expval{f(v),v} + \overline{\lambda}\expval{f(w), v} + \lambda\expval{f(v),w} + \expval{f(w), w} \\
+    &= |\lambda|^2\expval{f(v),v} + \lambda\expval{f(v),w} + \overline\lambda\expval{f(w), v} + \expval{f(w), w}
+\end{align*}
+\ttask Sei $v,\, w \in V$, $v$ fest, $\lambda \in \mathbb{C}$
+\begin{align*}
+    0 &= 0 + 0
+    = \expval{f(v+w),v+w} + \expval{f(iv+w),iv+w} \\
+    &= \overbrace{\expval{f(v),v}}^{0} +\expval{f(v),w} + \expval{f(w), v} + \overbrace{\expval{f(w),w}}^{0}
+    + \overbrace{\expval{f(v),v}}^{0} +\expval{f(v),w} - \expval{f(w), v} + \overbrace{\expval{f(w),w}}^{0} \\
+    &= 2\expval{f(v),w} \quad\qc \expval{f(v),w} = 0 ~\forall w \in V \xRightarrow{\text{unit}} f(v) = 0 \\\\
+    &\implies \forall v \in V : f(v) = 0 \implies f = 0
+\end{align*}
+\ttask Sei $v \in V$
+\begin{align*}
+    \overline{\expval{v,f(v)}} &\overset{\text{sesq.}}= \expval{f(v),v} \overset{\text{selbstadj.}}= \expval{v,f(v)} \\
+    \implies \expval{v,f(v)} &\in \mathbb{R}
+\end{align*}
+\ttask Eine Rotation $f$ um $\frac{\pi}{2}$ im $\mathbb{R}^2$ bildet jeden Vektor auf einen senkrecht zu ihm stehenden Vektor ab, sodass $\expval{f(v),v}=0 ~\forall v \in V$, jedoch ist eine Rotation nicht die Nullabbildung.
+\end{document}
