@@ -53,6 +53,7 @@
 
 \DeclareMathOperator*{\Lin}{Lin}
 \DeclareMathOperator*{\id}{id}
+\newcommand{\same}{\ensuremath~\Longleftrightarrow~}
 
 \setcounter{taski}{32}
 \begin{document}
@@ -82,12 +83,83 @@
     M^{E_3}_{E_1}(g^*(\varphi))
     = M^{E_3}_{E_1}(\varphi \circ g)
     = M^E_{E_1}(\varphi)\underbrace{M^{E_3}_E(g)}_{\mathbbm{1}} = \mqty(3 & 3 & 5) \\
+    int bla
     g^*(\varphi) = \mqty(3 \\ 3 \\ 5)^*
 \end{gather*}
 \ttask $v_1,\, v_2$ sind linear unabhängig und bilden daher eine Basis für $U$. Diese Basis wird ergänzt durch einen Vektor $v_3$
 \[ v_3 = 2 + t + 2t^2 \]
 welcher linear unabhängig zu $v_1,\, v_2$ ist. Damit bildet $(v_1,\, v_2,\, v_3)$ eine Basis von $V$. Nach Satz 22.10 ist demnach $(v_3^*)$ eine Basis von $U^0$. Dabei ist $v_3^*$
 \[ v_3^* = \Phi_{E^*}\qty((2,\, 1,\, 2)^t) \]
+\ttask Aus Berechnung
+\begin{gather*}
+    M^E_{E_3}(f) = \frac{1}{6} \mqty(6&3&2 \\ 6&-3&2 \\ 6&12&16)
+    \intertext{$(v_1,\,v_2)$ ist Basis von $U$, demnach $(w_1,\,w_2) = (f_(v_1),\,f(v_2))$ Basis von $f(U)$}
+    f(v_1) = M^E_{E_3}(f)\mqty(1\\-2\\0) = \mqty(0\\2\\-3) \qquad
+    f(v_2) = M^E_{E_3}(f)\mqty(-3\\0\\3) = \mqty(-2\\-2\\5)
+    \intertext{Die Basis $(w_1,\,w_2)$ wird mit $w_3$ zu einer Basis von $V$ ergänzt.}
+    w_3 = \mqty(2\\3\\2)\qc X^0 = \Lin( \qty{w_3^*} )
+\end{gather*}
+Ich sehe hier keinen Unterschied zwischen (i) und (ii).
+\newpage
 \ttask
+\begin{align*}
+    (f^*)^{-1}(U^0) &= X^0 \\
+    U^0 &= f^*(X^0) = \Lin(f^*(w_3^*)) = \Lin\qty(M^{E_3^*}_{E^*}(f*)\Phi^{-1}_{E_3^*}(w_3^*))\\
+    &= (M^{E}_{E_3}(f)^tw_3) = \Lin\qty(\Phi_{E_3^*}\frac{7}{2}\mqty(2\\1\\2)) = \Lin(v_3^*)
+\end{align*}
+\task \ttask $V$ ist $K$-VR, $U,\,U_1,\,U_2 \subseteq V$ UVR.
+\begin{theorem}
+    \[ U_1^0 + U_2^0 \subset (U_1 \cap U_2)^0 \]
+    Bei $\dim_K V < \infty$ gilt Gleichheit.
+\end{theorem}
+\begin{proof}
+\glqq $\subset$\grqq \quad
+Sei $\varphi \in U_1^0 + U_2^0$ mit $\varphi = \varphi_1 + \varphi_2 ~,~ \varphi_1 \in U_1^0 ~,~ \varphi_2 \in U_2^0$. Es folgt
+\begin{gather*}
+    \forall u \in U_1 \cap U_2 : \varphi(u) = \varphi_1(u) + \varphi_2(u) = 0 \qq{da} u \in U_1 ~,~ u \in U_2 \\
+    \implies \varphi \in (U_1 \cap U_2)^0
+\end{gather*}
 
+\glqq $\supset$\grqq \quad $\dim_K V = n < \infty$. Sei $\mathcal{A} = (u_1,\,\dots,\,u_r)$ eine Basis von $U_1 \cap U_2$. Diese Basis wird jeweils auf eine Basis für $U_1$ und $U_2$ erweitert.
+\[ \mathcal{B} = (u_1,\,\dots,\,u_r,\,v_1,\dots\,v_s) \qq{Basis von} U_1 \qquad \mathcal{C} = (u_1,\,\dots,\,u_r,\,w_1,\,\dots\,w_t) \qq{Basis von} U_2  \]
+Diese Basen $\mathcal{B},\,\mathcal{C}$ werden vereint und erweitert zu einer Basis $\mathcal{V}$ von $V$ mit
+\[ \mathcal{V} = (u_1,\,\dots,\,u_r,\,v_1,\,\dots,\,v_s,\,w_1,\dots\,w_t,\,x_1,\,\dots,\,x_\ell) \]
+Nun sind die dualen Basen darstellbar als
+\begin{gather*}
+    \mathcal{B}^* = (w_1^*,\,\dots,\,w_t^*,\,x^*_1,\dots\,x_\ell^*) \qq{B. von} U_1^0 \qquad
+    \mathcal{C}^* = (v_1^*,\,\dots,\,v_s^*,\,x^*_1,\dots\,x_\ell^*) \qq{B. von} U_2^0 \\
+    \mathcal{A}^* = (v_1^*,\,\dots,\,v_s^*,\,w_1^*,\,\dots,\,w_t^*,\,x^*_1,\dots\,x_\ell^*) \qq{B. von} (U_1 \cap U_2)^0
+\end{gather*}
+Da sich $\mathcal{A}^*$ aus $\mathcal{B}^*$ und $\mathcal{C}^*$ zusammensetzt gilt demnach
+\[ U_1^0 + U_2^0 = (U_1 \cap U_2)^0 \]
+\end{proof}
+\newpage
+\ttask
+\begin{theorem}
+    \[ i(U) \subset \qty(U^0)^0 \]
+    Gleichheit bei $\dim_K V < \infty$
+\end{theorem}
+\begin{proof}
+\glqq$\subset$\grqq \quad Sei $u \in U$
+\begin{gather*}
+    i(u)(\varphi) = \varphi(u) = 0 ~\forall \varphi \in U^0 \\
+    \implies i(u) \in \qty(U^0)^0
+\end{gather*}
+\glqq$\supset$\grqq \quad $\dim_K V = n < \infty$
+\begin{align*}
+    \dim_K \qty(U^0)^0 &\overset{22.10}= n - \dim_K (U^0) = n - \qty(n - \dim_K U) = \dim_K U \overset{i~\text{Iso.}}= \dim_K U^{**} \\
+    \xRightarrow{\text{Aus Teil~} \subset} \qty(U^0)^0 &= i(U)
+\end{align*}
+\end{proof}
+\ttask
+\begin{theorem}
+    $V,W$ sind $K$-VR, $f \in \mathrm{Hom}_K(V,\,W)$, $U \subset V$ UVR
+    \[ (f^*)^{-1}(U^0) = \qty(f(U))^0 \]
+\end{theorem}
+\begin{proof} Sei $x \in W^*$
+\begin{gather*}
+    x \in \qty(f(U))^0 \same x(f(u)) = 0 ~\forall u \in U \same f^*(x)(u) = 0 ~\forall u \in U \\
+    \same f^*(x) \in U^0 \same x \in (f^*)^{-1}(U^0)
+\end{gather*}
+\end{proof}
 \end{document}

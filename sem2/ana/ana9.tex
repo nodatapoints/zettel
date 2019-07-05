@@ -1,0 +1,104 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+\begin{center}
+    \textbf{Analysis II\\9. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maier \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\setcounter{taski}{2}
+\task
+Sei $\mathfrak{F} = \qty{A_i}_{i \in I}$ eine Familie von zusammenhängenden Teilmengen $A_i \subset X ~(i \in I)$ einer Topologie $X$ mit einem gemeinsamen Punkt $z \in X$
+\[ \forall i \in I: z \in A_i \quad. \]
+\begin{lemma}
+    Sind $P,\,Q \subset \bigcup_{i \in I} A_i$ offene nichtleere Teilmengen mit $P \cup Q = \bigcup_{i \in I} A_i ~,~ P \cap Q = \emptyset$, so gilt
+    \[ \forall i \in I: A_i \cap P \in \qty{\emptyset,\,A_i} \]
+\end{lemma}
+\begin{proof} durch Widerspruch
+
+Es sei ein $A_i ~ i \in I$ sodass $P' \coloneqq A_i \cap P \neq \emptyset$ und $Q' \coloneqq A_i \cap Q \neq \emptyset$. Letzteres ist äquivalent zu $A_i \cap P \neq A_i$ da $A_i \subset P \cup Q$.
+\begin{gather*}
+    A_i = A_i \cap \bigcup_{i \in I} A_i = A_i \cap (P \cup Q) = P' \cap Q' \\
+    P' \cap Q' = A_i \cap (P \cap Q) = \emptyset
+\end{gather*}
+Es wurde in Aufgabe \textbf{(2)} des vorherigen Blattes bewiesen, dass die Schnittmenge einer offenen Menge mit einer Teilmenge offen bezüglich dieser ist. Demnach sind $P',\,Q'$ offen bezüglich $A_i$. Dann würde nach Definition $A_i$ allerdings nicht zusammenhängend sein, was ein Widerspruch mit der Voraussetzung wäre.
+\end{proof}
+\begin{theorem}
+    $\bigcup_{i \in I} A_i$ ist zusammenhängend.
+\end{theorem}
+\begin{proof} durch Widerspruch
+
+Annahme: Sei $\bigcup_{i \in I} A_i$ nicht zusammenhängend. Demnach gibt es offene nichtleere Teilmengen $P,\,Q \subset \bigcup_{i \in I} A_i$ mit $P \cup Q = \bigcup_{i \in I} A_i ~,~ P \cap Q = \emptyset$.
+
+Sei o.B.d.A $z \in P$. Aus dem Lemma folgt so für alle $i \in I$ aus der anfänglichen Bedingung für $z$
+\[ z \in A_i \implies A_i \cap P \neq \emptyset \implies A_i \subset P \]
+Da $P$ und $Q$ nach Voraussetzung disjunkt folgt
+\[ \forall i \in I: A_i \cap Q = \emptyset \implies Q \cap \bigcup_{i \in I} A_i = \emptyset\qc Q \cap (P \cup Q) = \emptyset \qc Q = \emptyset \quad \text{\Large\Lightning} \]
+\end{proof}
+\end{document}

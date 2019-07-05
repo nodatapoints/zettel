@@ -1,0 +1,110 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+\setlength{\parindent}{0pt}
+\setkomafont{paragraph}{\normalfont\itshape}
+\pagenumbering{gobble}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+\begin{center}
+    \textbf{Analysis II\\10. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maier \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\setcounter{taski}{2}
+\task
+\ttask Sei $(x_n)_{n \in \mathbb{N}} \in \qty(\mathbb{R}^2)^{\mathbb{N}}$ eine beliebige Folge mit $\lim_{n \rightarrow \infty} x_n = (0,\,0)$. Es gilt
+\begin{gather*}
+    g: \mathbb{R}^2 \rightarrow \mathbb{R} ~,~ (x,\,y) \mapsto -\qty|\sin x| \qquad h: \mathbb{R}^2 \rightarrow \mathbb{R} ~,~ (x,\,y) \mapsto \qty|\sin x| \\
+    g(x_n) \leq f(x_n) \leq h(x_n) \quad \forall n \in \mathbb{N} 
+\end{gather*}
+Da $g$ als Komposition von $C^0(\mathbb{R}^2)$-Funktionen stetig ist gilt
+\[ \lim_{n \rightarrow \infty} g(x_n) = g(0,\,0) = 0 \qquad \lim_{n \rightarrow \infty} h(x_n) = -\lim_{n \rightarrow \infty} g(x_n) = 0 \]
+Aus Sandwich-Kriterium folgt
+\[ \lim_{n \rightarrow \infty} f(x_n) = 0 = f(0,\,0) \]
+Demnach ist nach Definition $f$ in $(0,\,0)$ stetig.
+
+\ttask
+\begin{lemma}
+    Jede Gerade der Form 
+\[ \qty{(x,\,y) \in \mathbb{R}^2 \mid ax + by = 0} \quad a,\,b \in \mathbb{R} ~,~ (a,\,b) \neq (0,\,0) \]
+    hat maximal zwei Schnittpunkte mit der Normalparabel $\qty{(t,\,t^2) \mid t \in \mathbb{R}}$.
+\end{lemma}
+\begin{proof} Seien $a,\,b \in \mathbb{R}$ mit $(a,\,b) \neq (0,\,0)$ gegeben, $(x,\,y) \in \mathbb{R}^2$ ein Schnittpunkt. So gilt
+\begin{align*}
+    ax + by &= ax + bx^2 = 0 \\
+    0 &= x(bx + a)
+\end{align*}
+Fall 1: $b = 0: \implies a \neq 0 \qc 0 = ax \implies x = 0$. $y = x^2 = 0$ \quad\qc $(x,\,y) = (0,\,0)$ \\
+Fall 2: $a = 0: \implies b \neq 0 \qc 0 = bx^2 = by \implies x = y = 0$ \quad\qc $(x,\,y) = (0,\,0)$ \\
+Fall 3: $a,\,b \neq 0: \implies (x,\,y) \in \qty{(0,\,0),~\qty(-\frac{a}{b}, \frac{a^2}{b^2})}$
+\end{proof}
+
+Sei der Einheitsvektor $\nu \in \mathbb{R}^2$ beliebig und $(t_n)_{n \in \mathbb{N}} \in \mathbb{R}_*^{\mathbb{N}}$ eine Nullfolge.
+
+Da nach Lemma die Folge $(t_n\nu)_{n \in \mathbb{N}}$ endlich viele Schnittpunkte mit der Normalparabel hat, gilt nach Definition von $f$
+\[ \exists N \in \mathbb{N}: \forall n \in \mathbb{N}~,~n>N: f(t_n\nu) = \frac{f(t_n\nu)}{t_n} = 0 \]
+Damit folgt nach Definition des Limes sofort
+\[ \lim_{n \rightarrow \infty} \frac{f(x_0 + t_n\nu) - f(x_0)}{t_n} = \lim_{n \rightarrow \infty} \frac{f(t_n\nu)}{t_n} = 0 \]
+Da $t_n$ von Anfang beliebig war, existiert die Richtungsableitung $\displaystyle\lim_{\substack{s \rightarrow 0\\s \in \mathbb{R}}}\frac{f(x_0 + s\nu) - f(x_0)}{s} = 0$ \\
+für beliebige Richtungen $\nu \in \mathbb{R}^2$ im Punkte $x_0 = (0,\,0)$.
+\end{document}
