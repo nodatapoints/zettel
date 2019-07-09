@@ -1,0 +1,142 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage{bbm}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+
+\setlength{\parindent}{0pt}
+
+\setkomafont{paragraph}{\normalfont\itshape}
+
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\DeclareMathOperator*{\Lin}{Lin}
+\DeclareMathOperator*{\id}{id}
+
+\setcounter{taski}{40}
+\begin{document}
+\begin{center}
+    \textbf{8. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l|l||p{18mm}|}
+        \hline
+        Aufgabe 41 & Aufgabe 42 & Aufgabe 43 & Aufgabe 44 & Summe:~ \\
+        \hline &&&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Mo 14:15 ~~ SR B& Tutor(in): Sebastian Groß\\
+    Namen: Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\task
+\ttask
+\begin{gather*}
+    \mathcal{C} = (v_1,\, v_2,\, v_3) \qquad \mathcal{B} = (w_1,\, w_2,\, w_3) \\
+    w_1 = \frac{v_1}{\norm{v_1}} = \frac{v_1}{1} = (1,\, 0,\, 0)^t \\
+    \widetilde{w_2} = v_2 - \expval{v_2,w_1}w_1 = (0,\, i,\, 0)^t \qc \norm{\widetilde{w_2}} = \sqrt{2} \qc 
+    w_2 = \frac{\sqrt 2}{2}(0,\, i,\, 0)^t \\
+    \widetilde{w_3} = v_3 - \expval{v_3,w_1}w_1 - \expval{v_3,w_2}w_2 = \qty(-i,\, \frac{1}{2},\, 1)^t
+    \qc \norm{\widetilde{w_3}} = \frac 1{\sqrt 2} \qc 
+    w_3 = \sqrt 2\qty(-i,\, \frac{1}{2},\, 1)^t
+\end{gather*}
+\ttask
+\begin{gather*}
+    M^\mathcal{B}_\mathcal{B}(\tilde{B}) = T^{E_3}_{\mathcal{B}}B~T^{\mathcal{B}}_{E_3}
+    = \sqrt 2\mqty(\sqrt{2} & 0 & -2i \\ 0 & i & 1 \\ 0 & 0 & 2)^{-1}
+    \mqty( i & 2 & i-2 \\ 0 & i-1 & 0 \\ 0 & 2i & -i-1)
+    \frac{\sqrt 2}{2}\mqty(\sqrt{2} & 0 & -2i \\ 0 & i & 1 \\ 0 & 0 & 2) \\
+    = \mqty(i & 0 & 0 \\ 0 & -1 & 1 \\ 0 & -1 & -1) \\
+    \xRightarrow{\text{Hinsehen}} \qq{nicht selbstadjungiert} \qquad
+    \xRightarrow{\text{Nachrechnen}} \qq{nicht unitär} \\
+    M^\mathcal{B}_\mathcal{B}(\tilde{B} \circ \tilde{B}^{ad})
+    = M^\mathcal{B}_\mathcal{B}(\tilde{B})\underbrace{\overline{M^\mathcal{B}_\mathcal{B}(\tilde{B})^t}}_{\substack{M^\mathcal{B}_\mathcal{B}(\tilde{B}^{ad}) \\ \text{da $\mathcal{B}$ ONB}}}
+    = \mqty(1 & 0 & 0 \\ 0 & 0 & -2 \\ 0 & 2 & 0)
+    = \overline{M^\mathcal{B}_\mathcal{B}(\tilde{B})^t}M^\mathcal{B}_\mathcal{B}(\tilde{B})
+    = M^\mathcal{B}_\mathcal{B}(\tilde{B}^{ad} \circ \tilde{B})\\
+    \implies \tilde{B} \circ \tilde{B}^{ad} = \tilde{B}^{ad} \circ \tilde{B} \\ 
+    M^{E_3}_{E_3}(\tilde{B} \circ \tilde{B}^{ad}) = B\overline{B^t}
+    = \mqty(1 & 4 & 2-5i\\ 0 & 2 & 0\\ 0 & 0 & 2)
+    \neq \mqty(1 & -4 & 2+5i\\ 0 & 2 & 0\\ 0 & 0 & 2)
+    = \overline{B^t}B = M^{E_3}_{E_3}(\tilde{B}^{ad} \circ \tilde{B}) \\
+    \implies \tilde{B} \circ \tilde{B}^{ad} \neq \tilde{B}^{ad} \circ \tilde{B}
+\end{gather*}
+\task
+\ttask Da $f$ normal gibt es eine ONB $\mathcal{B}$ aus EV von $f$, sodass
+\[
+    M^\mathcal{B}_\mathcal{B}(f)
+    = \mathrm{Diag}(\lambda_1,\, \dots,\, \lambda_n) \eqqcolon M \qc f^3
+    = f^4 \implies \lambda_i^3 = \lambda_i^4 \quad (1 \leq i \leq n)
+\]
+Für ein beliebiges $\lambda_i ~,~1 \leq i \leq n$ folgt
+\begin{gather*}
+    \lambda_i^3 = \lambda_i^4 \qc \lambda_i^3(\lambda_i - 1) = 0 \implies \lambda_i \in \qty{0,\, 1} \quad (\ast) \\
+    (\ast) \implies \lambda_i^2 = \lambda_i \implies f^2 = f \qquad
+    (\ast) \implies \overline{\lambda_i} = \lambda_i \implies \overline{M^t} = M \xRightarrow{\mathcal{B}~\text{ONB}} f = f^{ad}
+\end{gather*}
+
+\newpage
+\ttask $(V, \expval{\cdot,\cdot})$ unitärer Vektorraum, $\dim_ \mathbb{C} = n < \infty$, $f \in \mathrm{End}_\mathbb{C}(V)$
+\begin{theorem}
+    \[ f~\text{normal} ~\Longleftrightarrow~ \exists p \in \mathbb{C}[t]_{\leq n-1} : f^{ad} = p(f) \]
+\end{theorem}
+\begin{proof}
+
+\glqq$\Leftarrow$\grqq~
+\[
+    f \circ f^{ad}
+    = f \circ \sum_{k=0}^{n-1}a_kf^k
+    = \sum_{k=0}^{n-1}a_kf \circ f^k
+    = \sum_{k=0}^{n-1}a_kf^k \circ f
+    = (\sum_{k=0}^{n-1}a_kf^k) \circ f
+    = f^{ad} \circ f
+\]
+\end{proof}
+\end{document}
