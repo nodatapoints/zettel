@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage{marvosym}
+\usepackage{enumerate}
 
 \usepackage{tikz}
 \usepackage{chngcntr}
@@ -53,7 +54,7 @@
     Kamal Abdellatif
 \end{flushright}
 \begin{center}
-    \textbf{Höhere Analysis Abgabeblatt 1}\\[2em]
+    \textbf{Höhere Analysis Abgabeblatt 2}\\[2em]
 	\def\arraystretch{2}
     \begin{tabular}{|l|l|l||p{18mm}|}
         \hline
@@ -64,18 +65,22 @@
 \end{center}
 
 \task
-\[ (1) \implies (2) \qquad (1) \implies (3) \]
-z. Z. $ (3) \implies (1) $
-\begin{lemma}
-    Seien $E,\, F$ normierte lineare Räume, $f \in L(E,\, F)$ eine lineare Abbildung. Ist $f$ in einem $x_0 \in E$ stetig, so ist $f$ stetig.
-\end{lemma}
-\begin{proof}
-Seien $f \in L(E,\, F) ~,~ x_0 \in E$ nach Voraussetzungen gegeben. Sei $a \in E$ beliebig.
-\begin{align*}
-    f(x_0) - f(a) + \lim_{x \rightarrow a} f(x)
-    &= \lim_{x \rightarrow a} f(x_0 + x - a) \\
-    &= \lim_{x \rightarrow x_0} f(x) = f(x_0) \\
-    \lim_{x \rightarrow a} f(x) &= f(a)
-\end{align*}
-\end{proof}
+$E_0$ ist abgeschlossen unter Addition und skalarer Multiplikation. Seien $a,\, b \in E_0,\, \lambda \in \mathbb{R}$ beliebig.
+\begin{gather*}
+    0 \stackrel{\text{Norm}}\leq \norm{a+b} \stackrel{\text{Norm}}\leq \norm{a} + \norm{b} \stackrel{E_0}= 0 + 0 = 0 \\
+    \implies \norm{a+b} = 0 ~\xRightarrow{E_0}~ a + b \in E_0 \\
+    \norm{\lambda a} = |\lambda| \cdot \norm{a} = |\lambda| \cdot 0 = 0 ~\xRightarrow{E_0}~ \lambda a \in E_0
+\end{gather*}
+Damit ist $E_0$ ein Unterraum von $E$ ???
+
+Die Norm $\norm{x + E_0} \coloneqq \norm{x} ~,~ x \in E$ auf dem Faktorraum $E/E_0$
+\begin{enumerate}[(i)]
+\item ist positiv definit da für alle $x \in E$
+\begin{gather*}
+    \norm{x} \geq 0 \\
+    \norm{\bar x} = 0 \implies \norm{x} = 0 \implies x \in E_0 ~,~ x \sim 0 \implies \bar x = \bar 0
+\end{gather*}
+\item erfüllt die Dreiecksungleichung mit
+\[ \norm{\bar x + \bar y} = \norm{x + y} \stackrel{\text{Norm}}\leq \norm{x} + \norm{y} = \norm{\bar x} + \norm{\bar y} \quad x,\, y \in E\]
+\end{enumerate}
 \end{document}
