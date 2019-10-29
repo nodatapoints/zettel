@@ -108,6 +108,7 @@
     = \overline{B^t}B = M^{E_3}_{E_3}(\tilde{B}^{ad} \circ \tilde{B}) \\
     \implies \tilde{B} \circ \tilde{B}^{ad} \neq \tilde{B}^{ad} \circ \tilde{B}
 \end{gather*}
+\newpage
 \task
 \ttask Da $f$ normal gibt es eine ONB $\mathcal{B}$ aus EV von $f$, sodass
 \[
@@ -122,7 +123,6 @@ Für ein beliebiges $\lambda_i ~,~1 \leq i \leq n$ folgt
     (\ast) \implies \overline{\lambda_i} = \lambda_i \implies \overline{M^t} = M \xRightarrow{\mathcal{B}~\text{ONB}} f = f^{ad}
 \end{gather*}
 
-\newpage
 \ttask $(V, \expval{\cdot,\cdot})$ unitärer Vektorraum, $\dim_ \mathbb{C} = n < \infty$, $f \in \mathrm{End}_\mathbb{C}(V)$
 \begin{theorem}
     \[ f~\text{normal} ~\Longleftrightarrow~ \exists p \in \mathbb{C}[t]_{\leq n-1} : f^{ad} = p(f) \]
@@ -138,5 +138,58 @@ Für ein beliebiges $\lambda_i ~,~1 \leq i \leq n$ folgt
     = (\sum_{k=0}^{n-1}a_kf^k) \circ f
     = f^{ad} \circ f
 \]
+\glqq$\Rightarrow$\grqq~ Sei $f$ normal. So gibt es eine ONB $\mathcal{B}$ von $V$ aus EV von $f$. 
+\[ M \coloneqq M_\mathcal{B}^\mathcal{B}(f) = \mathrm{Diag}(\lambda_1,\,\dots,\,\lambda_n) \]
+Es soll nun ein $p \in \mathbb{C}[t]_{\leq n-1}$ geben sodass $f^{ad} = f$.
+\begin{gather*}
+    M_\mathcal{B}^\mathcal{B}(f^{ad}) \overset{\text{ONB}}= \overline{M^t} = p(M) \\
+    \implies \overline{\lambda_i} = p(\lambda_i) = \sum_{k=0}^{n-1}a_k \lambda_i^k \qquad (a_0,\,\dots,\,a_{n-1} \in \mathbb{C} ~,~ 1 \leq i \leq n) \\
+    \Lambda \coloneqq \mqty(\lambda_1^0 & \cdots & \lambda_1^{n-1} \\ 
+          \vdots & \ddots & \vdots \\ 
+          \lambda_n^0 & \cdots & \lambda_n^{n-1})
+    \qquad
+    \Lambda \mqty(a_0 \\ \vdots \\ a_{n-1}) = \mqty(\overline{\lambda_1} \\ \vdots \\ \overline{\lambda_n})
+\end{gather*}
+Mit gegebenen $\lambda_1,\,\dots,\lambda_n$ kann dieses inhomogene LGS nach den Koeffizienten $a_0,\,\dots,\,a_{n-1}$ gelöst werden. Damit erhält man das gewünschte $p$.
 \end{proof}
+\newpage
+\task
+\ttask
+Seien $x_1,\,x_2 \in I ~,~ y_1,\,y_2 \in J ~,~ r \in R$ beliebig.
+\begin{gather*}
+    (x_1 + y_1) + (x_2 + y_2) = \underbrace{(x_1 + x_2)}_{\in~I} + \underbrace{(y_1 + y_2)}_{\in~J} \in I + J  \\
+    r(x_1 + y_1) = \underbrace{rx_1}_{\in~I} + \underbrace{ry_1}_{\in~J} \in I + J  \\
+\end{gather*}
+\task Sei $\mu \coloneqq \sqrt{-5}$ und $R = \mathbb{Z}[\mu]$. Weiterhin 
+\[ \mathfrak{A}: R \rightarrow \mathbb{Z}~,~ a+\mu b \mapsto a \qquad \mathfrak{B}: R \rightarrow \mathbb{Z}~,~ a+\mu b \mapsto b \]
+\ttask Seien $a,\,b,\,c,\,d \in \mathbb{Z}$ beliebig.
+
+\begin{align*}
+    \delta((a+\mu b)(c+\mu d)) &= \delta(ac-5bd + \mu(ad+bc)) = a^2c^2 - 10abcd + 25b^2d^2 + 5a^2d^2 + 10abcd + 5b^2c^2 \\
+    &= a^2c^2 + 5a^2d^2 + 5b^2c^2 + 25b^2d^2 = (a^2+5b^2)(c^2+5d^2) \\
+    &= \delta(a+\mu b)\delta(c+\mu d)
+\end{align*}
+\ttask Seien $p,\,q \in R$, $p \cdot q = 1$ sodass $p$ Einheit. 
+\begin{align*}
+    \delta(p)\delta(q) = \delta(p \cdot q) &= \delta(1) = 1 \in \mathbb{N}_0 \\
+    \delta(p),\,\delta(q) \in \mathbb{N}_0 \implies \delta(p) = \delta(q) &= 1 \\
+    \mathfrak A(p)^2 + 5\mathfrak B(p) &= 1 \xRightarrow{~\mathbb{N}_0~} \mathfrak{B}(p) = 0 \qc \mathfrak A(p)^2 = 1 \implies p \in \qty{1+0 \cdot \mu,~-1+0 \cdot \mu} \\
+    \implies R^* = \qty{1,\,-1}
+\end{align*}
+\ttask Annahme: Es gibt $p,\,q \in R\setminus R^*$ sodass $pq = 2$.
+\begin{gather*}
+    \delta(p)\delta(q) = \delta(pq) = \delta(2) = 4
+\end{gather*}
+Da aus $\delta(p) = 1$ sofort $p \in R^*$ folgt, kann $\delta(p)$ nur 2 sein. Gleiches für $\delta(q)$. Allerdings befindet sich $2$ nicht im Bild von $\delta$ aus den Eigenschaften von $\mathbb{N}_0$. \Lightning
+
+Annahme: Es gibt $p,\,q \in R\setminus R^*$ sodass $pq = 1 + \mu$.
+\begin{gather*}
+    \delta(p)\delta(q) = \delta(pq) = \delta(1+\mu) = 6
+\end{gather*}
+6 hat die Teiler $ \qty{1,\,2,\,3,\,6}$. Da nach obigen Argument weder $\delta(p)$ noch $\delta(q)$ gleich 1 sein dürfen, sei o.B.b.A $\delta(p) = 2~,~\delta(q) = 3$. Jedoch befindet sich weder 2 noch 3 im Bild von $\delta$. \Lightning
+\begin{align*}
+     2 \mid 6 &= (1-\mu)(1+\mu) \qq{aber} 2 \nmid 1-\mu ~,~ 1+\mu  \\
+     (1-\mu) \mid 6 &= 2 \cdot 3 \qq{aber} (1+\mu) \nmid 2 ~,~ 3
+\end{align*}
+\ttask Siehe (c). $2$ und $1+\mu$ sind nicht assoziiert, da $-2,\, 2 \neq 1+\mu$.
 \end{document}

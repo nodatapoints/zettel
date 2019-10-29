@@ -1,0 +1,104 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{framed}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{marvosym}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{tikz}
+\usepackage{chngcntr}
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+
+\allowdisplaybreaks
+\setlength{\parindent}{0pt}
+\setkomafont{paragraph}{\normalfont\itshape}
+\pagenumbering{gobble}
+
+\declaretheoremstyle[%
+  spaceabove=0,%
+  spacebelow=6pt,%
+  headfont=\normalfont\itshape,%
+  postheadspace=1em,%
+  headpunct={}
+]{mystyle}
+
+\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
+\declaretheorem[name={Lemma}, style=mystyle]{lemma}
+\declaretheorem[name={Bemerkung}, style=mystyle, unnumbered]{note}
+\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
+\let\proof\oldproof
+\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
+
+\newcounter{taski}
+\newcounter{taskii}[taski]
+\newcounter{taskiii}[taskii]
+
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+
+\begin{document}
+\begin{center}
+    \textbf{Analysis II\\11. Abgabeblatt}\\[2em]
+	\def\arraystretch{2}
+    \begin{tabular}{|l|l|l||p{18mm}|}
+        \hline
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         \hline &&&\\
+         \hline  
+    \end{tabular}
+\end{center}
+\begingroup
+\def\arraystretch{1.5}
+\begin{tabular}{p{.5\textwidth}p{.5\textwidth}}
+	\hline
+    Übungsgruppe: Do 14:00 ~~ SR B& Tutor: Levin Maier \\
+    Namen: Ellen Bräutigam, Kamal Abdellatif &\\
+    \hline
+\end{tabular}
+\endgroup\\
+
+\setcounter{taski}{2}
+\task Denotiere $\partial_ig(x_0)$ die partielle Ableitung von $g$ an der Stelle $x_0$ nach der $i$-ten Komponente.
+
+Sei $(x,\,y) = 0$
+\begin{align*}
+    \partial_1g(x,\,y) &= \pdv{x}f(ax+by) \overset{\text{Kettenr.}}= a\cdot f'(ax+by) \\
+    \partial_2g(x,\,y) &= \pdv{y}f(ax+by) \overset{\text{Kettenr.}}= b\cdot f'(ax+by)
+\end{align*}
+Da $f \in C^{q+1}(0)$ gilt dies auch für höhere Ableitungen von $g$ bis zur Ordnung $q$. Mit jeder partiellen Ableitung erhöht sich die Ordnung der Ableitung und der entsprechende Faktor kommt hinzu.
+
+Seien $i_1,\,\dots,\,i_m \in \qty{1,\,2} ~,~ m \leq q$ eine beliebige Permutation von $m$ Komponenten, zusammengesetzt aus $j$ Einsen und $m-j$ Zweien. So gilt mit $a = c_1 ~,~ b = c_2$ und $h = (x,\,y) \in U_\delta{(0)}$
+\begin{align*}
+    \partial_{i_1}\partial_{i_2}\cdots\partial_{i_m}f(0) &= c_1c_2\cdots c_mf^{(m)}(0) = a^j b^{m-j}f^{(m)}(0) \\
+    \partial_{i_1}\partial_{i_2}\cdots\partial_{i_m}f(0)h^{(i_1)}h^{(i_2)}\cdots h^{(i_m)} &= f^{(m)}(0)(ax)^j(by)^{m-j}
+\end{align*}
+Es gibt $\binom m k$ Permutationen dieser Art für gegebenes $m,\,j$. Wählt man $m \leq q$ fest und summiert den unten gegeben Term, erhält man
+\[
+    \sum_{i_1,\dots,i_m=1}^2 \partial_{i_1}\partial_{i_2}\cdots\partial_{i_m}f(0)h^{(i_1)}h^{(i_2)}\cdots h^{(i_m)} =
+    \sum_{j=0}^m\binom m jf^{(m)}(0)(ax)^j(by)^{m-j}
+\]
+Eingesetzt in die Definition der Taylor-Entwicklung von $g$ um die Stelle $0$ erhält man schlussendlich
+\[ 
+    g(x,\,y) = \sum_{m=0}^q \frac{f^{(m)}(0)}{m!}\sum_{j=0}^m\binom m j(ax)^j(by)^{m-j} + R_{q+1}(x,\,y)
+\]
+Das Restglied $R_{q+1}(x,\,y)$ ist nach Definition gegeben als
+\begin{align*}
+    R_{q+1}(x,\,y) &= 
+    \sum_{i_1,\dots,i_{q+1}=1}^2 \partial_{i_1}\partial_{i_2}\cdots\partial_{i_{q+1}}f(asx+bsy)h^{(i_1)}h^{(i_2)}\cdots h^{(i_{q+1})} \\
+    &= \frac{1}{(q+1)!}\sum_{j=0}^{q+1}\binom {q+1} jf^{(q+1)}(s(ax+by))(sax)^j(sby)^{q+1-j} \\
+    &= \frac{f^{(q+1)}(s(ax+by))}{(q+1)!}\qty(s(ax+by))^{q+1} \qquad s \in (0,\,1)
+\end{align*}
+\end{document}
