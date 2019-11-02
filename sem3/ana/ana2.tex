@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage{marvosym}
+\usepackage{mathrsfs}
 \usepackage{enumerate}
 
 \usepackage{tikz}
@@ -52,7 +53,6 @@
 \newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
 \newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
 \newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
-
 \begin{document}
 \begin{flushright}
     Kamal Abdellatif
@@ -67,7 +67,6 @@
          \hline  
     \end{tabular}
 \end{center}
-
 \task Sei $E$ ein $\mathbb{R}$-Vektorraum ausgestattet mit der Seminorm $\norm{\cdot}$, $E_0 \coloneqq \qty{x \in E ~\big\vert~ \norm{x} = 0}$. \\
 
 $E_0$ ist abgeschlossen unter Addition und skalarer Multiplikation. Seien $a,\, b \in E_0,\, \lambda \in \mathbb{R}$ beliebig.
@@ -90,7 +89,6 @@ Die Norm $\norm{x + E_0} \coloneqq \norm{x} ~,~ x \in E$ auf dem Faktorraum $E/E
 \item und skaliert mit einem Faktor $\lambda \in \mathbb{R}$
     \[ \norm{\lambda \bar x} = \norm{\bar{\lambda x}} = \norm{\lambda x} = |\lambda|\cdot\norm{x} = |\lambda|\cdot\norm{\bar x} \qquad x \in E \]
 \end{enumerate}
-
 \task Es seien $E,\,F$ lineare normierte $\mathbb{R}$-Vektorräume, $F$ ein \textsc{Banach}-Raum. $L(E,\,F)$ bezeichne den $\mathbb{R}$-Vektorraum der stetigen linearen Abbildungen $\phi:E \rightarrow F$.
 \\
 
@@ -110,4 +108,31 @@ Seien $\phi \in L(E,\,F) ~,~ x_0 \in E$
     \implies \forall x \in E : \norm{\phi(x)} \leq \norm{\phi} \cdot \norm{x}
 \end{gather*}
 \end{proof}
+\newpage
+\begin{theorem}
+    $L(E,\, F)$ unter Standard-Norm $\norm{\cdot}$ ist ein \textsc{Banach}-Raum.
+\end{theorem}
+\begin{proof}
+Sei $(\phi_n)_{n \in \mathbb{N}}$ eine \textsc{Cauchy}-Folge in $L(E,\, F)$. Sei $x_0 \in E$ fest, $\epsilon > 0$ beliebig. Somit gibt es ein $N \in \mathbb{N}$ sodass für alle $n,\, m \in \mathbb{N} ~,~ N < n,\, m$ gilt
+\[
+    \norm{x_0}\cdot\epsilon
+    \stackrel{\textsc{Cauchy}}> \norm{x_0}\cdot\norm{\phi_m-\phi_n} 
+    \stackrel{\text{Lemma 1}}\geq \norm{(\phi_m-\phi_n)(x_0)}
+    \stackrel{L \text{ linear}}= \norm{\phi_m(x_0) - \phi_n(x_0)}
+\]
+Mit $\epsilon' = \frac\epsilon{\norm{x_0}}$ ist die Folge $\qty(\phi_n(x_0))_{n \in \mathbb{N}}$ demnach \textsc{Cauchy}-Folge in $F$. Da $F$ vollständig ist, existiert $\lim_{n \rightarrow \infty} \phi_n(x_0)$. Da $x_0$ anfänglich fest aber beliebig war, kann der Grenzwert für $\phi_n$ festgelegt werden als
+\[ \lim_{n \rightarrow \infty}\phi_n \quad\coloneqq\quad \phi : E \rightarrow F ~,~ x \mapsto \lim_{n \rightarrow \infty} \phi_n(x) \]
+Die Linearität von $\phi$ folgt direkt aus den Rechenregeln für konvergente Folgen. Es muss noch die Stetigkeit gezeigt werden: $\qty(\norm{\phi_n})_{n \in \mathbb{N}}$ ist eine \textsc{Cauchy}-Folge in $\mathbb{R}$ da nach umgestellter Dreiecksungleichung
+\[ \abs\big{\norm{\phi_m} - \norm{\phi_n}} = \norm{\phi_m} - \norm{\phi_n} \leq \norm{\phi_m - \phi_n} \qquad m,\, n \in \mathbb{N} ~,~ \norm{\phi_m} > \norm{\phi_n} \text{ o.B.d.A}\]
+Da $\mathbb{R}$ vollständig ist existiert der Grenzwert $\norm{\phi} \coloneqq \lim_{n \rightarrow \infty} \norm{\phi_n}$. Weiterhin ist die Norm $\norm{\cdot} : L(E,\, F) \rightarrow \mathbb{R}$ stetig. Demnach gilt für beliebiges $x \in E$
+\[
+    \norm{\phi(x)} = \norm{\lim_{n\rightarrow\infty}\phi_n(x)}
+    \stackrel{\text{stetig}}= \lim_{n\rightarrow\infty}\norm{\phi_n(x)} 
+    \stackrel{\text{Lemma 1}}\leq \norm{x}\lim_{n\rightarrow\infty}\norm{\phi_n}
+    = \norm{x}\cdot\norm{\phi}
+\]
+Damit ist nach Satz 2.1 der Vorlesung $\phi$ stetig und schlussendlich $\phi \in L(E,\, F)$.
+\end{proof}
+\task
+Sei $\mathscr{S} \subset \mathbb{R}$ die Menge der höhstens abzählbaren Teilmengen von $\mathbb{R}$.
 \end{document}
