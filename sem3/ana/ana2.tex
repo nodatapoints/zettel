@@ -1,75 +1,12 @@
-\documentclass[a4paper, 12pt]{scrartcl}
+\documentclass{anablatt}
+\blattno{2}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[ngerman]{babel}
-
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{physics}
-\usepackage{framed}
-\usepackage{float}
-\usepackage{mathtools}
-\usepackage{marvosym}
-\usepackage{mathrsfs}
-\usepackage{enumerate}
-
-\usepackage{tikz}
-\usepackage{chngcntr}
-
-\usepackage{amsthm}
-\usepackage{thmtools}
-
-\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
-
-\allowdisplaybreaks
-
-\setlength{\parindent}{0pt}
-
-\setkomafont{paragraph}{\normalfont\itshape}
-
-\declaretheoremstyle[%
-  spaceabove=0,%
-  spacebelow=6pt,%
-  headfont=\normalfont\itshape,%
-  postheadspace=1em,%
-  headpunct={}
-]{mystyle}
-
-\declaretheorem[name={Behauptung}, style=mystyle, unnumbered]{theorem}
-\declaretheorem[name={Lemma}, style=mystyle]{lemma}
-\declaretheorem[name={Voraussetzung}, style=mystyle, unnumbered]{precondition}
-\let\proof\oldproof
-\declaretheorem[name={Beweis}, style=mystyle, qed=\qedsymbol, unnumbered]{proof}
-
-\let\phi\varphi
-\let\epsilon\varepsilon
-\let\bar\overline
-
-\newcounter{taski}
-\newcounter{taskii}[taski]
-\newcounter{taskiii}[taskii]
-
-\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
-\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
-\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
 \begin{document}
-\begin{flushright}
-    Kamal Abdellatif
-\end{flushright}
-\begin{center}
-    \textbf{Höhere Analysis Abgabeblatt 2}\\[2em]
-	\def\arraystretch{2}
-    \begin{tabular}{|l|l|l||p{18mm}|}
-        \hline
-         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
-         \hline &&&\\
-         \hline  
-    \end{tabular}
-\end{center}
-\task Sei $E$ ein $\mathbb{R}$-Vektorraum ausgestattet mit der Seminorm $\norm{\cdot}$, $E_0 \coloneqq \qty{x \in E ~\big\vert~ \norm{x} = 0}$. \\
+\makeheader
 
-$E_0$ ist abgeschlossen unter Addition und skalarer Multiplikation. Seien $a,\, b \in E_0,\, \lambda \in \mathbb{R}$ beliebig.
+\task Sei $E$ ein \R-Vektorraum ausgestattet mit der Seminorm $\norm{\cdot}$, $E_0 \coloneqq \qty{x \in E ~\big\vert~ \norm{x} = 0}$. \\
+
+$E_0$ ist abgeschlossen unter Addition und skalarer Multiplikation. Seien $a,\, b \in E_0,\, \lambda \in \R$ beliebig.
 \begin{gather*}
     0 \stackrel{\text{Norm}}\leq \norm{a+b} \stackrel{\text{Norm}}\leq \norm{a} + \norm{b} \stackrel{E_0}= 0 + 0 = 0 \\
     \implies \norm{a+b} = 0 ~\xRightarrow{E_0}~ a + b \in E_0 \\
@@ -86,10 +23,10 @@ Die Norm $\norm{x + E_0} \coloneqq \norm{x} ~,~ x \in E$ auf dem Faktorraum $E/E
 \end{gather*}
 \item erfüllt die Dreiecksungleichung mit
     \[ \norm{\bar x + \bar y} = \norm{\bar{x+y}} = \norm{x + y} \stackrel{\text{Seminorm}}\leq \norm{x} + \norm{y} = \norm{\bar x} + \norm{\bar y} \quad x,\, y \in E\]
-\item und skaliert mit einem Faktor $\lambda \in \mathbb{R}$
+\item und skaliert mit einem Faktor $\lambda \in \R$
     \[ \norm{\lambda \bar x} = \norm{\bar{\lambda x}} = \norm{\lambda x} = |\lambda|\cdot\norm{x} = |\lambda|\cdot\norm{\bar x} \qquad x \in E \]
 \end{enumerate}
-\task Es seien $E,\,F$ lineare normierte $\mathbb{R}$-Vektorräume, $F$ ein \textsc{Banach}-Raum. $L(E,\,F)$ bezeichne den $\mathbb{R}$-Vektorraum der stetigen linearen Abbildungen $\phi:E \rightarrow F$.
+\task Es seien $E,\,F$ lineare normierte $\R$-Vektorräume, $F$ ein \textsc{Banach}-Raum. $L(E,\,F)$ bezeichne den $\R$-Vektorraum der stetigen linearen Abbildungen $\phi:E \rightarrow F$.
 \\
 
 \begin{lemma}
@@ -113,18 +50,18 @@ Seien $\phi \in L(E,\,F) ~,~ x_0 \in E$
     $L(E,\, F)$ unter Standard-Norm $\norm{\cdot}$ ist ein \textsc{Banach}-Raum.
 \end{theorem}
 \begin{proof}
-Sei $(\phi_n)_{n \in \mathbb{N}}$ eine \textsc{Cauchy}-Folge in $L(E,\, F)$. Sei $x_0 \in E$ fest, $\epsilon > 0$ beliebig. Somit gibt es ein $N \in \mathbb{N}$ sodass für alle $n,\, m \in \mathbb{N} ~,~ N < n,\, m$ gilt
+Sei $(\phi_n)_{n \in \N}$ eine \textsc{Cauchy}-Folge in $L(E,\, F)$. Sei $x_0 \in E$ fest, $\epsilon > 0$ beliebig. Somit gibt es ein $N \in \N$ sodass für alle $n,\, m \in \N ~,~ N < n,\, m$ gilt
 \[
     \norm{x_0}\cdot\epsilon
     \stackrel{\textsc{Cauchy}}> \norm{x_0}\cdot\norm{\phi_m-\phi_n} 
     \stackrel{\text{Lemma 1}}\geq \norm{(\phi_m-\phi_n)(x_0)}
     \stackrel{L \text{ linear}}= \norm{\phi_m(x_0) - \phi_n(x_0)}
 \]
-Mit $\epsilon' = \frac\epsilon{\norm{x_0}}$ ist die Folge $\qty(\phi_n(x_0))_{n \in \mathbb{N}}$ demnach \textsc{Cauchy}-Folge in $F$. Da $F$ vollständig ist, existiert $\lim_{n \rightarrow \infty} \phi_n(x_0)$. Da $x_0$ anfänglich fest aber beliebig war, kann der Grenzwert für $\phi_n$ festgelegt werden als
+Mit $\epsilon' = \frac\epsilon{\norm{x_0}}$ ist die Folge $\qty(\phi_n(x_0))_{n \in \N}$ demnach \textsc{Cauchy}-Folge in $F$. Da $F$ vollständig ist, existiert $\lim_{n \rightarrow \infty} \phi_n(x_0)$. Da $x_0$ anfänglich fest aber beliebig war, kann der Grenzwert für $\phi_n$ festgelegt werden als
 \[ \lim_{n \rightarrow \infty}\phi_n \quad\coloneqq\quad \phi : E \rightarrow F ~,~ x \mapsto \lim_{n \rightarrow \infty} \phi_n(x) \]
-Die Linearität von $\phi$ folgt direkt aus den Rechenregeln für konvergente Folgen. Es muss noch die Stetigkeit gezeigt werden: $\qty(\norm{\phi_n})_{n \in \mathbb{N}}$ ist eine \textsc{Cauchy}-Folge in $\mathbb{R}$ da nach umgestellter Dreiecksungleichung
-\[ \abs\big{\norm{\phi_m} - \norm{\phi_n}} = \norm{\phi_m} - \norm{\phi_n} \leq \norm{\phi_m - \phi_n} \qquad m,\, n \in \mathbb{N} ~,~ \norm{\phi_m} > \norm{\phi_n} \text{ o.B.d.A}\]
-Da $\mathbb{R}$ vollständig ist existiert der Grenzwert $\norm{\phi} \coloneqq \lim_{n \rightarrow \infty} \norm{\phi_n}$. Weiterhin ist die Norm $\norm{\cdot} : L(E,\, F) \rightarrow \mathbb{R}$ stetig. Demnach gilt für beliebiges $x \in E$
+Die Linearität von $\phi$ folgt direkt aus den Rechenregeln für konvergente Folgen. Es muss noch die Stetigkeit gezeigt werden: $\qty(\norm{\phi_n})_{n \in \N}$ ist eine \textsc{Cauchy}-Folge in $\R$ da nach umgestellter Dreiecksungleichung
+\[ \abs\big{\norm{\phi_m} - \norm{\phi_n}} = \norm{\phi_m} - \norm{\phi_n} \leq \norm{\phi_m - \phi_n} \qquad m,\, n \in \N ~,~ \norm{\phi_m} > \norm{\phi_n} \text{ o.B.d.A}\]
+Da $\R$ vollständig ist existiert der Grenzwert $\norm{\phi} \coloneqq \lim_{n \rightarrow \infty} \norm{\phi_n}$. Weiterhin ist die Norm $\norm{\cdot} : L(E,\, F) \rightarrow \R$ stetig. Demnach gilt für beliebiges $x \in E$
 \[
     \norm{\phi(x)} = \norm{\lim_{n\rightarrow\infty}\phi_n(x)}
     \stackrel{\text{stetig}}= \lim_{n\rightarrow\infty}\norm{\phi_n(x)} 
@@ -133,6 +70,77 @@ Da $\mathbb{R}$ vollständig ist existiert der Grenzwert $\norm{\phi} \coloneqq 
 \]
 Damit ist nach Satz 2.1 der Vorlesung $\phi$ stetig und schlussendlich $\phi \in L(E,\, F)$.
 \end{proof}
-\task
-Sei $\mathscr{S} \subset \mathbb{R}$ die Menge der höhstens abzählbaren Teilmengen von $\mathbb{R}$.
+\task Sei $\mathscr{S} \subset \R$ die Menge der höchstens abzählbaren Teilmengen von $\R$.
+
+\begin{lemma}
+Folgende Aussagen werden ohne Beweis genutzt. (Siehe Anhang)
+\begin{enumerate}[(i)]
+    \item Die Vereinigung höchstens abzählbar vieler höchstens abzählbaren Mengen ist wieder höchstens abzählbar.
+    \item Der Schnitt höchstens abzählbar vieler höchstens abzählbaren Mengen ist wieder höchstens abzählbar.
+    \item Jede Teilmenge einer höchstens abzählbaren Menge ist wieder höchstens abzählbar.
+\end{enumerate}
+\end{lemma}
+\begin{theorem}
+Die von $\mathscr{S}$ erzeugte $\sigma$-Algebra $\mathfrak{M}$ besteht genau aus allen Teilmengen von \R die selbst höchstens abzählbar sind oder deren Komplement höchstens abzählbar ist.
+\end{theorem}
+\def\S{\mathscr{S}}
+\def\frN{\ensuremath{\mathfrak{N}} }
+\def\frM{\ensuremath{\mathfrak{M}} }
+\begin{proof}
+1. Teil: Z. z.: Ist $\mathfrak{N} \subset \mathcal{P}(\R)$ eine $\sigma$-Algebra mit $\mathscr{S} \subseteq \mathfrak{N}$ so folgt $\mathfrak{N} \subseteq \mathfrak{M}$, wobei $\mathfrak{M}$ gegeben ist als
+\[ \frM \coloneqq \S ~\cup~ \qty{X^c \mid X \in \S} \]
+Sei also eine $\sigma$-Algebra \frN mit $\S \subseteq \frN$ gegeben. Sei $X \in \S$; dann ist nach Voraussetzung auch $X \in \frN$. Da \frN abgeschlossen unter Komplementbildung ist muss demnach auch $X^c \in \frN$. Damit gilt nach Definition von \frM
+\[ \frM \subseteq \frN \]
+2. Teil: Z. z.: \frM ist eine $\sigma$-Algebra.
+
+\frM ist nach Definition abgeschlossen unter Komplementbildung. Man betrachte nun die Vereinigung einer höchstens abzählbaren Familie $\mathfrak{F} = \qty{X_n}_{n \in \N} \in \mathcal{P}(\frM)$. (Endliche Vereinigungen können hier durch die unendliche Wiederholung des letzten Elements ebenfalls über abzählbarer Familien dargestellt werden.)
+
+Nach Assoziativität der Vereinigung und der Definition von \frM kann diese Vereinigung in zwei höchstens abzählbare Vereinigungen höchstens abzählbarer Mengen aufgeteilt werden.
+\begin{align*}
+    \bigcup_{n \in \N} X_n &= \bigcup_{\substack{n \in \N\\X_n \in \S}}X_n ~\cup~ \bigcup_{\substack{n \in \N\\X_n^c \in \S}}X_n
+    = \bigcup_{\substack{n \in \N\\X_n \in \S}}X_n ~\cup~ \bigcup_{\substack{n \in \N\\X_n^c \in \S}}\qty(X_n^c)^c \\
+    &= \overbrace{\bigcup_{\substack{n \in \N\\X_n \in \S}}X_n}^{\eqqcolon A} ~\cup~ \overbrace{\qty\Big(\bigcap_{\substack{n \in \N\\X_n^c \in \S}}X_n^c)^c}^{\eqqcolon B^c}
+    = A \cup B^c = \qty(B \cap A^c)^c = (B \setminus A)^c
+\end{align*}
+Nach Lemma 2 sind sowohl $A$ als auch $B$ höchstens abzählbare Mengen, also $A,\,B \in \S$.
+\[
+    B \setminus A \subseteq B \quad \xRightarrow{\text{Lemma 2}} \quad B \setminus A \in \S
+    \quad \xRightarrow{\text{Def. \frM}} \quad \bigcup_{n \in \N} X_n = (B \setminus A)^c \in \frM
+\]
+Somit ist \frM unter höchstens abzählbarer Vereinigung abgeschlossen.
+
+Da nach Definition von Abzählbarkeit $\emptyset \in \S \subseteq \frM$ ist \frM damit eine $\sigma$-Algebra.
+\end{proof}
+\newpage
+\textbf{Anhang} \quad Es wurde in Analysis I auf dem 3. Übungsblatt bereits gezeigt dass die Vereinigung abzählbar vieler abzählbarer Mengen ebenfalls abzählbar ist. Im Folgenden ist nochmals mein Beweis dargestellt. \\
+
+\begin{theorem}
+Für eine Folge $(M_n)_{n \in \mathbb{N}}$
+	\[ \forall n \in \mathbb{N} : M_n\ \text{abzählbar} \Rightarrow \bigcup_{n \in \mathbb{N}}M_n\quad\text{abzählbar}\]
+\end{theorem}
+\begin{proof}
+\[ \txtimpl{Def. abz.} \forall n \in \mathbb{N}\ \exists \varphi_n:\mathbb{N} \rightarrow M_n\ ,\ \varphi_n\ \text{bijektiv} \]
+Es sei
+\[ \sigma : \mathbb{N}^2 \rightarrow \bigcup_{n \in \mathbb{N}}M_n\ ,\ (i,\ j) \mapsto \varphi_i(j) \]
+$\sigma$ ist nach Konstruktion surjektiv. Da nach Satz 1.5.3 $\mathbb{N}^2$ abzählbar ist, sodass eine Bijektion $\tau : \mathbb{N} \rightarrow \mathbb{N}^2$ existiert.
+\[ \Rightarrow \sigma \circ \tau : \mathbb{N} \rightarrow \bigcup_{n \in \mathbb{N}}M_n \quad \text{surjektiv} \]
+Nach Lemma \ref{surj} ist $\bigcup_{n \in \mathbb{N}}M_n$ somit abzählbar.
+\end{proof}
+
+\begin{lemma}\label{surj}
+	Gibt es für eine Menge $M$ eine surjektive Abbildung $\varphi:\mathbb{N} \rightarrow M$, so ist $M$ abzählbar.	
+\end{lemma}
+\begin{proof}
+\begin{gather*}
+	\txtimpl{Def. Surj.} \forall x \in M \ \exists n \in \mathbb{N} : \varphi(n) = s \\
+	\Rightarrow \forall x \in M : \varphi^{-1}(\{x\}) \neq \emptyset
+\end{gather*}
+Es sei nun eine Abbildung $\theta: M \rightarrow \mathbb{N}$, welche ein $x \in M$ auf das kleinste Element in seinem Urbild abbildet. Es existiert ein eindeutiges kleinstes Element, da $\varphi^{-1}(\{x\}) \subseteq \mathbb{N}$.
+\[ \theta(x) \coloneqq \min\big(\varphi^{-1}(\{x\})\big) \]
+Surjektivität bleibt nach Konstruktion erhalten, und aus der Eindeutigkeit des kleinsten Elements folgt
+\[ \forall x,\ y \in M : \min\big(\varphi^{-1}(\{x\})\big) = \min\big(\varphi^{-1}(\{y\})\big) \eqqcolon n \Rightarrow x = \varphi(n) = y\]
+sodass $\theta$ injektiv und so bijektiv ist.
+\[ \defimpl{\sim} M \sim \mathbb{N} \txtimpl{Def. abz.} M\ \text{abzählbar} \]
+\end{proof}
+
 \end{document}
