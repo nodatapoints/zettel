@@ -1,0 +1,29 @@
+\documentclass{anablatt}
+\blattno3
+\begin{document}
+\makeheader
+\setcounter{taski}1
+\task
+\begin{theorem}
+    Sei $(X,\mathfrak M)$ ein Messraum, $f:X \rightarrow \R$ eine messbare Funktion. Dann existiert eine Folge von einfachen Funktionen die punktweise gegen $f$ konvergiert.
+\end{theorem}
+\begin{proof}
+    Es sei für jede Zahl $n \in \N~,~ n > 0$ die Familie von links-halboffenen Intervallen $\{J_1,\dots,J_N\} \subset \mathfrak B(\R)$ der Länge $\frac 1 n$ eine Partition des Intervalls $(-n,n] \in \mathfrak B(\R)$. Es seien weiterhin die Mengen $A_k^{(n)}$ die Urbilder der messbaren Mengen $J_k^{(n)}$, welche nach Definition einer messbaren Funktion ebenfalls messbar sind.
+    \[ A_k^{(n)} \coloneqq f^{-1}(J_k) \in \mathfrak M \qquad k \in \{1,\dots,N\} \]
+Man definiere die Funktion $f_n:X \rightarrow \R$ als
+\[
+    f_n(x) \coloneqq \begin{cases}
+        \displaystyle\inf_{x \in A_k^{(n)}} f(x) \qquad&x \in A_k^{(n)}~,~ k \in \{1,\dots,N\} \\[1.5em]
+        0 \qquad&\text{sonst}
+        \end{cases}
+        \quad.
+\]
+Da $A_1^{(n)},\dots,A_N^{(n)}$ sowie $\R \setminus (-n,n]$ messbar sind, eine Partition von $\R$ darstellen und konstant bezüglich $f_n$ bleiben ist $f_n$ einfach und wohldefiniert.
+
+Man betrachte nun ein $x \in \R$. Für $n > |x|$ ist $x \in (-n,n]$, sodass es ein $A_k^{(n)} \ni x$ gibt. Angenommen es gäbe ein $y \in A_k^{(n)}$ mit $f(y) < f(x)$. Wählt man $n' > \frac1{f(x)-f(y)}$ so sind die Intervalle $J_1,\dots,J_N'$ kürzer als $f(x) - f(y)$, sodass $f(x)$ und $f(y)$ nicht im selben Intervall liegen können. Da $(n',n'] \subset (n,n]$ liegen $x,y$ wieder in den Urbildern $A_1^{(n')},\dots,A_{N'}^{(n')}$, jedoch nun in Verschiedenen. Somit nähert sich für $n \rightarrow \infty$ der Wert $f(x)$ beliebig nahe an $\displaystyle\inf_{x \in A_k^{(n)}} f(x) = f_n(x)$.
+
+Da schlussendlich die Intervallschachtelung $\{f(x)\} = \bigcup_{n=1}^\infty J^{(n)}_{\mu_n}$ mit $(\mu_n)_{n \in \N} \in \N^\N$ definiert werden kann gilt
+\[ f_n\qty(A_k^{(n)}) = f_n\qty(f_n^{-1}\qty(J^{(n)}_k)) \supseteq J_k^{(n)} \ni f(x) \]
+liegt der punktweise Limes $\displaystyle\lim_{n \rightarrow \infty}f_n(x) = f(x)$ vor.
+\end{proof}
+\end{document}

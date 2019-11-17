@@ -1,0 +1,25 @@
+\documentclass{anablatt}
+\blattno4
+\begin{document}
+\makeheader
+\task
+\ttask
+\begin{theorem}
+Sei $X$ ein Messraum und seien $f,g : X \rightarrow \R$ messbar. Dann ist $f \cdot g$ als
+\[ f \cdot g: X \rightarrow \R ~,~ x \mapsto f(x) \cdot g(x) \]
+ebenfalls messbar.
+\end{theorem}
+\begin{proof}
+Nach Satz 3.3 gibt es zwei Folgen von einfachen Funktionen $(f_n)_{n \in \N}, (g_n)_{n \in \N} \in \qty(X^\R)^\N$ welche jeweils punktweise gegen $f$ und $g$ konvergieren. Man betrache nun ein beliebiges $n \in \N$: Nach Definition lassen gibt es Partitionen $A, B \subset \mathfrak M$ von messbaren Mengen welche jeweils Konstant auf $f$ und $g$ sind.
+
+Man definiere die Partition $R \subset \mathfrak M$ von $X$.
+\[
+    R \coloneqq \qty{A_i\setminus B \mid A_i \in A} \cup \qty{B_i\setminus A \mid B_i \in B} \cup \qty{A_i \cap B_j \mid A_i \in A~,~ B_j \in B}
+\]
+Nach Lemma 3.1.1 besteht $R$ wieder aus messbaren Mengen.
+
+Da alle $A_i$ und $B_i$ jeweils konstant auf $f$ und $g$ sind, sind auch alle $R_i \in R$ auf $f \cdot g$ konstant, sodass $f_n \cdot g_n$ eine einfache Funktion ist. Nach Rechenregeln für konvergente Folgen gilt für beliebiges $x \in X$
+\[ \lim_{n \rightarrow \infty} f_n(x)\cdot g_n(x) = \qty(\lim_{n \rightarrow \infty}f_n(x)) \cdot \qty (\lim_{n \rightarrow \infty} g_n(x)) = (f \cdot g)(x) \quad.\]
+So konvergiert die Folge $(f_n \cdot g_n)_{n\in\N}$ von einfachen Funktionen punktweise gegen $f \cdot g$. Nach Satz 3.3 ist $f \cdot g$ damit messbar.
+\end{proof}
+\end{document}

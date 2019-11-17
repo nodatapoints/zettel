@@ -33,11 +33,11 @@ Die Norm $\norm{x + E_0} \coloneqq \norm{x} ~,~ x \in E$ auf dem Faktorraum $E/E
 Seien $\phi \in L(E,\,F) ~,~ x_0 \in E$
 \[ \norm{\phi(x_0)} \leq \norm{\phi}\cdot\norm{x_0} \]
 \end{lemma}
-\begin{proof}
+\begin{proof} Für $x = 0$ trivial da $0 = 0$. Sei $E^* \coloneqq E \setminus \qty{0}$
 \begin{gather*}
-    \sup_{x \in E} \frac{\norm{\phi(x)}}{\norm{x}}
-    = \sup_{x \in E} \norm{\frac{\phi(x)}{\norm{x}}}
-    = \sup_{x \in E} \norm{\phi\qty(\frac{x}{\norm{x}})}
+    \sup_{x \in E^*} \frac{\norm{\phi(x)}}{\norm{x}}
+    = \sup_{x \in E^*} \norm{\frac{\phi(x)}{\norm{x}}}
+    = \sup_{x \in E^*} \norm{\phi\qty(\frac{x}{\norm{x}})}
     = \sup_{\substack{x' \in E\\\norm{x'}=1}} \norm{\phi(x')}
     = \norm{\phi}
     \\
@@ -53,11 +53,11 @@ Seien $\phi \in L(E,\,F) ~,~ x_0 \in E$
 Sei $(\phi_n)_{n \in \N}$ eine \textsc{Cauchy}-Folge in $L(E,\, F)$. Sei $x_0 \in E$ fest, $\epsilon > 0$ beliebig. Somit gibt es ein $N \in \N$ sodass für alle $n,\, m \in \N ~,~ N < n,\, m$ gilt
 \[
     \norm{x_0}\cdot\epsilon
-    \stackrel{\textsc{Cauchy}}> \norm{x_0}\cdot\norm{\phi_m-\phi_n} 
+    \stackrel{\textsc{Cauchy}}\geq \norm{x_0}\cdot\norm{\phi_m-\phi_n} 
     \stackrel{\text{Lemma 1}}\geq \norm{(\phi_m-\phi_n)(x_0)}
     \stackrel{L \text{ linear}}= \norm{\phi_m(x_0) - \phi_n(x_0)}
 \]
-Mit $\epsilon' = \frac\epsilon{\norm{x_0}}$ ist die Folge $\qty(\phi_n(x_0))_{n \in \N}$ demnach \textsc{Cauchy}-Folge in $F$. Da $F$ vollständig ist, existiert $\lim_{n \rightarrow \infty} \phi_n(x_0)$. Da $x_0$ anfänglich fest aber beliebig war, kann der Grenzwert für $\phi_n$ festgelegt werden als
+Also ist die Folge $\qty(\phi_n(x_0))_{n \in \N}$ demnach \textsc{Cauchy}-Folge in $F$. Da $F$ vollständig ist, existiert $\lim_{n \rightarrow \infty} \phi_n(x_0)$. Da $x_0$ anfänglich fest aber beliebig war, kann der Grenzwert für $\phi_n$ festgelegt werden als
 \[ \lim_{n \rightarrow \infty}\phi_n \quad\coloneqq\quad \phi : E \rightarrow F ~,~ x \mapsto \lim_{n \rightarrow \infty} \phi_n(x) \]
 Die Linearität von $\phi$ folgt direkt aus den Rechenregeln für konvergente Folgen. Es muss noch die Stetigkeit gezeigt werden: $\qty(\norm{\phi_n})_{n \in \N}$ ist eine \textsc{Cauchy}-Folge in $\R$ da nach umgestellter Dreiecksungleichung
 \[ \abs\big{\norm{\phi_m} - \norm{\phi_n}} = \norm{\phi_m} - \norm{\phi_n} \leq \norm{\phi_m - \phi_n} \qquad m,\, n \in \N ~,~ \norm{\phi_m} > \norm{\phi_n} \text{ o.B.d.A}\]

@@ -17,6 +17,7 @@
 \RequirePackage{marvosym}
 \RequirePackage{mathrsfs}
 \RequirePackage{enumerate}
+\RequirePackage{stmaryrd}
 
 \RequirePackage{tikz}
 \RequirePackage{chngcntr}
@@ -57,22 +58,24 @@
 \newcounter{taskii}[taski]
 \newcounter{taskiii}[taskii]
 
-\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}~}
-\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}~}
-\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})~}
+\newcommand{\task}{\stepcounter{taski}\textbf{Aufgabe \arabic{taski}}\quad}
+\newcommand{\ttask}{\stepcounter{taskii}\textbf{(\alph{taskii})}\quad}
+\newcommand{\tttask}{\stepcounter{taskiii}\quad(\roman{taskiii})\quad}
 
 \newcommand{\blattno}[1]{\global\let\blattnumber#1}
 \newcommand{\makeheader}{
 \begin{flushright}
-    Kamal Abdellatif
+    Kamal Abdellatif\\
+    Mi 14:00
 \end{flushright}
+\vspace{-3em}
 \begin{center}
     \textbf{Höhere Analysis Abgabeblatt \blattnumber}\\[2em]
     \begingroup
 	\def\arraystretch{2}
     \begin{tabular}{|l|l|l||p{18mm}|}
         \hline
-         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe:~ \\
+         Aufgabe 1 & Aufgabe 2 & Aufgabe 3 & Summe~ \\
          \hline &&&\\
          \hline  
     \end{tabular}
@@ -84,5 +87,7 @@
 \newcommand{\defImpl}[1]{\stackrel{\text{Def.}\;#1}{\Longleftrightarrow}}
 \newcommand{\txtimpl}[1]{\stackrel{\text{#1}}{\Longrightarrow}}
 \newcommand{\txtImpl}[1]{\stackrel{\text{#1}}{\Longleftrightarrow}}
+
+\newcommand{\range}[1]{\ensuremath{\left\llbracket #1 \right\rrbracket}}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
