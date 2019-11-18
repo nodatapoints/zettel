@@ -65,7 +65,7 @@
 \newcommand{\blattno}[1]{\global\let\blattnumber#1}
 \newcommand{\makeheader}{
 \begin{flushright}
-    Kamal Abdellatif\\
+    Kamal Abdellatif\\Ellen Bräutigam\\
     Mi 14:00
 \end{flushright}
 \vspace{-3em}
