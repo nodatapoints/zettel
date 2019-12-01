@@ -1,0 +1,35 @@
+\documentclass{anablatt}
+\blattno5
+
+\begin{document}
+\makeheader
+\task
+Sei $(\N, \N, \mu)$ mit $\mu: \N \rightarrow [0,\infty] ~,~ A \mapsto |A|$ ein Maßraum.
+\begin{theorem}
+Eine Funktion $f:\N \rightarrow \R$ ist genau dann integrierbar bezüglich $\mu$ wenn $\sum_{n=1}^\infty f(n)$ absolut konvergent ist. Ist dies der Fall, so gilt
+\[ \int_\N f\dd\mu = \sum_{n=1}^\infty f(n)  \quad.\]
+\end{theorem}
+\begin{proof}
+Man betrachte die Folge $(t_n)_{n\in\N} \in T(\N,\R)^\N$. Für alle $n \in \N$ sei $\mathfrak P_n = \{\{i\} \mid i \in \range{1,n}\}$ eine Partition von messbaren Mengen der Menge $\range{1,n} \subset \N$. Die entsprechende Treppenfunktion $t_n$ soll gegeben sein als
+\[
+    t_n: \N \rightarrow \R ~,~
+    i \mapsto \begin{cases}
+        f(i) \quad & i \leq n \\
+           0 \quad & i > n
+       \end{cases} \quad.
+\]
+Damit ist $t_n\eval_A$ nach Definition konstant auf allen $A \in \mathfrak P_n$. Durch Konstruktion approximiert $(t_n)_{n\in\N}$ die Funktion $f$. Damit gilt
+\begin{align*}
+    \infty \stackrel{\mu\text{ int'bar}}> \int_\N f\dd\mu
+    &= \lim_{n \rightarrow \infty} \int_\N t_n\dd\mu 
+    = \lim_{n \rightarrow \infty} \sum_{\{i\}\in\mathfrak P_n} \overbrace{\mu(\{i\})}^1t_n(i)
+    = \lim_{n \rightarrow \infty} \sum_{i=1}^n f(i)
+    = \sum_{i=1}^\infty f(i)
+\end{align*}
+Die Rückrichtung gilt gleichermaßen, da das Integral wohldefiniert ist und somit unabhängig von der Wahl der approximierenden Folge.
+\end{proof}
+
+\task nicht bearbeitet
+
+\task nicht bearbeitet
+\end{document}

@@ -1,0 +1,39 @@
+\documentclass{anablatt}
+\blattno6
+
+\begin{document}
+\makeheader
+\setcounter{taski}1
+Man definiere für $A \subseteq X^\R$ sowie $(f_n)_{n\in\N} \in \qty(X^\R)^\N$
+\[ \sup A : X \rightarrow \R ~,~ x \mapsto \sup_{f \in A} f(x) \qquad \sup_{n\in\N} f_n \coloneqq \sup \qty{f_n \mid n\in\N} \]
+
+\begin{theorem}
+Sei $(f_n)_{n \in \N} \in \L^1(X)^\N, g \in \L^1(X)$ mit $|f_n| \leq g~\forall n \in \N$. Dann ist
+\[ \sup_{n\in\N}f_n \in \L^1(X) \]
+und
+\[ \int_X \sup_{n\in\N}f_n\dd\mu ~\geq~ \sup_{n\in\N}\int_Xf_n\dd\mu \quad. \]
+\end{theorem}
+\begin{proof}
+Man definiere $(g_n)_{n\in\N} \in \qty(X^\R)^\N$ als
+\[ g_n \coloneqq \sup\qty{f_n \mid k\in\N,k\leq n}  \]
+Es ist $g_1 = f_1 \in \L^1(X)$, und für $n \in \N$ gilt nach Satz 4.3.2 und nach Konstruktion von $g_n$
+\[ g_{n+1} = \underbrace{\sup\qty{g_n, f_{n+1}}}_{\in \L^1(X)} \geq g_n \]
+Damit ist nach vollständiger Induktion $(g_n)_{n\in\N}$ eine monoton wachsende Folge in $\L^1(X)$.
+
+Weiterin folgt für $n\in\N$
+\begin{gather*}
+    g_n \leq \sup_{n\in\N} g_n = \sup_{n\in\N} f_n \leq \sup_{n\in\N} |f_n| \leq g \\
+    \int_X g_n\dd\mu \leq \int_Xg\dd\mu < \infty
+\end{gather*}
+So ist $\qty(\int_X g_n\dd\mu)_{n\in\N}$ nach oben beschränkt.
+
+Nach Satz von \textsc{Beppo-Levi} gibt es also ein $h \in \L^1(X)$ sodass $(g_n)_{n\in\N}$ $L^1$-konvergent gegen $h$ ist und fast überall punktweise gegen $h$ konvergiert. Da $(g_n)_{n\in\N}$ monoton steigend ist bildet $h$ somit die kleinste obere Schranke. Damit gilt mit $n \in \N$ für fast alle $x \in X$ dass $g_n(x) \leq h(x)$. Somit
+\[ \int_Xh\dd\mu \geq \int_Xg_n\dd\mu \geq \int_Xf_n\dd\mu \quad\forall n \in \N \quad.\]
+$\int_Xh\dd\mu$ bildet also eine obere Schranke für  $\qty(\int_Xf_n\dd\mu)_{n \in \N}$. Schlussendlich folgt
+
+\[ \int_X\sup_{n\in\N}f_n\dd\mu = \lim_{n \rightarrow\infty} \int_Xg_n\dd\mu ~\stackrel{\text{$g_n$ $L^1$-CF}}=~ \int_Xh\dd\mu
+    \geq\sup_{n\in\N}\int_Xf_n\dd\mu \quad.
+\]
+\end{proof}
+
+\end{document}

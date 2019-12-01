@@ -50,9 +50,12 @@
 \let\phi\varphi
 \let\epsilon\varepsilon
 \let\bar\overline
+\let\olddd\dd
+\def\dd{\,\olddd}
 
 \def\R{\ensuremath{\mathbb{R}} }
 \def\N{\ensuremath{\mathbb{N}} }
+\def\L{\ensuremath{\mathcal{L}} }
 
 \newcounter{taski}
 \newcounter{taskii}[taski]
