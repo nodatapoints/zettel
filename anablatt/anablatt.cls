@@ -71,7 +71,7 @@
     Kamal Abdellatif\\Ellen Bräutigam\\
     Mi 14:00
 \end{flushright}
-\vspace{-3em}
+\vspace{-4.5em}
 \begin{center}
     \textbf{Höhere Analysis Abgabeblatt \blattnumber}\\[2em]
     \begingroup
