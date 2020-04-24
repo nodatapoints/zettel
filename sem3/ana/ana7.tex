@@ -1,0 +1,23 @@
+\documentclass{anablatt}
+\blattno7
+\newcommand{\dotcup}{\cup\mkern-12.5mu\cdot\mkern3mu}
+\begin{document}
+\makeheader
+\begin{theorem}
+Sei $(X, \mathfrak M, \mu)$ ein Maßraum und $f \in \L^1(X)$ Weiterhin sei $X = \bigcup_{n\in\N}A_n$ mit $A_n \in \mathfrak M~\forall n \in \N$, sodass $\forall i,j \in \N ~,~ i\neq j : \mu(A_i\cap A_j) = 0$. Dann gilt
+\[ \int_X f\dd\mu = \sum_{n=1}^\infty\int_{A_n} f\dd\mu \]
+\end{theorem}
+\begin{proof}
+Es sei $B_n$ für $n \in \N$ definiert als
+\[ B_n \coloneqq A_n \setminus \bigcup_{\substack{k\in\N\\ k\neq n}} (A_k \cap A_n) \in \mathfrak M \]
+Damit sind nach Konstruktion alle $B_i, B_j$ disjunkt für $i,j \in \N ~,~ i\neq j$. Es bleibt $\bigsqcup_{n\in\N}B_n = \bigcup_{n\in\N}A_n = X$. Weiterhin ist für alle $n \in \N$
+\[ A_n = B_n \sqcup \overbrace{\bigcup_{\substack{k\in\N\\ k\neq n}} (A_k \cap A_n)}^{A_n\setminus B_n \in \mathfrak M} \qquad
+    0 \leq \mu\qty(\bigcup_{\substack{k\in\N\\ k\neq n}} (A_k \cap A_n)) \leq \sum_{\substack{k\in\N\\ k\neq n}} \mu(A_k \cap A_n) = 0
+\]
+Damit ist $\mu(A_n\setminus B_n) = 0$ und so nach Satz 4.1.2
+\begin{gather*}
+   \int_{A_n}f\dd\mu = \int_{B_n}f\dd\mu + \int_{A_n\setminus B_n}f\dd\mu = \int_{B_n}f\dd\mu \\
+   \int_X f\dd\mu = \sum_{n \in \N} \int_{B_n}f\dd\mu= \sum_{n \in \N} \int_{A_n}f\dd\mu
+\end{gather*}
+\end{proof}
+\end{document}
