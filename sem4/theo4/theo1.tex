@@ -1,0 +1,103 @@
+\documentclass{theoblatt}
+
+\blattno1
+\blattauthor{Kamal Abdellatif}
+
+\begin{document}
+\makeheader
+\task
+\ttask
+The total energy emitted by a volume element $\dd V$ is given as $u(\nu, T)\dd V$. The energy received by the opening $\dd A$ over a time $\dd t$ is therefore
+\begin{align*}
+    \dd E\cdot \dd A \dd t &= \frac{\dd A_\perp}{A_{Sp}} u(\nu, T) \dd V
+    = \frac{\cos\theta\dd A}{2\tau r^2} \cdot u \cdot r^2\sin\theta\dd\theta\dd\phi\dd r \\
+    \dd E \cdot \dd t &= \frac{u}{2\tau} \sin\theta\cos\theta \dd\theta\dd\phi\dd r
+    = \frac{u}{4\tau} \sin(2\theta) \dd\theta\dd\phi\dd r
+    \intertext{Integrated over the half sphere of radius $c\dd t$ this yields the total energy received per area $\dd A$ over the period $\dd t$.}
+    \dd t \cdot E = \dd t\int \dd E
+    &= \frac{u}{4\tau} \int_0^{c\dd t}\dd r\int_0^\tau\dd\phi \int_0^{\tau/4}\sin(2\theta) \dd\theta \\
+    &= \frac{u}{4\tau} \cdot c \dd t \cdot \tau \cdot \qty[-\frac12\cos(2\theta)]_0^{\tau/4} \\
+    E(\nu, T) &= \frac c4 u(\nu, T) \\
+    u(\nu, T) &= \frac 4c E(\nu, T)
+\end{align*}
+\ttask
+The energy density equals the mode density times the average energy per mode. The mode density is already known from the lecture as
+\[ \dv{n}{\nu} = \frac{4\tau\nu^2}{c^3} \quad.\]
+Since fermionic photons can still use the same modes as regular photons, the mode density stays the same.
+
+Boltzmann statistics yield a new value of the expected average energy per mode:
+\begin{align*}
+    \expval E &= \frac{\sum_i E_i e^{E_i/kT}}{\sum_i e^{E_i/kT}}
+    = \frac{ 0 + h\nu \cdot e^{h\nu/kT}}{1 + e^{h\nu/kT}}
+    = \frac{h\nu}{1 + e^{-h\nu/kT}}
+\end{align*}
+This finally gives
+\[ u(\nu, T) = \dv{N}{\nu}\cdot\expval{E} = \frac{4\tau h}{c^3}\ \frac{\nu^3}{1 + e^{-h\nu/kT}}\quad. \]
+\ttask
+When the energy spectrum is assumed to be continuous, $u(\nu, T)$ is predicted by Rayleigh and Jeans as
+\[ u(\nu, T) = \frac{4\tau}{c^3}\ kT\nu^2 \]
+however, this diverges for $\nu \rightarrow \infty$. Therefore the total energy is $\infty$.
+
+Planck suggested that light is quantized into multiples of $h\nu$, which leads to an energy density of
+\[ u(\nu, T) = \frac{4\tau}{c^3}\ \frac{\nu^3}{e^{h\nu/kT}-1} \quad. \]
+Using the result of (1.1), this gives
+\[ E(\nu, T) = \frac c4 u(\nu, T) = \frac{\tau h}{c^2}\ \frac{\nu^3}{e^{h\nu/kT}-1} \quad, \]
+which will be integrated over the whole spectrum:
+\begin{align*}
+    P_{tot} &= \int_0^\infty E(\nu, T)\dd\nu
+    = \frac{\tau h}{c^2} \int_0^\infty \frac{\nu^3}{e^{h\nu/kT}-1}\ \dd\nu
+    = \frac{\tau h}{c^2} \qty(\frac{kT}h)^4 \int_0^\infty \frac{z^3}{e^z-1}\ \dd z \\
+    &= \frac{\tau h}{c^2} \qty(\frac{kT}h)^4 \frac{\tau^4}{240}
+    = \frac{\tau^5k^4}{240c^2h^3}\ T^4 = \sigma T^4 
+\end{align*}
+
+As derived in (1.2), fermionic photons show an energy density of
+\[ u(\nu, T) = \frac{4\tau h}{c^3}\ \frac{\nu^3}{1 + e^{-h\nu/kT}} \]
+in this setting. Like before, this will be integrated over all frequencies:
+\begin{align*}
+    P_{tot} &= \int_0^\infty E(\nu, T)\dd\nu
+    = \frac{\tau h}{c^2} \int_0^\infty \frac{\nu^3}{e^{h\nu/kT}+1}\ \dd\nu
+    = \frac{\tau h}{c^2} \qty(\frac{kT}h)^4 \int_0^\infty \frac{z^3}{e^z+1}\ \dd z \\
+    &= \frac{\tau h}{c^2} \qty(\frac{kT}h)^4 \cdot \frac78 \cdot \frac{\tau^4}{240}
+    = \frac78\ \sigma T^4
+\end{align*}
+
+\task
+\ttask
+\begin{gather*}
+    \mu_0 \mqty( 1 & 0 & 0 ) \qty(\frac{\sqrt2}2\mqty(0&1&0\\1&0&1\\0&1&0)\hat x+\frac{\sqrt2}2\mqty(0&-i&0\\i&0&-i\\0&i&0)\hat y+\mqty(1&0&0\\0&0&0\\0&0&-1)\hat z)\mqty(1\\0\\0) \\
+    = \mu_0 \mqty( 1 &0&0) \qty(\frac{\sqrt2}2\mqty(0\\1\\0)\hat x +\frac{\sqrt2}2\mqty(0\\i\\0)\hat y + \mqty(1\\0\\0)\hat z) = \mu_0\hat z
+    \\
+    \mu_0 \mqty( 0 & 1 & 0 ) \qty(\frac{\sqrt2}2\mqty(0&1&0\\1&0&1\\0&1&0)\hat x+\frac{\sqrt2}2\mqty(0&-i&0\\i&0&-i\\0&i&0)\hat y+\mqty(1&0&0\\0&0&0\\0&0&-1)\hat z)\mqty(0\\1\\0) \\
+    = \mu_0 \mqty( 0 &1&0) \qty(\frac{\sqrt2}2\mqty(1\\0\\1)\hat x +\frac{\sqrt2}2\mqty(-i\\0\\i)\hat y + \mqty(0\\0\\0)\hat z) = 0
+    \\
+    \mu_0 \mqty( 0 & 0 & 1 ) \qty(\frac{\sqrt2}2\mqty(0&1&0\\1&0&1\\0&1&0)\hat x+\frac{\sqrt2}2\mqty(0&-i&0\\i&0&-i\\0&i&0)\hat y+\mqty(1&0&0\\0&0&0\\0&0&-1)\hat z)\mqty(0\\0\\1) \\
+    = \mu_0 \mqty(0&0&1) \qty(\frac{\sqrt2}2\mqty(0\\1\\0)\hat x +\frac{\sqrt2}2\mqty(0\\-i\\0)\hat y + \mqty(0\\0\\-1)\hat z) = -\mu_0\hat z
+    \\
+\end{gather*}
+\newpage
+\ttask
+\begin{gather*}
+    \mu_0 \mqty( \frac12 & \frac{\sqrt2}2 & \frac12 ) \qty(\frac{\sqrt2}2\mqty(0&1&0\\1&0&1\\0&1&0)\hat x+\frac{\sqrt2}2\mqty(0&-i&0\\i&0&-i\\0&i&0)\hat y+\mqty(1&0&0\\0&0&0\\0&0&-1)\hat z)\mqty( \frac12 \\ \frac{\sqrt2}2 \\ \frac12 ) \\
+    = \mu_0 \mqty( \frac12 & \frac{\sqrt2}2 & \frac12 ) \qty(\mqty(\frac12 \\ \frac{\sqrt2}2\\\frac12)\hat x+\mqty(-\frac12i\\0\\\frac12i)\hat y+\mqty(\frac12\\0\\-\frac12)\hat z)\mqty( \frac12 \\ \frac{\sqrt2}2 \\ \frac12 ) \\
+    = \mu_0 \hat x
+\end{gather*}
+
+\ttask not solved
+
+\ttask The internal state of $x^+$ is the superposition seen in (2.2). According to (2.1) the probabilities can be calculated by directly squaring the absolute value of $\alpha, \beta$ and $\gamma$.
+\[ P(x^-) = |\alpha|^2 = \frac14 \qquad P(x^0)=|\beta|^2=\frac12 \qquad P(x^+)=|\gamma|^2=\frac14 \]
+These probabilities satisfy the expected normalization and symmetry.
+
+\ttask The state vector is currently represented in the orthonormal $z$ base $e_1, e_2, e_3$, but it could also be expressed using the $x$ base. The $x^+$ in the $z$ base is already known from (2.2). To preserve symmetry the $x^-$ vector must have the same resulting probabilities as the $x^+$ vector. One can vary the phase of the vector components freely without changing the absolute value. To satisfy both orthogonality and normalization one finds
+
+\[ x^+ : \mqty(\frac12 & -\frac{\sqrt2}2 & \frac12) \quad. \]
+
+To complete the orthogonal $x$ base the $x^0$ vector is computed using the cross product:
+\begin{gather*}
+    \mqty(\frac12 & \frac{\sqrt2}2 & \frac12) \times \mqty(\frac12 & -\frac{\sqrt2}2 & \frac12)
+    = \mqty(\frac{\sqrt2}2 & 0 & \frac{\sqrt2}2)
+\end{gather*}
+Since this result is given in $z$ base coordinates, one can again square the absolute values to get the final probabilities:
+\[ P(x^-) = |\alpha|^2 = \frac12 \qquad P(x^0)=|\beta|^2=0 \qquad P(x^+)=|\gamma|^2=\frac12 \]
+\end{document}
