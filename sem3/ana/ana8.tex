@@ -1,0 +1,59 @@
+\documentclass{anablatt}
+\blattno8
+
+\begin{document}
+\makeheader
+\setcounter{taski}2
+\task
+Sei $\qty([0,1],\, \mathcal B\eval_{[0,1]},\, \mu\eval_{[0,1]})$ ein Maßraum. Es wird folgende Definition für die Folge $(A_n)_{n\in\N} \in \mathfrak M^\N$ genutzt:
+Sei $(B_n)_{n\in\N} \in \mathfrak M^\N$ eine Folge mit
+\begin{align*}
+    B_1 &= [0,1] \\
+    B_{n+1} &= \qty{\frac x3 ~\Big\vert~ x \in B_n} \cup \qty{\frac{2+x}3 ~\Big\vert~ x \in B_n} \qquad \forall n \in \N \\
+    C &\coloneqq \bigcap_{n\in\N} B_n 
+\end{align*}
+
+Dann ist $(A_n)_{n\in\N}$ gegeben als
+\[ A_n \coloneqq [0,1] \setminus B_n \qquad \forall n\in\N \]
+\[ G \coloneqq [0,1] \setminus C \]
+Es wird ohne Beweis angenommen dass für jedes $M \in \mathfrak M ~,~ a \in \R$
+\begin{gather*}
+   \mu(aM) = \mu\qty(\qty{ax \mid x \in M}) = |a|\cdot\mu(M)  \\
+   \mu(a+M) = \mu\qty(\qty{a+x \mid x \in M}) = \mu(M)  \\
+\end{gather*}
+\ttask
+Da für alle Mengen $M \subseteq [0,1]$  gilt $\frac13 M \cap (\frac23+\frac13 M) = \emptyset$. Damit folgt für alle $n \in \N$
+\[ \mu\qty(B_{n+1}) = \mu\qty(\frac13 B_n + \qty(\frac23+\frac13 B_n)) = \frac23 \mu(B_n) \]
+Mit $\mu(B_1) = 1$ gilt als explizite Vorschrift für $n \in \N$
+\[ \mu(B_n) = \qty(\frac23)^{n-1} \xrightarrow{n \rightarrow \infty} 0 \]
+Damit ist nach $C \sqcup G = [0, 1]$
+\[ \mu(G) = 1-\mu(C) = 1 \]
+\ttask
+\begin{theorem}
+    \[ x \in C \quad\Longleftrightarrow\quad
+    \exists (a_n)_{n\in\N} \in \{0,2\}^\N : x = \sum_{n=1}^\infty a_n3^{-n} \qquad (x \in [0,1]) \]
+\end{theorem}
+\newpage
+\begin{proof}
+\glqq$\Leftarrow$\grqq \quad Sei $(a_n)_{n\in\N} \in \{0,2\}^\N$ beliebig mit $ x = \sum_{n=1}^\infty a_n3^{-n}$
+
+Induktionsanfang: $x \in B_1 = [0,1]$ da
+\[ 0 = \sum_{n=1}^\infty 0\cdot3^{-n} \leq x \leq \sum_{n=1}^\infty 2\cdot3^{-n} = -2 + \sum_{n=0}^\infty 2\cdot3^{-n} = -2 + \frac2{1-\frac13} = 1 \]
+Induktionsbehauptung: \quad$ x \in B_n$ für beliebiges $(a_n)_{n\in\N}$ \\
+Induktionsschritt: Z. z.: \quad $x \in B_{n+1}$ \\
+
+Sei also $(a_n)_{n\in\N} \in \{0,2\}^\N$ beliebig mit $x \coloneqq \sum_{n=1}^\infty a_n3^{-n} \in B_n$.
+
+Man definiere $(a_n')_{n\in\N} ~,~ (a_n'')_{n\in\N} \in \{0,2\}^\N$ mit
+\begin{gather*}
+    a_1' = 0 \qquad a_1'' = 2 \\ 
+    a_n' = a_n'' = a_{n+1}  \quad\forall n \in \N\setminus\{1\}
+\end{gather*}
+Beide Reihen befinden sich nach Voraussetzung wieder in $B_n$. Durch Konstruktion folgt
+\begin{gather*}
+    \frac13x = \sum_{n=1}^\infty a_n3^{-(n+1)} = \sum_{n=1}^\infty a_n'3^{-n} \in B_n \\
+    \frac23 + \frac13x = 2\cdot3^{-1} + \sum_{n=1}^\infty a_n'3^{-n} = \sum_{n=1}^\infty a_n''3^{-n} \in B_n
+\end{gather*}
+Nach Definition von $B_{n+1}$ ist demnach jedes $x \in B_{n+1}$ durch eine Potenzreihe aus $\{0,1\}^\N$ darstellbar.
+\end{proof}
+\end{document}
